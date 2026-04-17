@@ -25,7 +25,7 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-semibold text-slate-300 mb-4 uppercase tracking-wider">Product</h4>
             <ul className="space-y-2.5 text-sm text-slate-400">
-              <li><a href={`${APP_URL}/register`} className="hover:text-white transition-colors">Get started free</a></li>
+              <li><a href={`${APP_URL}/register`} className="hover:text-white transition-colors">Start your trial</a></li>
               <li><a href={`${APP_URL}/login`} className="hover:text-white transition-colors">Log in</a></li>
               <li><Link href="/score" className="hover:text-white transition-colors">De-Risk Score</Link></li>
             </ul>

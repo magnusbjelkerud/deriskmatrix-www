@@ -75,12 +75,12 @@ export default function AboutPage() {
         {/* CTA */}
         <section className="bg-gradient-to-br from-teal to-blue-accent rounded-2xl p-8 text-center">
           <h2 className="text-2xl font-black text-white mb-3">Try the platform</h2>
-          <p className="text-white/80 mb-6">Free to get started. No credit card required.</p>
+          <p className="text-white/80 mb-6">14-day trial. No lock-in. Cancel anytime.</p>
           <a
             href="https://app.deriskmatrix.com/register"
             className="inline-block px-7 py-3.5 bg-white text-teal font-bold rounded-xl hover:bg-slate-50 transition-colors"
           >
-            Get started free →
+            Start your trial →
           </a>
         </section>
 

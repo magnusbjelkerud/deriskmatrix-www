@@ -35,22 +35,25 @@ const FRAMEWORKS = ['ISO 31000', 'OKR', 'Balanced Scorecard', 'SMART Goals', 'SW
 
 const PRICING = [
   {
-    name: 'Free', price: '0', period: 'forever', highlight: false,
-    desc: 'Get started immediately — no credit card needed.',
-    features: ['Up to 20 goals', 'Canvas & Dashboard', 'Risk states + forecasting', 'Actions & comments', 'AI goal assistant'],
-    cta: 'Start for free', href: `${APP_URL}/register`,
+    name: 'Starter', price: '490', period: 'per month', highlight: false,
+    annual: '390',
+    desc: 'For a single leadership team getting structured on risk.',
+    features: ['Up to 5 users', '50 goals', 'Canvas & Dashboard', 'Risk states + forecasting', 'Actions & Risk Register', 'AI goal assistant', '14-day trial'],
+    cta: 'Start 14-day trial', href: `${APP_URL}/register`,
   },
   {
-    name: 'Pro', price: '490', period: 'per month', highlight: true,
-    desc: 'For organizations with multiple teams and portfolios.',
-    features: ['Unlimited goals', 'Department & portfolio hierarchy', 'Executive Risk Summary', 'Learning Velocity insights', 'Risk Register', 'Priority support'],
-    cta: 'Start Pro trial', href: `${APP_URL}/register`,
+    name: 'Pro', price: '1 490', period: 'per month', highlight: true,
+    annual: '1 190',
+    desc: 'For organizations with departments, portfolios and a leadership group.',
+    features: ['Unlimited users & goals', 'Department & portfolio hierarchy', 'Executive Risk Summary', 'Learning Velocity insights', 'External read-only sharing', 'Priority support', '14-day trial'],
+    cta: 'Start 14-day trial', href: `${APP_URL}/register`,
   },
   {
     name: 'Enterprise', price: 'Custom', period: '', highlight: false,
-    desc: 'Custom setup for compliance-heavy organizations.',
-    features: ['Everything in Pro', 'Custom integrations', 'GDPR DPA', 'SSO / BankID', 'Dedicated onboarding', 'SLA'],
-    cta: 'Contact us', href: 'mailto:magnus@bjelkerud.no',
+    annual: null,
+    desc: 'For compliance-heavy organizations with custom integration needs.',
+    features: ['Everything in Pro', 'Tripletex / Fiken integration', 'SSO / BankID', 'GDPR DPA', 'Dedicated onboarding', 'SLA'],
+    cta: 'Book a demo', href: 'mailto:post@deriskmatrix.com',
   },
 ]
 
@@ -87,7 +90,7 @@ export default function Home() {
                   href={`${APP_URL}/register`}
                   className="px-8 py-4 bg-teal hover:bg-teal-dark text-white font-bold rounded-xl text-center transition-all shadow-xl shadow-teal/30 text-lg"
                 >
-                  Start for free →
+                  Start your trial →
                 </a>
                 <Link
                   href="/score"
@@ -98,9 +101,9 @@ export default function Home() {
               </div>
 
               <div className="flex items-center gap-6 text-xs text-slate-500">
-                <span className="flex items-center gap-1.5"><span className="text-teal">✓</span> Free forever plan</span>
-                <span className="flex items-center gap-1.5"><span className="text-teal">✓</span> No credit card</span>
-                <span className="flex items-center gap-1.5"><span className="text-teal">✓</span> Live in 10 minutes</span>
+                <span className="flex items-center gap-1.5"><span className="text-teal">✓</span> 14-day trial included</span>
+                <span className="flex items-center gap-1.5"><span className="text-teal">✓</span> No lock-in</span>
+                <span className="flex items-center gap-1.5"><span className="text-teal">✓</span> Up and running in minutes</span>
               </div>
             </div>
 
@@ -384,13 +387,13 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
             <h3 className="text-2xl font-black text-white mb-1">Ready to see your goals in a new light?</h3>
-            <p className="text-teal-light/80 text-sm">Free plan. No credit card. Your first risk state overview in under 10 minutes.</p>
+            <p className="text-teal-light/80 text-sm">Free plan. No lock-in. Your first risk state overview in under 10 minutes.</p>
           </div>
           <a
             href={`${APP_URL}/register`}
             className="flex-shrink-0 px-8 py-4 bg-white text-teal font-black rounded-xl hover:bg-slate-50 transition-colors shadow-lg text-lg whitespace-nowrap"
           >
-            Start for free →
+            Start your trial →
           </a>
         </div>
       </section>
@@ -419,7 +422,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-black text-navy mb-3">Simple, transparent pricing</h2>
-            <p className="text-lg text-slate-500">Start for free. Upgrade when your organization grows.</p>
+            <p className="text-lg text-slate-500">Start your trial. Upgrade when your organization grows.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 items-start">
             {PRICING.map(plan => (
@@ -429,17 +432,18 @@ export default function Home() {
                   <div className="inline-block bg-teal text-white text-xs font-bold px-3 py-1 rounded-full mb-4 self-start">Most popular</div>
                 )}
                 <h3 className={`text-xl font-black mb-1 ${plan.highlight ? 'text-white' : 'text-navy'}`}>{plan.name}</h3>
-                <div className="flex items-baseline gap-1 mb-2">
+                <div className="flex items-baseline gap-1 mb-1">
                   {plan.price === 'Custom'
                     ? <span className={`text-3xl font-black ${plan.highlight ? 'text-white' : 'text-navy'}`}>Custom</span>
                     : <>
-                        <span className={`text-3xl font-black ${plan.highlight ? 'text-white' : 'text-navy'}`}>
-                          {plan.price === '0' ? 'Free' : `${plan.price} NOK`}
-                        </span>
-                        {plan.period && <span className={`text-sm ${plan.highlight ? 'text-slate-400' : 'text-slate-400'}`}>/{plan.period}</span>}
+                        <span className={`text-3xl font-black ${plan.highlight ? 'text-white' : 'text-navy'}`}>{plan.price} NOK</span>
+                        <span className="text-sm text-slate-400">/{plan.period}</span>
                       </>
                   }
                 </div>
+                {plan.annual && (
+                  <div className="text-xs text-teal mb-3">{plan.annual} NOK/month billed annually — save 20%</div>
+                )}
                 <p className={`text-sm mb-6 ${plan.highlight ? 'text-slate-300' : 'text-slate-500'}`}>{plan.desc}</p>
                 <ul className="space-y-2.5 mb-8 flex-1">
                   {plan.features.map(f => (
@@ -488,7 +492,7 @@ export default function Home() {
                 className="inline-block px-7 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl transition-colors border border-white/20 w-full">
                 Calculate your De-Risk Score →
               </Link>
-              <p className="text-slate-500 text-xs mt-2">Free · Instant · No sign-up needed</p>
+              <p className="text-slate-500 text-xs mt-2">Instant result · No sign-up needed</p>
             </div>
 
             {/* CTA 2 — Signup */}
@@ -496,13 +500,13 @@ export default function Home() {
               <div className="text-4xl mb-4">🚀</div>
               <h3 className="text-white font-black text-2xl mb-2">Ready to get started?</h3>
               <p className="text-white/80 text-sm mb-6 leading-relaxed">
-                Free forever plan. Set up your first goals, see your risk states live, and start managing strategy the right way.
+                14-day trial included. Set up your first goals, see your risk states live, and start managing strategy the right way.
               </p>
               <a href={`${APP_URL}/register`}
                 className="inline-block px-7 py-3.5 bg-white text-teal font-black rounded-xl hover:bg-slate-50 transition-colors w-full text-lg">
-                Start for free →
+                Start your trial →
               </a>
-              <p className="text-white/50 text-xs mt-2">No credit card · Live in 10 minutes</p>
+              <p className="text-white/50 text-xs mt-2">No lock-in · Up and running in minutes</p>
             </div>
           </div>
         </div>

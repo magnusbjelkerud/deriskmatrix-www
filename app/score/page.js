@@ -343,9 +343,9 @@ export default function ScorePage() {
                 href={`${APP_URL}/register`}
                 className="inline-block px-8 py-4 bg-teal hover:bg-teal-dark text-white font-bold rounded-xl transition-colors shadow-lg text-lg"
               >
-                Get started free →
+                Start your trial →
               </a>
-              <p className="text-slate-500 text-xs mt-3">No credit card required</p>
+              <p className="text-slate-500 text-xs mt-3">No lock-in required</p>
             </div>
 
             <div className="text-center pb-4">

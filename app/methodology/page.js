@@ -135,7 +135,7 @@ export default function MethodologyPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="https://app.deriskmatrix.com/register" className="px-7 py-3.5 bg-teal hover:bg-teal-dark text-white font-bold rounded-xl transition-colors">
-              Get started free →
+              Start your trial →
             </a>
             <Link href="/score" className="px-7 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl transition-colors border border-white/20">
               Calculate your De-Risk Score

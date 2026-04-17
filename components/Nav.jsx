@@ -58,7 +58,7 @@ export default function Nav() {
             href={`${APP_URL}/register`}
             className="text-sm font-semibold px-5 py-2 bg-teal hover:bg-teal-dark text-white rounded-lg transition-colors shadow-sm"
           >
-            Get started free
+            Start your trial
           </a>
         </div>
 
@@ -82,7 +82,7 @@ export default function Nav() {
           <hr className="border-slate-100" />
           <a href={`${APP_URL}/login`} className="text-sm font-medium text-slate-700">Log in</a>
           <a href={`${APP_URL}/register`} className="text-sm font-semibold text-white bg-teal px-4 py-2.5 rounded-lg text-center">
-            Get started free
+            Start your trial
           </a>
         </div>
       )}
