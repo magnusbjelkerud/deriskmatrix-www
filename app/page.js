@@ -37,13 +37,13 @@ const PRICING = [
     name: 'Free', price: '0', period: 'forever', highlight: false,
     desc: 'Get started immediately — no credit card needed.',
     features: ['Up to 20 goals', 'Canvas & Dashboard', 'Risk states + forecasting', 'Actions & comments', 'AI goal assistant'],
-    cta: 'Start for free', href: `${APP_URL}/signup`,
+    cta: 'Start for free', href: `${APP_URL}/register`,
   },
   {
     name: 'Pro', price: '490', period: 'per month', highlight: true,
     desc: 'For organizations with multiple teams and portfolios.',
     features: ['Unlimited goals', 'Department & portfolio hierarchy', 'Executive Risk Summary', 'Learning Velocity insights', 'Risk Register', 'Priority support'],
-    cta: 'Start Pro trial', href: `${APP_URL}/signup`,
+    cta: 'Start Pro trial', href: `${APP_URL}/register`,
   },
   {
     name: 'Enterprise', price: 'Custom', period: '', highlight: false,
@@ -83,7 +83,7 @@ export default function Home() {
 
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <a
-                  href={`${APP_URL}/signup`}
+                  href={`${APP_URL}/register`}
                   className="px-8 py-4 bg-teal hover:bg-teal-dark text-white font-bold rounded-xl text-center transition-all shadow-xl shadow-teal/30 text-lg"
                 >
                   Start for free →
@@ -386,7 +386,7 @@ export default function Home() {
             <p className="text-teal-light/80 text-sm">Free plan. No credit card. Your first risk state overview in under 10 minutes.</p>
           </div>
           <a
-            href={`${APP_URL}/signup`}
+            href={`${APP_URL}/register`}
             className="flex-shrink-0 px-8 py-4 bg-white text-teal font-black rounded-xl hover:bg-slate-50 transition-colors shadow-lg text-lg whitespace-nowrap"
           >
             Start for free →
@@ -495,7 +495,7 @@ export default function Home() {
               <p className="text-white/80 text-sm mb-6 leading-relaxed">
                 Free forever plan. Set up your first goals, see your risk states live, and start managing strategy the right way.
               </p>
-              <a href={`${APP_URL}/signup`}
+              <a href={`${APP_URL}/register`}
                 className="inline-block px-7 py-3.5 bg-white text-teal font-black rounded-xl hover:bg-slate-50 transition-colors w-full text-lg">
                 Start for free →
               </a>

@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const APP_URL = 'https://app.deriskmatrix.com'
 
@@ -20,13 +21,14 @@ export default function Nav() {
     }`}>
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-teal to-blue-accent flex items-center justify-center">
-            <span className="text-white font-black text-sm">D</span>
-          </div>
-          <span className={`font-bold text-lg tracking-tight ${scrolled ? 'text-navy' : 'text-white'}`}>
-            De-Risk Matrix
-          </span>
+        <Link href="/" className="flex items-center">
+          <Image
+            src={scrolled ? '/images/logo-pos.svg' : '/images/logo-neg.svg'}
+            alt="De-Risk Matrix"
+            width={160}
+            height={36}
+            priority
+          />
         </Link>
 
         {/* Desktop links */}
@@ -53,7 +55,7 @@ export default function Nav() {
             Log in
           </a>
           <a
-            href={`${APP_URL}/signup`}
+            href={`${APP_URL}/register`}
             className="text-sm font-semibold px-5 py-2 bg-teal hover:bg-teal-dark text-white rounded-lg transition-colors shadow-sm"
           >
             Get started free
@@ -79,7 +81,7 @@ export default function Nav() {
           <Link href="/about" className="text-sm font-medium text-slate-700" onClick={() => setOpen(false)}>About</Link>
           <hr className="border-slate-100" />
           <a href={`${APP_URL}/login`} className="text-sm font-medium text-slate-700">Log in</a>
-          <a href={`${APP_URL}/signup`} className="text-sm font-semibold text-white bg-teal px-4 py-2.5 rounded-lg text-center">
+          <a href={`${APP_URL}/register`} className="text-sm font-semibold text-white bg-teal px-4 py-2.5 rounded-lg text-center">
             Get started free
           </a>
         </div>

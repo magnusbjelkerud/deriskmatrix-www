@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 const APP_URL = 'https://app.deriskmatrix.com'
 
@@ -9,11 +10,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-teal to-blue-accent flex items-center justify-center">
-                <span className="text-white font-black text-sm">D</span>
-              </div>
-              <span className="font-bold text-lg">De-Risk Matrix</span>
+            <div className="mb-4">
+              <Image src="/images/logo-neg.svg" alt="De-Risk Matrix" width={160} height={36} />
             </div>
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
               A methodology and platform for strategic goal & risk management. Aligned with ISO 31000.
@@ -27,7 +25,7 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-semibold text-slate-300 mb-4 uppercase tracking-wider">Product</h4>
             <ul className="space-y-2.5 text-sm text-slate-400">
-              <li><a href={`${APP_URL}/signup`} className="hover:text-white transition-colors">Get started free</a></li>
+              <li><a href={`${APP_URL}/register`} className="hover:text-white transition-colors">Get started free</a></li>
               <li><a href={`${APP_URL}/login`} className="hover:text-white transition-colors">Log in</a></li>
               <li><Link href="/score" className="hover:text-white transition-colors">De-Risk Score</Link></li>
             </ul>

@@ -134,7 +134,7 @@ export default function MethodologyPage() {
             The platform implements the full methodology — goal spans, risk states, cultural practices, actions, and forecasting — in a single workspace.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="https://app.deriskmatrix.com/signup" className="px-7 py-3.5 bg-teal hover:bg-teal-dark text-white font-bold rounded-xl transition-colors">
+            <a href="https://app.deriskmatrix.com/register" className="px-7 py-3.5 bg-teal hover:bg-teal-dark text-white font-bold rounded-xl transition-colors">
               Get started free →
             </a>
             <Link href="/score" className="px-7 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl transition-colors border border-white/20">

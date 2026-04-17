@@ -340,7 +340,7 @@ export default function ScorePage() {
                 De-Risk Matrix gives you the structure, the risk states, and the tools to close every gap — in a single workspace. Free to start.
               </p>
               <a
-                href={`${APP_URL}/signup`}
+                href={`${APP_URL}/register`}
                 className="inline-block px-8 py-4 bg-teal hover:bg-teal-dark text-white font-bold rounded-xl transition-colors shadow-lg text-lg"
               >
                 Get started free →
