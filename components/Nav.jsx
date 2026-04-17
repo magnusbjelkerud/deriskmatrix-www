@@ -21,12 +21,13 @@ export default function Nav() {
     }`}>
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center py-1">
           <Image
             src={scrolled ? '/images/logo-pos.svg' : '/images/logo-neg.svg'}
             alt="De-Risk Matrix"
             width={160}
-            height={36}
+            height={44}
+            style={{ objectFit: 'contain', objectPosition: 'center' }}
             priority
           />
         </Link>

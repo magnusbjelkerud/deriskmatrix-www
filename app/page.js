@@ -33,11 +33,6 @@ const FEATURES = [
 
 const FRAMEWORKS = ['ISO 31000', 'OKR', 'Balanced Scorecard', 'SMART Goals', 'SWOT', 'PESTEL', 'McKinsey 7S']
 
-const PRICING_EXAMPLES = [
-  { users: 3,  label: '3 users',  monthly: 897,  annual: 747 },
-  { users: 5,  label: '5 users',  monthly: 1495, annual: 1245 },
-  { users: 10, label: '10 users', monthly: 2990, annual: 2490 },
-]
 
 export default function Home() {
   return (
@@ -377,42 +372,34 @@ export default function Home() {
           <div className="text-center mb-12">
             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Pricing</p>
             <h2 className="text-4xl font-black text-navy mb-3">Simple, transparent pricing</h2>
-            <p className="text-lg text-slate-500">Per user. All features included. 14-day trial on every account.</p>
+            <p className="text-lg text-slate-500">Two plans. All features included. 14-day trial on every account.</p>
           </div>
 
-          {/* Price card */}
-          <div className="bg-navy rounded-2xl p-10 text-center mb-8">
-            <div className="flex items-baseline justify-center gap-2 mb-2">
-              <span className="text-6xl font-black text-white">249</span>
-              <div className="text-left">
-                <div className="text-slate-300 text-lg font-semibold">NOK</div>
-                <div className="text-slate-400 text-sm">user/month</div>
-              </div>
-            </div>
-            <p className="text-teal font-semibold mb-1">Annual billing · save 17%</p>
-            <p className="text-slate-400 text-sm mb-8">299 NOK/user/month billed monthly</p>
-
-            {/* Examples */}
-            <div className="grid grid-cols-3 gap-4 mb-8">
-              {PRICING_EXAMPLES.map(ex => (
-                <div key={ex.users} className="bg-white/5 border border-white/10 rounded-xl p-4">
-                  <div className="text-white font-black text-xl">{ex.annual.toLocaleString('nb-NO')} kr</div>
-                  <div className="text-slate-400 text-xs mt-0.5">{ex.label} · /month</div>
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            {[
+              { name: 'Lite',     users: 'Up to 10 users', price: '1 190', note: '1 490 NOK/month billed monthly', highlight: false },
+              { name: 'Business', users: 'Up to 50 users', price: '2 790', note: '3 490 NOK/month billed monthly', highlight: true  },
+            ].map(plan => (
+              <div key={plan.name} className={`rounded-2xl p-8 ${plan.highlight ? 'bg-navy' : 'bg-slate-50 border border-slate-200'}`}>
+                <div className={`text-xs font-bold uppercase tracking-wider mb-1 ${plan.highlight ? 'text-teal' : 'text-teal'}`}>{plan.users}</div>
+                <h3 className={`text-xl font-black mb-3 ${plan.highlight ? 'text-white' : 'text-navy'}`}>{plan.name}</h3>
+                <div className="flex items-baseline gap-1 mb-1">
+                  <span className={`text-4xl font-black ${plan.highlight ? 'text-white' : 'text-navy'}`}>{plan.price}</span>
+                  <span className="text-slate-400 text-sm">NOK/month</span>
                 </div>
-              ))}
-            </div>
+                <p className={`text-xs mb-6 ${plan.highlight ? 'text-slate-400' : 'text-slate-400'}`}>{plan.note}</p>
+                <a href={`${APP_URL}/register`}
+                  className={`block w-full py-3 rounded-xl font-bold text-center text-sm transition-colors ${plan.highlight ? 'bg-teal hover:bg-teal-dark text-white' : 'bg-navy hover:bg-slate-800 text-white'}`}>
+                  Start 14-day trial →
+                </a>
+              </div>
+            ))}
+          </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a href={`${APP_URL}/register`}
-                className="px-8 py-3.5 bg-teal hover:bg-teal-dark text-white font-bold rounded-xl transition-colors text-lg">
-                Start 14-day trial →
-              </a>
-              <Link href="/pricing"
-                className="px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl transition-colors border border-white/20">
-                See full pricing →
-              </Link>
-            </div>
-            <p className="text-slate-500 text-xs mt-4">No credit card required · All features · Cancel anytime</p>
+          <div className="text-center">
+            <Link href="/pricing" className="text-sm text-teal font-semibold hover:underline">
+              See full pricing, features and FAQ →
+            </Link>
           </div>
         </div>
       </section>
