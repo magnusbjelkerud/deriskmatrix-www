@@ -39,6 +39,9 @@ export default function Nav() {
           <Link href="/score" className={`text-sm font-medium hover:text-teal transition-colors ${scrolled ? 'text-slate-600' : 'text-white/80'}`}>
             De-Risk Score
           </Link>
+          <Link href="/pricing" className={`text-sm font-medium hover:text-teal transition-colors ${scrolled ? 'text-slate-600' : 'text-white/80'}`}>
+            Pricing
+          </Link>
           <Link href="/about" className={`text-sm font-medium hover:text-teal transition-colors ${scrolled ? 'text-slate-600' : 'text-white/80'}`}>
             About
           </Link>
@@ -78,6 +81,7 @@ export default function Nav() {
         <div className="md:hidden bg-white border-t border-slate-100 px-6 py-4 flex flex-col gap-4">
           <Link href="/methodology" className="text-sm font-medium text-slate-700" onClick={() => setOpen(false)}>Methodology</Link>
           <Link href="/score" className="text-sm font-medium text-slate-700" onClick={() => setOpen(false)}>De-Risk Score</Link>
+          <Link href="/pricing" className="text-sm font-medium text-slate-700" onClick={() => setOpen(false)}>Pricing</Link>
           <Link href="/about" className="text-sm font-medium text-slate-700" onClick={() => setOpen(false)}>About</Link>
           <hr className="border-slate-100" />
           <a href={`${APP_URL}/login`} className="text-sm font-medium text-slate-700">Log in</a>

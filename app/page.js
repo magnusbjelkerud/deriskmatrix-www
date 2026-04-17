@@ -33,28 +33,10 @@ const FEATURES = [
 
 const FRAMEWORKS = ['ISO 31000', 'OKR', 'Balanced Scorecard', 'SMART Goals', 'SWOT', 'PESTEL', 'McKinsey 7S']
 
-const PRICING = [
-  {
-    name: 'Starter', price: '490', period: 'per month', highlight: false,
-    annual: '390',
-    desc: 'For a single leadership team getting structured on risk.',
-    features: ['Up to 5 users', '50 goals', 'Canvas & Dashboard', 'Risk states + forecasting', 'Actions & Risk Register', 'AI goal assistant', '14-day trial'],
-    cta: 'Start 14-day trial', href: `${APP_URL}/register`,
-  },
-  {
-    name: 'Pro', price: '1 490', period: 'per month', highlight: true,
-    annual: '1 190',
-    desc: 'For organizations with departments, portfolios and a leadership group.',
-    features: ['Unlimited users & goals', 'Department & portfolio hierarchy', 'Executive Risk Summary', 'Learning Velocity insights', 'External read-only sharing', 'Priority support', '14-day trial'],
-    cta: 'Start 14-day trial', href: `${APP_URL}/register`,
-  },
-  {
-    name: 'Enterprise', price: 'Custom', period: '', highlight: false,
-    annual: null,
-    desc: 'For compliance-heavy organizations with custom integration needs.',
-    features: ['Everything in Pro', 'Tripletex / Fiken integration', 'SSO / BankID', 'GDPR DPA', 'Dedicated onboarding', 'SLA'],
-    cta: 'Book a demo', href: 'mailto:post@deriskmatrix.com',
-  },
+const PRICING_EXAMPLES = [
+  { users: 3,  label: '3 users',  monthly: 897,  annual: 747 },
+  { users: 5,  label: '5 users',  monthly: 1495, annual: 1245 },
+  { users: 10, label: '10 users', monthly: 2990, annual: 2490 },
 ]
 
 export default function Home() {
@@ -101,9 +83,9 @@ export default function Home() {
               </div>
 
               <div className="flex items-center gap-6 text-xs text-slate-500">
-                <span className="flex items-center gap-1.5"><span className="text-teal">✓</span> 14-day trial included</span>
+                <span className="flex items-center gap-1.5"><span className="text-teal">✓</span> 14-day trial</span>
                 <span className="flex items-center gap-1.5"><span className="text-teal">✓</span> No lock-in</span>
-                <span className="flex items-center gap-1.5"><span className="text-teal">✓</span> Up and running in minutes</span>
+                <span className="flex items-center gap-1.5"><span className="text-teal">✓</span> All features included</span>
               </div>
             </div>
 
@@ -132,7 +114,7 @@ export default function Home() {
               { val: '6', label: 'risk states' },
               { val: '2×3', label: 'matrix structure' },
               { val: 'ISO 31000', label: 'aligned' },
-              { val: 'Free', label: 'to start' },
+              { val: '14-day', label: 'trial' },
               { val: 'AI', label: 'goal assistant' },
             ].map(s => (
               <div key={s.label} className="flex items-center gap-2">
@@ -359,7 +341,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
             <h3 className="text-2xl font-black text-white mb-1">Ready to see your goals in a new light?</h3>
-            <p className="text-teal-light/80 text-sm">Free plan. No lock-in. Your first risk state overview in under 10 minutes.</p>
+            <p className="text-teal-light/80 text-sm">14-day trial. No lock-in. Your first risk state overview in under 10 minutes.</p>
           </div>
           <a
             href={`${APP_URL}/register`}
@@ -391,47 +373,46 @@ export default function Home() {
 
       {/* ── Pricing ───────────────────────────────────────────────── */}
       <section id="pricing" className="py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="text-center mb-16">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-12">
             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Pricing</p>
             <h2 className="text-4xl font-black text-navy mb-3">Simple, transparent pricing</h2>
-            <p className="text-lg text-slate-500">14-day trial on all plans. Cancel anytime.</p>
+            <p className="text-lg text-slate-500">Per user. All features included. 14-day trial on every account.</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6 items-start">
-            {PRICING.map(plan => (
-              <div key={plan.name}
-                className={`rounded-2xl p-7 flex flex-col ${plan.highlight ? 'bg-navy shadow-2xl shadow-navy/20 md:-mt-4 md:mb-4' : 'bg-slate-50 border border-slate-200'}`}>
-                {plan.highlight && (
-                  <div className="inline-block bg-teal text-white text-xs font-bold px-3 py-1 rounded-full mb-4 self-start">Most popular</div>
-                )}
-                <h3 className={`text-xl font-black mb-1 ${plan.highlight ? 'text-white' : 'text-navy'}`}>{plan.name}</h3>
-                <div className="flex items-baseline gap-1 mb-1">
-                  {plan.price === 'Custom'
-                    ? <span className={`text-3xl font-black ${plan.highlight ? 'text-white' : 'text-navy'}`}>Custom</span>
-                    : <>
-                        <span className={`text-3xl font-black ${plan.highlight ? 'text-white' : 'text-navy'}`}>{plan.price} NOK</span>
-                        <span className="text-sm text-slate-400">/{plan.period}</span>
-                      </>
-                  }
-                </div>
-                {plan.annual && (
-                  <div className="text-xs text-teal mb-3">{plan.annual} NOK/month billed annually — save 20%</div>
-                )}
-                <p className={`text-sm mb-6 ${plan.highlight ? 'text-slate-300' : 'text-slate-500'}`}>{plan.desc}</p>
-                <ul className="space-y-2.5 mb-8 flex-1">
-                  {plan.features.map(f => (
-                    <li key={f} className="flex items-start gap-2 text-sm">
-                      <span className="text-teal mt-0.5 flex-shrink-0">✓</span>
-                      <span className={plan.highlight ? 'text-slate-200' : 'text-slate-600'}>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-                <a href={plan.href}
-                  className={`w-full py-3.5 rounded-xl font-bold text-center text-sm transition-colors ${plan.highlight ? 'bg-teal hover:bg-teal-dark text-white' : 'bg-navy hover:bg-slate-800 text-white'}`}>
-                  {plan.cta}
-                </a>
+
+          {/* Price card */}
+          <div className="bg-navy rounded-2xl p-10 text-center mb-8">
+            <div className="flex items-baseline justify-center gap-2 mb-2">
+              <span className="text-6xl font-black text-white">249</span>
+              <div className="text-left">
+                <div className="text-slate-300 text-lg font-semibold">NOK</div>
+                <div className="text-slate-400 text-sm">user/month</div>
               </div>
-            ))}
+            </div>
+            <p className="text-teal font-semibold mb-1">Annual billing · save 17%</p>
+            <p className="text-slate-400 text-sm mb-8">299 NOK/user/month billed monthly</p>
+
+            {/* Examples */}
+            <div className="grid grid-cols-3 gap-4 mb-8">
+              {PRICING_EXAMPLES.map(ex => (
+                <div key={ex.users} className="bg-white/5 border border-white/10 rounded-xl p-4">
+                  <div className="text-white font-black text-xl">{ex.annual.toLocaleString('nb-NO')} kr</div>
+                  <div className="text-slate-400 text-xs mt-0.5">{ex.label} · /month</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <a href={`${APP_URL}/register`}
+                className="px-8 py-3.5 bg-teal hover:bg-teal-dark text-white font-bold rounded-xl transition-colors text-lg">
+                Start 14-day trial →
+              </a>
+              <Link href="/pricing"
+                className="px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl transition-colors border border-white/20">
+                See full pricing →
+              </Link>
+            </div>
+            <p className="text-slate-500 text-xs mt-4">No credit card required · All features · Cancel anytime</p>
           </div>
         </div>
       </section>
@@ -473,7 +454,7 @@ export default function Home() {
               <div className="text-4xl mb-4">🚀</div>
               <h3 className="text-white font-black text-2xl mb-2">Ready to get started?</h3>
               <p className="text-white/80 text-sm mb-6 leading-relaxed">
-                14-day trial included. Set up your first goals, see your risk states live, and start managing strategy the right way.
+                14-day trial. All features included. Set up your first goals, see your risk states live, and start managing strategy the right way.
               </p>
               <a href={`${APP_URL}/register`}
                 className="inline-block px-7 py-3.5 bg-white text-teal font-black rounded-xl hover:bg-slate-50 transition-colors w-full text-lg">
