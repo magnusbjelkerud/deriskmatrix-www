@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
+import MatrixDemo from '../components/MatrixDemo'
 
 const APP_URL = 'https://app.deriskmatrix.com'
 
@@ -85,17 +86,8 @@ export default function Home() {
             </div>
 
             {/* Right — De-Risk Matrix */}
-            <div className="hidden md:block">
-              <div className="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
-                <Image
-                  src="/images/matrix.png"
-                  alt="The De-Risk Matrix — 6 risk states"
-                  width={600}
-                  height={480}
-                  className="w-full h-auto"
-                  priority
-                />
-              </div>
+            <div className="hidden md:flex items-center justify-center">
+              <MatrixDemo />
             </div>
           </div>
         </div>
@@ -181,53 +173,55 @@ export default function Home() {
 
       {/* ── Score interrupt CTA ───────────────────────────────────── */}
       <section className="py-20 bg-gradient-to-br from-navy via-slate-900 to-navy relative overflow-hidden">
-        {/* Background decoration */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 right-0 w-96 h-96 bg-teal rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-accent rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
         </div>
         <div className="relative max-w-4xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-block bg-teal/20 text-teal text-xs font-bold px-3 py-1 rounded-full mb-5 border border-teal/30">
-                Free · 2 minutes · No sign-up
-              </div>
-              <h2 className="text-4xl font-black text-white mb-4 leading-tight">
-                Most organizations score below 40 out of 100.
-              </h2>
-              <p className="text-slate-300 leading-relaxed mb-6">
-                5 questions reveal exactly where your strategic risk management stands — and which gaps are costing you the most.
-              </p>
-              <Link
-                href="/score"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-teal hover:bg-teal-dark text-white font-bold rounded-xl transition-all shadow-xl shadow-teal/20 text-lg"
-              >
-                Calculate your De-Risk Score →
-              </Link>
-              <p className="text-slate-500 text-xs mt-3">Instant result. No email required.</p>
+
+          {/* Header */}
+          <div className="text-center mb-10">
+            <div className="inline-block bg-teal/20 text-teal text-xs font-bold px-3 py-1 rounded-full mb-5 border border-teal/30">
+              5 questions · 2 minutes · Free · No sign-up
             </div>
-            {/* Score preview */}
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-              <div className="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-5">De-Risk Score scale</div>
-              {[
-                { label: 'Fully de-risked',  range: '80–100', color: '#1a9e8a', bg: 'rgba(26,158,138,0.15)', w: '100%' },
-                { label: 'Well managed',     range: '60–79',  color: '#2ab09a', bg: 'rgba(42,176,154,0.12)', w: '79%' },
-                { label: 'Building',         range: '40–59',  color: '#1d4ed8', bg: 'rgba(29,78,216,0.12)',  w: '59%' },
-                { label: 'Significant gaps', range: '20–39',  color: '#ea580c', bg: 'rgba(234,88,12,0.12)',  w: '39%' },
-                { label: 'Critical',         range: '0–19',   color: '#c0392b', bg: 'rgba(192,57,43,0.12)',  w: '19%' },
-              ].map(b => (
-                <div key={b.label} className="mb-3">
-                  <div className="flex items-center justify-between text-xs mb-1">
-                    <span style={{ color: b.color }} className="font-semibold">{b.label}</span>
-                    <span className="text-slate-500">{b.range}</span>
-                  </div>
-                  <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
-                    <div style={{ width: b.w, background: b.color }} className="h-full rounded-full" />
-                  </div>
+            <h2 className="text-4xl md:text-5xl font-black text-white mb-4 leading-tight">
+              Where does your strategy<br className="hidden md:block" /> have blind spots?
+            </h2>
+            <p className="text-slate-400 text-lg max-w-xl mx-auto">
+              Most leadership teams can&apos;t answer these five questions well. Can yours?
+            </p>
+          </div>
+
+          {/* Question teasers */}
+          <div className="grid md:grid-cols-2 gap-3 mb-8 max-w-3xl mx-auto">
+            {[
+              { n: '01', q: 'How do you define strategic goals?',            hint: 'Target numbers aren\'t enough.' },
+              { n: '02', q: 'How fast do you catch underperforming goals?',  hint: 'Most find out too late.' },
+              { n: '03', q: 'What actually drives your strategic decisions?', hint: 'Data, gut feel, or both?' },
+              { n: '04', q: 'How openly does leadership discuss risk?',       hint: 'Culture is the biggest gap.' },
+            ].map(item => (
+              <div key={item.n} className="flex items-start gap-3 bg-white/5 border border-white/8 rounded-xl px-4 py-3.5">
+                <span className="text-xs font-black text-teal/60 mt-0.5 flex-shrink-0 w-5">{item.n}</span>
+                <div>
+                  <p className="text-sm font-semibold text-white/80 leading-snug">{item.q}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">{item.hint}</p>
                 </div>
-              ))}
-              <p className="text-slate-500 text-xs mt-4 italic">Where does your organization land?</p>
-            </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Teaser tail + CTA */}
+          <div className="text-center">
+            <p className="text-slate-500 text-sm mb-6">
+              +1 more question · instant score · your personal gap analysis
+            </p>
+            <Link
+              href="/score"
+              className="inline-flex items-center gap-2 px-10 py-4 bg-teal hover:bg-teal-dark text-white font-black rounded-xl transition-all shadow-2xl shadow-teal/25 text-lg"
+            >
+              Find out your score →
+            </Link>
+            <p className="text-slate-600 text-xs mt-3">No email required. Instant result.</p>
           </div>
         </div>
       </section>
