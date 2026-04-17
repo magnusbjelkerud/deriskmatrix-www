@@ -21,13 +21,13 @@ export default function Nav() {
     }`}>
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center py-1">
+        <Link href="/" className="flex items-center">
+          {/* SVG viewBox 1152×500, ratio 2.31:1 → at h=40 use w=92 */}
           <Image
             src={scrolled ? '/images/logo-pos.svg' : '/images/logo-neg.svg'}
             alt="De-Risk Matrix"
-            width={160}
-            height={44}
-            style={{ objectFit: 'contain', objectPosition: 'center' }}
+            width={92}
+            height={40}
             priority
           />
         </Link>
