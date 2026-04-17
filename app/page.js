@@ -234,33 +234,66 @@ export default function Home() {
 
       {/* ── 6 Risk states ─────────────────────────────────────────── */}
       <section className="py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-black text-navy mb-4">The 6 risk states</h2>
             <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-              A 2×3 matrix of goal position (beyond / on track / below) and evidence strength (strong / weak). Every goal always has a state.
+              Every goal is always in exactly one state — determined by its position relative to target/threshold, and the strength of your evidence.
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {RISK_STATES.map(rs => (
-              <div
-                key={rs.label}
-                style={{ background: rs.bg, borderColor: rs.color + '40' }}
-                className="rounded-2xl p-5 border card-hover"
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <span style={{ color: rs.color }} className="text-lg font-black">{rs.label}</span>
-                  <span style={{ background: rs.color + '20', color: rs.color }} className="text-xs font-semibold px-2 py-1 rounded-full">
-                    → {rs.action}
-                  </span>
+
+          {/* Matrix */}
+          <div className="overflow-x-auto">
+            <div className="min-w-[520px]">
+              {/* X-axis label */}
+              <div className="flex ml-24 mb-2">
+                <div className="flex-1 text-center text-xs font-bold text-slate-400 uppercase tracking-wider py-1 border-b-2 border-slate-200">
+                  Strong evidence
                 </div>
-                <p className="text-slate-600 text-sm leading-relaxed">{rs.desc}</p>
-                <div className="mt-3 flex gap-2">
-                  <span className="text-xs bg-white/60 text-slate-500 px-2 py-0.5 rounded font-medium">{rs.position}</span>
-                  <span className="text-xs bg-white/60 text-slate-500 px-2 py-0.5 rounded font-medium">{rs.evidence}</span>
+                <div className="flex-1 text-center text-xs font-bold text-slate-400 uppercase tracking-wider py-1 border-b-2 border-slate-200">
+                  Weak evidence
                 </div>
               </div>
-            ))}
+              <div className="text-center text-xs font-bold text-slate-300 uppercase tracking-widest mb-4 ml-24">
+                ← Evidence / knowledge →
+              </div>
+
+              {/* Rows */}
+              {[
+                { rowLabel: 'Beyond target', states: [RISK_STATES[0], RISK_STATES[1]], border: 'border-l-4 border-blue-200' },
+                { rowLabel: 'On track',      states: [RISK_STATES[2], RISK_STATES[3]], border: 'border-l-4 border-teal-200' },
+                { rowLabel: 'Below threshold', states: [RISK_STATES[4], RISK_STATES[5]], border: 'border-l-4 border-red-200' },
+              ].map(row => (
+                <div key={row.rowLabel} className="flex gap-3 mb-3 items-stretch">
+                  {/* Y-axis label */}
+                  <div className="w-20 flex-shrink-0 flex items-center justify-end">
+                    <span className="text-xs font-bold text-slate-400 uppercase tracking-wide text-right leading-tight">
+                      {row.rowLabel}
+                    </span>
+                  </div>
+                  {row.states.map(rs => (
+                    <div
+                      key={rs.label}
+                      style={{ background: rs.bg, borderColor: rs.color + '50' }}
+                      className={`flex-1 rounded-2xl p-5 border-2 card-hover`}
+                    >
+                      <div className="flex items-start justify-between mb-2">
+                        <span style={{ color: rs.color }} className="text-lg font-black">{rs.label}</span>
+                        <span style={{ background: rs.color + '25', color: rs.color }} className="text-xs font-bold px-2.5 py-1 rounded-full whitespace-nowrap">
+                          → {rs.action}
+                        </span>
+                      </div>
+                      <p className="text-slate-600 text-sm leading-relaxed">{rs.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              ))}
+
+              {/* Y-axis arrow label */}
+              <div className="text-right mr-0 mt-2 ml-24">
+                <span className="text-xs font-bold text-slate-300 uppercase tracking-widest">↑ Goal position ↓</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
