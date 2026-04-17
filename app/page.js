@@ -107,46 +107,17 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right — mock app canvas */}
+            {/* Right — De-Risk Matrix */}
             <div className="hidden md:block">
-              <div className="bg-slate-900 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                {/* Window chrome */}
-                <div className="bg-slate-800 px-4 py-3 flex items-center gap-2 border-b border-white/5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-400/60" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/60" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-400/60" />
-                  <span className="text-xs text-slate-500 ml-3 font-medium">De-Risk Matrix — Enterprise Canvas</span>
-                </div>
-                {/* Canvas content */}
-                <div className="p-5 space-y-2.5">
-                  <div className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-4">5 goals · 2 need attention</div>
-                  {MOCK_GOALS.map(g => (
-                    <div key={g.name} style={{ background: g.bg }} className="flex items-center gap-3 rounded-xl px-4 py-3">
-                      {/* Position indicator */}
-                      <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: g.color + '30', border: `2px solid ${g.color}` }}>
-                        <div className="w-2.5 h-2.5 rounded-full" style={{ background: g.color }} />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="text-white/90 text-sm font-medium truncate">{g.name}</div>
-                        {/* Mini progress bar */}
-                        <div className="mt-1 h-1 bg-white/10 rounded-full overflow-hidden w-24">
-                          <div style={{ width: `${g.pct}%`, background: g.color }} className="h-full rounded-full" />
-                        </div>
-                      </div>
-                      <span style={{ color: g.color, background: g.color + '20', borderColor: g.color + '40' }} className="text-xs px-2.5 py-1 rounded-full font-bold border whitespace-nowrap">
-                        {g.state}
-                      </span>
-                    </div>
-                  ))}
-                  {/* Bottom bar */}
-                  <div className="border-t border-white/5 pt-3 flex items-center justify-between mt-4">
-                    <div className="flex gap-3">
-                      <span className="text-xs text-teal">● 3 on track</span>
-                      <span className="text-xs text-red-400">● 2 at risk</span>
-                    </div>
-                    <span className="text-xs text-slate-500">De-Risk Score: 58</span>
-                  </div>
-                </div>
+              <div className="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+                <Image
+                  src="/images/matrix.png"
+                  alt="The De-Risk Matrix — 6 risk states"
+                  width={600}
+                  height={480}
+                  className="w-full h-auto"
+                  priority
+                />
               </div>
             </div>
           </div>
@@ -154,7 +125,7 @@ export default function Home() {
       </section>
 
       {/* ── Stats / trust bar ─────────────────────────────────────── */}
-      <section className="bg-slate-900 border-y border-slate-800 py-6">
+      <section className="bg-slate-900 border-y border-slate-800 py-6" id="overview">
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-sm">
             {[
@@ -174,8 +145,12 @@ export default function Home() {
       </section>
 
       {/* ── Problem ───────────────────────────────────────────────── */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-white" id="why">
         <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Why De-Risk Matrix</p>
+            <h2 className="text-4xl font-black text-navy">The problem with how goals are set today</h2>
+          </div>
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
               <div className="inline-block bg-red-50 text-red-600 text-xs font-bold px-3 py-1 rounded-full mb-5 border border-red-200">
@@ -281,12 +256,10 @@ export default function Home() {
       </section>
 
       {/* ── How it works ──────────────────────────────────────────── */}
-      <section className="py-24 bg-slate-50">
+      <section className="py-24 bg-slate-50" id="how-it-works">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-16">
-            <div className="inline-block bg-teal-light text-teal text-xs font-semibold px-3 py-1 rounded-full mb-4 border border-teal/20">
-              How it works
-            </div>
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">How it works</p>
             <h2 className="text-4xl font-black text-navy">Goals. Risk States. Culture.</h2>
             <p className="text-lg text-slate-500 mt-4 max-w-xl mx-auto">Three concepts. One repeating cycle. Every period more precise than the last.</p>
           </div>
@@ -312,9 +285,10 @@ export default function Home() {
       </section>
 
       {/* ── 6 Risk states matrix ──────────────────────────────────── */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-white" id="risk-states">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-16">
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">The De-Risk Matrix</p>
             <h2 className="text-4xl font-black text-navy mb-4">The 6 risk states</h2>
             <p className="text-lg text-slate-500 max-w-2xl mx-auto">
               Every goal is always in exactly one state — determined by where it sits relative to target/threshold, and the strength of your evidence.
@@ -361,12 +335,10 @@ export default function Home() {
       </section>
 
       {/* ── Features ──────────────────────────────────────────────── */}
-      <section className="py-24 bg-slate-50">
+      <section className="py-24 bg-slate-50" id="features">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-16">
-            <div className="inline-block bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full mb-4 border border-blue-200">
-              The platform
-            </div>
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">The platform</p>
             <h2 className="text-4xl font-black text-navy mb-3">Everything your strategy needs</h2>
             <p className="text-slate-500 max-w-xl mx-auto">One workspace for goals, risk states, forecasts, actions, hierarchy, and culture.</p>
           </div>
@@ -421,8 +393,9 @@ export default function Home() {
       <section id="pricing" className="py-24 bg-white">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-16">
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Pricing</p>
             <h2 className="text-4xl font-black text-navy mb-3">Simple, transparent pricing</h2>
-            <p className="text-lg text-slate-500">Start your trial. Upgrade when your organization grows.</p>
+            <p className="text-lg text-slate-500">14-day trial on all plans. Cancel anytime.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 items-start">
             {PRICING.map(plan => (

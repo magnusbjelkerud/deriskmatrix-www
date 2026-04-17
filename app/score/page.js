@@ -117,19 +117,17 @@ export default function ScorePage() {
     <div className="min-h-screen bg-slate-50">
       <Nav />
 
-      <div ref={topRef} className="pt-24 pb-20">
+      <div ref={topRef} className="pb-20">
 
         {/* ── Hero header ─────────────────────────────────────────── */}
         {!submitted && (
-          <div className="hero-gradient py-16 mb-10">
+          <div className="hero-gradient pt-28 pb-16 mb-10">
             <div className="max-w-2xl mx-auto px-6 text-center">
               <div className="inline-block bg-white/10 text-white text-xs font-semibold px-3 py-1.5 rounded-full mb-5 border border-white/20">
-                Free · 2 minutes · No sign-up required
+                2 minutes · No sign-up required
               </div>
               <h1 className="text-5xl font-black text-white mb-4 leading-tight">
-                How close to{' '}
-                <span className="gradient-text">100</span>
-                {' '}are you?
+                How close to <span className="text-teal">100</span> are you?
               </h1>
               <p className="text-xl text-slate-300 leading-relaxed mb-4">
                 Most organizations score below 40. Find out where you stand — and exactly what to fix first.
@@ -139,7 +137,7 @@ export default function ScorePage() {
                 <span className="w-1 h-1 rounded-full bg-slate-600" />
                 <span>Instant score</span>
                 <span className="w-1 h-1 rounded-full bg-slate-600" />
-                <span>Personalized gaps</span>
+                <span>Personalised gaps</span>
               </div>
             </div>
           </div>
@@ -147,7 +145,7 @@ export default function ScorePage() {
 
         {/* ── Result hero ─────────────────────────────────────────── */}
         {submitted && (
-          <div className="hero-gradient py-16 mb-10">
+          <div className="hero-gradient pt-28 pb-16 mb-10">
             <div className="max-w-2xl mx-auto px-6 text-center">
               <div className="text-sm font-semibold text-slate-400 mb-2 uppercase tracking-wider">Your De-Risk Score</div>
               <div style={{ color: band.color }} className="text-9xl font-black mb-1 leading-none"
