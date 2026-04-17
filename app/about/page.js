@@ -1,6 +1,7 @@
 import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata = {
   title: 'About Magnus Bjelkerud — De-Risk Matrix',
@@ -24,11 +25,17 @@ export default function AboutPage() {
         {/* Magnus */}
         <section className="grid md:grid-cols-3 gap-10 items-start">
           <div className="md:col-span-1 flex flex-col items-center text-center">
-            <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-teal to-blue-accent flex items-center justify-center text-white font-black text-4xl mb-4">
-              M
+            <div className="w-40 h-40 rounded-2xl overflow-hidden mb-4 shadow-lg">
+              <Image
+                src="/images/magnus.jpg"
+                alt="Magnus Bjelkerud"
+                width={160}
+                height={160}
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="font-bold text-navy">Magnus Bjelkerud</div>
-            <div className="text-slate-500 text-sm mt-1">Creator</div>
+            <div className="text-slate-500 text-sm mt-1">Creator, De-Risk Matrix</div>
           </div>
           <div className="md:col-span-2 space-y-4 text-slate-600 leading-relaxed">
             <p>

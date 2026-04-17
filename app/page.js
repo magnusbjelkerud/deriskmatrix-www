@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 
@@ -402,7 +403,9 @@ export default function Home() {
             Traditionally, risk meant <em className="text-teal not-italic font-semibold">how big the hole in the floor is</em> — probability multiplied by negative consequence. But ISO 31000 looks upward: how high the building is, and how high it could grow. Risk is the effect of uncertainty on objectives — and that is exactly what De-Risk Matrix is built upon.
           </blockquote>
           <div className="flex items-center justify-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal to-blue-accent flex items-center justify-center text-white font-bold text-sm">M</div>
+            <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border-2 border-teal/40">
+              <Image src="/images/magnus.jpg" alt="Magnus Bjelkerud" width={48} height={48} className="w-full h-full object-cover" />
+            </div>
             <div className="text-left">
               <div className="text-white font-semibold text-sm">Magnus Bjelkerud</div>
               <div className="text-slate-400 text-xs">Creator, De-Risk Matrix</div>
