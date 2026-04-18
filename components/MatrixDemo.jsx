@@ -1,233 +1,231 @@
-// ── SVG icons (white outline, 22×22 viewBox) ─────────────────────────────────
+// ─── White line icons ─────────────────────────────────────────────────────────
 
-function IconTarget() {
+const S = { fill: 'none', stroke: 'rgba(255,255,255,0.85)', strokeWidth: 1.6, strokeLinecap: 'round', strokeLinejoin: 'round' }
+
+function IcoTarget() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-      stroke="rgba(255,255,255,0.75)" strokeWidth="1.5" strokeLinecap="round">
-      <circle cx="12" cy="12" r="9"/>
+    <svg width="26" height="26" viewBox="0 0 24 24" {...S}>
+      <circle cx="12" cy="12" r="9.5"/>
       <circle cx="12" cy="12" r="5.5"/>
-      <circle cx="12" cy="12" r="2"/>
-      <line x1="12" y1="2.5" x2="12" y2="6"/>
-      <line x1="12" y1="18" x2="12" y2="21.5"/>
-      <line x1="2.5" y1="12" x2="6" y2="12"/>
-      <line x1="18" y1="12" x2="21.5" y2="12"/>
+      <circle cx="12" cy="12" r="1.5" fill="rgba(255,255,255,0.85)" stroke="none"/>
+      <line x1="12" y1="2" x2="12" y2="5.5"/>
+      <line x1="12" y1="18.5" x2="12" y2="22"/>
+      <line x1="2" y1="12" x2="5.5" y2="12"/>
+      <line x1="18.5" y1="12" x2="22" y2="12"/>
     </svg>
   )
 }
 
-function IconHandshake() {
+function IcoHandshake() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-      stroke="rgba(255,255,255,0.75)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M2 8.5L6 7l4 1.5h2l4-1.5 4 1.5v3.5l-4-1.5-2 2-2-2-2 2-2-2-4 1.5V8.5z"/>
-      <path d="M10 8.5l2 2.5 2-2.5"/>
-      <path d="M6 15.5l3-3 3 3 3-3 3 3"/>
+    <svg width="26" height="26" viewBox="0 0 24 24" {...S}>
+      <path d="M3 9l3-2 3.5 1.5H14l3.5-1.5 3 2v4l-3-1.5-2.5 2.5-2.5-2-2.5 2-2.5-2.5L3 13V9z"/>
+      <path d="M9.5 8.5l2.5 3 2.5-3"/>
     </svg>
   )
 }
 
-function IconClock() {
+function IcoClock() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-      stroke="white" strokeWidth="1.5" strokeLinecap="round">
+    <svg width="32" height="32" viewBox="0 0 24 24" {...S}>
       <circle cx="12" cy="12" r="9"/>
-      <line x1="12" y1="7" x2="12" y2="12"/>
-      <line x1="12" y1="12" x2="15.5" y2="14.5"/>
+      <path d="M12 7v5l3 2"/>
+      <path d="M6.5 4.5l1.5 1.5M17.5 4.5l-1.5 1.5"/>
     </svg>
   )
 }
 
-function IconRocket() {
+function IcoRocket() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-      stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 2C12 2 16 6 16 11V16L12 19L8 16V11C8 6 12 2 12 2z"/>
+    <svg width="32" height="32" viewBox="0 0 24 24" {...S}>
+      <path d="M12 3s4 3 4 8v5l-4 3-4-3v-5c0-5 4-8 4-8z"/>
       <circle cx="12" cy="10" r="2"/>
-      <path d="M8 16L5 17L6 13"/>
-      <path d="M16 16L19 17L18 13"/>
+      <path d="M8 16l-2.5 1.5 1-3.5"/>
+      <path d="M16 16l2.5 1.5-1-3.5"/>
     </svg>
   )
 }
 
-function IconMedal() {
+function IcoMedal() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-      stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="14" r="6"/>
-      <path d="M9 2l3 5 3-5"/>
-      <path d="M9 2h6"/>
-      <path d="M12 11v2l1.5 1"/>
+    <svg width="32" height="32" viewBox="0 0 24 24" {...S}>
+      <circle cx="12" cy="14.5" r="5.5"/>
+      <path d="M8.5 3h7l-1.5 5.5h-4L8.5 3z"/>
+      <path d="M10 8.5l-1.5 5M14 8.5l1.5 5"/>
+      <path d="M10.5 13l1.5 2.5 1.5-2.5"/>
     </svg>
   )
 }
 
-function IconThumbUp() {
+function IcoThumbUp() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-      stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M7 22V11l5-9 1 1v6h5l1 2-1 9H7z"/>
-      <line x1="7" y1="11" x2="4" y2="11"/>
-      <rect x="4" y="11" width="3" height="11" rx="1"/>
+    <svg width="32" height="32" viewBox="0 0 24 24" {...S}>
+      <path d="M7 22V12l4-8.5 1 .5v6.5h5.5l.5 1.5-1 9H7z"/>
+      <line x1="7" y1="12" x2="4.5" y2="12"/>
+      <rect x="3" y="12" width="4" height="10" rx="1"/>
     </svg>
   )
 }
 
-function IconAlarm() {
+function IcoAlarm() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-      stroke="white" strokeWidth="1.5" strokeLinecap="round">
+    <svg width="32" height="32" viewBox="0 0 24 24" {...S}>
       <circle cx="12" cy="13" r="7.5"/>
-      <line x1="12" y1="9" x2="12" y2="13"/>
-      <line x1="12" y1="13" x2="15" y2="15"/>
-      <path d="M4 6l3 3M20 6l-3 3"/>
-      <path d="M9 3h6"/>
+      <path d="M12 9.5V13l2.5 1.5"/>
+      <path d="M4.5 6.5l2 2M19.5 6.5l-2 2"/>
+      <path d="M9.5 3.5h5"/>
     </svg>
   )
 }
 
-function IconHand() {
+function IcoHand() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-      stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M8 7V16.5a2 2 0 004 0V12"/>
-      <path d="M12 12V8a2 2 0 014 0v4"/>
-      <path d="M16 12v-1a2 2 0 014 0V16a6 6 0 01-6 6H12a6 6 0 01-6-6V7"/>
-      <path d="M8 5V4a2 2 0 00-4 0v1"/>
+    <svg width="32" height="32" viewBox="0 0 24 24" {...S}>
+      <path d="M8 13V7.5a1.5 1.5 0 013 0V12"/>
+      <path d="M11 12V6.5a1.5 1.5 0 013 0V12"/>
+      <path d="M14 12V8.5a1.5 1.5 0 013 0V13"/>
+      <path d="M17 13v-1a1.5 1.5 0 013 0v3a7 7 0 01-7 7H11a7 7 0 01-7-7v-3"/>
+      <path d="M4 12V7.5a1.5 1.5 0 013 0V13"/>
     </svg>
   )
 }
 
-// ── Cell data ─────────────────────────────────────────────────────────────────
+// ─── Cell data ────────────────────────────────────────────────────────────────
 
 const CELLS = [
-  // row 0 — Beyond target
-  { name: 'DEFENSIVE', action: 'RAISE',     color: '#1a4a7a', Icon: IconClock    },
-  { name: 'POTENT',    action: 'EXPLORE',   color: '#0d7a6a', Icon: IconRocket   },
-  // row 1 — On track
-  { name: 'HARMONIOUS',action: 'ENSURE',    color: '#1a9e8a', Icon: IconMedal    },
-  { name: 'OPTIMISTIC',action: 'PROVE',     color: '#2ab09a', Icon: IconThumbUp  },
-  // row 2 — Below threshold
-  { name: 'DIRE',      action: 'LOWER',     color: '#9b1a1a', Icon: IconAlarm    },
-  { name: 'PESSIMISTIC',action:'INTERVENE', color: '#c94040', Icon: IconHand     },
+  { name: 'DEFENSIVE',   action: 'RAISE',     bg: '#1a3f7a', Icon: IcoClock   },
+  { name: 'POTENT',      action: 'EXPLORE',   bg: '#0d6e8a', Icon: IcoRocket  },
+  { name: 'HARMONIOUS',  action: 'ENSURE',    bg: '#0d8a7a', Icon: IcoMedal   },
+  { name: 'OPTIMISTIC',  action: 'PROVE',     bg: '#1a9e8a', Icon: IcoThumbUp },
+  { name: 'DIRE',        action: 'LOWER',     bg: '#8a1a1a', Icon: IcoAlarm   },
+  { name: 'PESSIMISTIC', action: 'INTERVENE', bg: '#b83232', Icon: IcoHand    },
 ]
 
-// ── Arrow (→) drawn as SVG ────────────────────────────────────────────────────
-function Arrow() {
-  return (
-    <svg width="18" height="10" viewBox="0 0 18 10" fill="none" className="flex-shrink-0">
-      <line x1="0" y1="5" x2="13" y2="5" stroke="rgba(255,255,255,0.25)" strokeWidth="1.5"/>
-      <polyline points="9,1 13,5 9,9" stroke="rgba(255,255,255,0.25)" strokeWidth="1.5"
-        fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  )
-}
+// ─── Layout constants ─────────────────────────────────────────────────────────
 
-// ── Component ─────────────────────────────────────────────────────────────────
+const CELL_H   = 118   // px
+const CELL_GAP = 6     // px
+const CIRCLE   = 50    // px diameter
+const LEFT_W   = 80    // px for label+circle area
+const ARROW_W  = 22    // px
 
-const CELL_H   = 96   // px — height of each cell
-const CELL_GAP = 5    // px — gap between cells
-const CIRCLE_D = 44   // px — diameter of indicator circles
+// Y position of dividers (from top of grid)
+const TARGET_Y    = CELL_H + CELL_GAP / 2
+const THRESHOLD_Y = 2 * CELL_H + 1.5 * CELL_GAP
+const GRID_H      = 3 * CELL_H + 2 * CELL_GAP
+
+// ─── Main component ───────────────────────────────────────────────────────────
 
 export default function MatrixDemo() {
-  // Y positions (from top of grid) where the value-line circles sit
-  const targetY     = CELL_H + CELL_GAP / 2          // divider between row 0 and 1
-  const thresholdY  = 2 * CELL_H + 1.5 * CELL_GAP    // divider between row 1 and 2
-  const gridH       = 3 * CELL_H + 2 * CELL_GAP
-
   return (
-    <div className="select-none w-full max-w-[480px] mx-auto">
-      <div className="flex items-start gap-2">
+    <div className="select-none" style={{ maxWidth: 520 }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 0 }}>
 
-        {/* ── Left indicators ───────────────────────────────────────── */}
-        <div className="relative flex-shrink-0" style={{ width: 72, height: gridH }}>
+        {/* ── Left: value indicators ──────────────────────────────── */}
+        <div style={{ position: 'relative', width: LEFT_W, height: GRID_H, flexShrink: 0 }}>
 
-          {/* Vertical connecting line */}
-          <div
-            className="absolute left-1/2 -translate-x-px bg-white/15"
-            style={{ top: targetY, height: thresholdY - targetY, width: 1 }}
-          />
+          {/* Vertical connecting line between the two circles */}
+          <div style={{
+            position: 'absolute',
+            left: LEFT_W - CIRCLE / 2 - 1,
+            top: TARGET_Y,
+            width: 1,
+            height: THRESHOLD_Y - TARGET_Y,
+            background: 'rgba(255,255,255,0.15)',
+          }}/>
 
           {/* Target Value indicator */}
-          <div
-            className="absolute flex items-center gap-1.5"
-            style={{ top: targetY - CIRCLE_D / 2, left: 0, right: 0 }}
-          >
-            <div className="flex flex-col items-end flex-1 pr-1">
-              <span className="text-[9px] font-bold text-white/35 uppercase tracking-wider leading-tight text-right">
+          <div style={{
+            position: 'absolute',
+            top: TARGET_Y - CIRCLE / 2,
+            left: 0, right: 0,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+          }}>
+            <div style={{ flex: 1, textAlign: 'right' }}>
+              <div style={{ fontSize: 9, fontWeight: 700, color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', letterSpacing: '0.08em', lineHeight: 1.3 }}>
                 Target<br/>Value
-              </span>
+              </div>
             </div>
-            <div
-              className="flex-shrink-0 rounded-full flex items-center justify-center"
-              style={{
-                width: CIRCLE_D, height: CIRCLE_D,
-                background: 'rgba(15,23,42,0.9)',
-                border: '1.5px solid rgba(255,255,255,0.18)',
-                boxShadow: '0 0 12px rgba(26,158,138,0.2)',
-              }}
-            >
-              <IconTarget />
+            <div style={{
+              width: CIRCLE, height: CIRCLE, borderRadius: '50%',
+              background: 'rgba(10,20,40,0.9)',
+              border: '1.5px solid rgba(255,255,255,0.2)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              boxShadow: '0 0 16px rgba(26,158,138,0.25)',
+              flexShrink: 0,
+            }}>
+              <IcoTarget />
             </div>
           </div>
 
           {/* Threshold Value indicator */}
-          <div
-            className="absolute flex items-center gap-1.5"
-            style={{ top: thresholdY - CIRCLE_D / 2, left: 0, right: 0 }}
-          >
-            <div className="flex flex-col items-end flex-1 pr-1">
-              <span className="text-[9px] font-bold text-white/35 uppercase tracking-wider leading-tight text-right">
+          <div style={{
+            position: 'absolute',
+            top: THRESHOLD_Y - CIRCLE / 2,
+            left: 0, right: 0,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+          }}>
+            <div style={{ flex: 1, textAlign: 'right' }}>
+              <div style={{ fontSize: 9, fontWeight: 700, color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', letterSpacing: '0.08em', lineHeight: 1.3 }}>
                 Threshold<br/>Value
-              </span>
+              </div>
             </div>
-            <div
-              className="flex-shrink-0 rounded-full flex items-center justify-center"
-              style={{
-                width: CIRCLE_D, height: CIRCLE_D,
-                background: 'rgba(15,23,42,0.9)',
-                border: '1.5px solid rgba(255,255,255,0.18)',
-                boxShadow: '0 0 12px rgba(200,80,80,0.2)',
-              }}
-            >
-              <IconHandshake />
+            <div style={{
+              width: CIRCLE, height: CIRCLE, borderRadius: '50%',
+              background: 'rgba(10,20,40,0.9)',
+              border: '1.5px solid rgba(255,255,255,0.2)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              boxShadow: '0 0 16px rgba(180,60,60,0.25)',
+              flexShrink: 0,
+            }}>
+              <IcoHandshake />
             </div>
           </div>
         </div>
 
-        {/* ── Arrow connectors ──────────────────────────────────────── */}
-        <div className="relative flex-shrink-0" style={{ height: gridH }}>
-          <div className="absolute" style={{ top: targetY - 5 }}>
-            <Arrow />
-          </div>
-          <div className="absolute" style={{ top: thresholdY - 5 }}>
-            <Arrow />
-          </div>
+        {/* ── Arrows ──────────────────────────────────────────────── */}
+        <div style={{ position: 'relative', width: ARROW_W, height: GRID_H, flexShrink: 0 }}>
+          {[TARGET_Y, THRESHOLD_Y].map((y, i) => (
+            <svg key={i} width={ARROW_W} height={14} style={{ position: 'absolute', top: y - 7, left: 0 }}
+              viewBox={`0 0 ${ARROW_W} 14`} fill="none">
+              <line x1="1" y1="7" x2={ARROW_W - 5} y2="7" stroke="rgba(255,255,255,0.22)" strokeWidth="1.5"/>
+              <polyline points={`${ARROW_W - 9},3 ${ARROW_W - 4},7 ${ARROW_W - 9},11`}
+                stroke="rgba(255,255,255,0.22)" strokeWidth="1.5" fill="none"
+                strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          ))}
         </div>
 
-        {/* ── Matrix grid ───────────────────────────────────────────── */}
-        <div className="flex-1">
-          <div
-            className="grid grid-cols-2"
-            style={{ gap: CELL_GAP }}
-          >
-            {CELLS.map((cell) => (
-              <div
-                key={cell.name}
-                className="flex flex-col items-center justify-between rounded-xl px-2 py-3"
-                style={{
-                  height: CELL_H,
-                  background: cell.color,
-                  boxShadow: `inset 0 1px 0 rgba(255,255,255,0.12), 0 2px 8px rgba(0,0,0,0.3)`,
-                }}
-              >
-                <span className="text-[11px] font-black text-white tracking-widest text-center leading-none">
+        {/* ── Grid ────────────────────────────────────────────────── */}
+        <div style={{ flex: 1 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: CELL_GAP }}>
+            {CELLS.map(cell => (
+              <div key={cell.name} style={{
+                height: CELL_H,
+                background: cell.bg,
+                borderRadius: 10,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '12px 8px 10px',
+                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 12px rgba(0,0,0,0.35)',
+              }}>
+                <span style={{
+                  fontSize: 11, fontWeight: 900, color: 'rgba(255,255,255,0.92)',
+                  letterSpacing: '0.1em', textTransform: 'uppercase',
+                }}>
                   {cell.name}
                 </span>
                 <cell.Icon />
-                <span
-                  className="text-[9px] font-bold tracking-widest text-center"
-                  style={{ color: 'rgba(255,255,255,0.55)' }}
-                >
+                <span style={{
+                  fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.45)',
+                  letterSpacing: '0.12em', textTransform: 'uppercase',
+                }}>
                   {cell.action}
                 </span>
               </div>
@@ -235,10 +233,16 @@ export default function MatrixDemo() {
           </div>
 
           {/* Column headers */}
-          <div className="grid grid-cols-2 mt-3" style={{ gap: CELL_GAP }}>
+          <div style={{
+            display: 'grid', gridTemplateColumns: '1fr 1fr',
+            gap: CELL_GAP, marginTop: 10,
+          }}>
             {['Strong Evidence', 'Weak Evidence'].map(label => (
-              <div key={label} className="text-center">
-                <span className="text-[10px] font-bold text-white/35 uppercase tracking-widest">
+              <div key={label} style={{ textAlign: 'center' }}>
+                <span style={{
+                  fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.3)',
+                  textTransform: 'uppercase', letterSpacing: '0.1em',
+                }}>
                   {label}
                 </span>
               </div>
