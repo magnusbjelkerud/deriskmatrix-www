@@ -2,7 +2,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
-import MatrixDemo from '../components/MatrixDemo'
 
 const APP_URL = 'https://app.deriskmatrix.com'
 
@@ -87,7 +86,14 @@ export default function Home() {
 
             {/* Right — De-Risk Matrix */}
             <div className="hidden md:flex items-center justify-center">
-              <MatrixDemo />
+              <Image
+                src="/images/derisk-matrix.png"
+                alt="The De-Risk Matrix — 6 risk states"
+                width={580}
+                height={560}
+                className="w-full h-auto drop-shadow-2xl"
+                priority
+              />
             </div>
           </div>
         </div>
