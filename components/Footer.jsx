@@ -38,6 +38,7 @@ export default function Footer() {
               <li><Link href="/methodology" className="hover:text-white transition-colors">Methodology</Link></li>
               <li><Link href="/about" className="hover:text-white transition-colors">About Magnus</Link></li>
               <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy policy</Link></li>
+              <li><Link href="/terms" className="hover:text-white transition-colors">Terms of service</Link></li>
             </ul>
           </div>
         </div>
