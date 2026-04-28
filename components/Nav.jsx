@@ -46,6 +46,9 @@ export default function Nav() {
           <Link href="/about" className={`text-sm font-medium hover:text-teal transition-colors ${scrolled ? 'text-slate-600' : 'text-white/80'}`}>
             About
           </Link>
+          <Link href="/security" className={`text-sm font-medium hover:text-teal transition-colors ${scrolled ? 'text-slate-600' : 'text-white/80'}`}>
+            Security
+          </Link>
         </div>
 
         {/* CTAs */}
@@ -84,6 +87,7 @@ export default function Nav() {
           <Link href="/score" className="text-sm font-medium text-slate-700" onClick={() => setOpen(false)}>De-Risk Score</Link>
           <Link href="/pricing" className="text-sm font-medium text-slate-700" onClick={() => setOpen(false)}>Pricing</Link>
           <Link href="/about" className="text-sm font-medium text-slate-700" onClick={() => setOpen(false)}>About</Link>
+          <Link href="/security" className="text-sm font-medium text-slate-700" onClick={() => setOpen(false)}>Security</Link>
           <hr className="border-slate-100" />
           <a href={`${APP_URL}/login`} className="text-sm font-medium text-slate-700">Log in</a>
           <a href={`${APP_URL}/register`} className="text-sm font-semibold text-white bg-teal px-4 py-2.5 rounded-lg text-center">

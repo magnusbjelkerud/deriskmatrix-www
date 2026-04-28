@@ -7,31 +7,31 @@ const APP_URL = 'https://app.deriskmatrix.com'
 
 const PLANS = [
   {
-    name: 'Lite',
-    users: 'Up to 10 users',
-    monthly: 1490,
-    annual: 1190,
-    desc: 'For a leadership team getting structured on risk.',
+    name: 'Starter',
+    users: 'Up to 5 users',
+    monthly: 49,
+    annual: 39,
+    desc: 'For a leadership team getting structured on risk. All features included.',
     highlight: false,
     cta: 'Start 14-day trial',
     href: `${APP_URL}/register`,
   },
   {
-    name: 'Business',
-    users: 'Up to 50 users',
-    monthly: 3490,
-    annual: 2790,
-    desc: 'For organizations with departments, portfolios, and a broader leadership group.',
+    name: 'Growth',
+    users: 'Unlimited users',
+    monthly: 149,
+    annual: 119,
+    desc: 'For organizations with departments, portfolios, and a broader leadership group. All features included.',
     highlight: true,
     cta: 'Start 14-day trial',
     href: `${APP_URL}/register`,
   },
   {
     name: 'Enterprise',
-    users: '50+ users',
+    users: 'Custom',
     monthly: null,
     annual: null,
-    desc: 'Custom setup for larger organizations with compliance or integration needs.',
+    desc: 'Custom setup for larger organizations with compliance, SSO, or integration needs.',
     highlight: false,
     cta: 'Book a demo',
     href: 'mailto:post@deriskmatrix.com',
@@ -122,12 +122,12 @@ export default function PricingPage() {
                   <>
                     <div className="flex items-baseline gap-1 mb-1">
                       <span className={`text-4xl font-black ${plan.highlight ? 'text-white' : 'text-navy'}`}>
-                        {plan.annual.toLocaleString('nb-NO')}
+                        €{plan.annual}
                       </span>
-                      <span className="text-slate-400 text-sm">NOK/month</span>
+                      <span className="text-slate-400 text-sm">/month</span>
                     </div>
                     <div className={`text-xs mb-2 ${plan.highlight ? 'text-slate-400' : 'text-slate-400'}`}>
-                      {plan.monthly.toLocaleString('nb-NO')} NOK/month billed monthly
+                      €{plan.monthly}/month billed monthly
                     </div>
                     <div className="text-xs text-teal font-semibold mb-5">
                       Annual billing — save {Math.round((1 - plan.annual / plan.monthly) * 100)}%
