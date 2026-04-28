@@ -131,14 +131,14 @@ export default function SecurityPage() {
               <h3 className="text-lg font-black text-navy mb-2">Security questions or responsible disclosure</h3>
               <p className="text-slate-500 text-sm">
                 Found a vulnerability? Need a Data Processing Agreement (DPA)?
-                We respond to all security inquiries within 24 hours.
+                Get in touch and we will respond as soon as possible.
               </p>
             </div>
             <a
-              href="mailto:security@deriskmatrix.com"
+              href="mailto:post@deriskmatrix.com"
               className="flex-shrink-0 px-6 py-3 bg-teal hover:bg-teal-dark text-white font-bold rounded-xl text-sm transition-colors"
             >
-              security@deriskmatrix.com
+              post@deriskmatrix.com
             </a>
           </div>
         </div>
