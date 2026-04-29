@@ -35,6 +35,18 @@ const ROWS = [
     tech: 'Secrets managed via Supabase Vault — never in source code',
     plain: 'API keys and credentials are stored in a secure secret vault, not in the application code or version control.',
   },
+  {
+    tech: 'CORS policy — API functions restricted to authorized origins only',
+    plain: 'Our server functions only accept requests from the De-Risk Matrix application. Requests from unknown domains are blocked at the API level before any logic runs.',
+  },
+  {
+    tech: 'Admin operations enforced at database level (PostgreSQL SECURITY DEFINER)',
+    plain: 'User management and company access changes require super-admin status verified inside the database — not just in the UI. An attacker who bypasses the interface still cannot execute admin operations.',
+  },
+  {
+    tech: 'Automated dependency vulnerability scanning (Snyk)',
+    plain: 'All software dependencies are continuously monitored for known vulnerabilities. Security patches are applied promptly when issues are discovered — not on a quarterly schedule.',
+  },
 ]
 
 const BADGES = [
