@@ -6,9 +6,9 @@ export const metadata = {
   description: 'Terms of Service for the De-Risk Matrix application.',
 }
 
-const COMPANY = '[SELSKAPSNAVN]'
-const ORG_NR  = '[ORG.NR]'
-const EMAIL   = 'hello@deriskmatrix.com'
+const COMPANY = 'Magnus Bjelkerud'
+const ORG_NR  = 'TBD'
+const EMAIL   = 'post@deriskmatrix.com'
 const UPDATED = 'April 2026'
 
 export default function TermsPage() {
@@ -123,6 +123,16 @@ export default function TermsPage() {
             <a href="/privacy" className="text-teal underline">Privacy Policy</a> for full details
             on how we handle your data.
           </p>
+          <p className="mt-2">
+            <strong>Data controller responsibility for employee data.</strong> If you enter personal
+            data about your own employees or personnel into the Service (such as HR metrics,
+            performance data, or headcount information), you are the data controller for that data
+            under the GDPR. You are responsible for ensuring you have a valid legal basis for
+            processing that data, and for informing your employees as required. {COMPANY} acts as
+            your data processor for such data in accordance with our{' '}
+            <a href="/dpa" className="text-teal underline">Data Processing Agreement (DPA)</a>,
+            which is incorporated into these Terms by reference.
+          </p>
         </section>
 
         <section>
@@ -162,6 +172,12 @@ export default function TermsPage() {
           <p className="mt-2">
             We do not warrant that the Service will be uninterrupted, error-free, or that any
             defects will be corrected.
+          </p>
+          <p className="mt-2">
+            No system can guarantee complete protection against all hostile attacks or data breaches.
+            We take every reasonable measure to minimise risk, follow industry best practices, and
+            respond swiftly if an incident occurs — including notifying the competent supervisory
+            authority and affected individuals as required under applicable data protection law.
           </p>
         </section>
 
@@ -224,8 +240,9 @@ export default function TermsPage() {
           </p>
         </section>
 
-        <div className="border-t border-slate-200 pt-8">
-          <a href="/privacy" className="text-teal underline text-sm">Privacy Policy →</a>
+        <div className="border-t border-slate-200 pt-8 flex gap-6 text-sm">
+          <a href="/privacy" className="text-teal underline">Privacy Policy →</a>
+          <a href="/dpa" className="text-teal underline">Data Processing Agreement →</a>
         </div>
 
       </div>

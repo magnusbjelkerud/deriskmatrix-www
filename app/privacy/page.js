@@ -22,7 +22,7 @@ export default function PrivacyPage() {
 
         <section>
           <h2 className="text-xl font-bold text-navy mb-3">1. Who we are</h2>
-          <p>De-Risk Matrix is a SaaS platform for strategic goal and risk management, developed and operated by Magnus Bjelkerud (org.nr. TBD), Norway. Contact: <a href="mailto:magnus@bjelkerud.no" className="text-teal underline">magnus@bjelkerud.no</a>.</p>
+          <p>De-Risk Matrix is a SaaS platform for strategic goal and risk management, developed and operated by Magnus Bjelkerud, Norway. Contact: <a href="mailto:post@deriskmatrix.com" className="text-teal underline">post@deriskmatrix.com</a>.</p>
         </section>
 
         <section>
@@ -46,7 +46,15 @@ export default function PrivacyPage() {
 
         <section>
           <h2 className="text-xl font-bold text-navy mb-3">4. Data storage and processors</h2>
-          <p>Your data is stored on <strong>Supabase</strong> (EU region — Frankfurt, Germany), which is our infrastructure provider. Supabase is GDPR compliant. We maintain a Data Processing Agreement (DPA) with Supabase.</p>
+          <p className="mb-3">Your data is stored on <strong>Supabase</strong> (EU region — Frankfurt, Germany), which is our infrastructure provider. Supabase is GDPR compliant. We maintain a Data Processing Agreement (DPA) with Supabase.</p>
+          <p className="mb-3">When you use De-Risk Matrix to track employee metrics or HR data, De-Risk Matrix acts as your <strong>data processor</strong> for that data. Our <a href="/dpa" className="text-teal underline">Data Processing Agreement</a> governs this relationship and is incorporated into our Terms of Service.</p>
+          <p className="mb-3">We use the following sub-processors who may process personal data on our behalf:</p>
+          <ul className="list-disc pl-5 space-y-2">
+            <li><strong>Supabase Inc.</strong> — database and authentication infrastructure. EU region (Frankfurt, Germany). SOC 2 Type II certified. DPA in place.</li>
+            <li><strong>Anthropic, PBC</strong> — AI-powered features (goal generation, company analysis). Data submitted for AI analysis is processed by Anthropic. See <a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener" className="text-teal underline">Anthropic's Privacy Policy</a>. DPA available on request.</li>
+            <li><strong>Stripe, Inc.</strong> — payment processing. PCI DSS Level 1 certified. Card data is never stored by us. See <a href="https://stripe.com/privacy" target="_blank" rel="noopener" className="text-teal underline">Stripe's Privacy Policy</a>.</li>
+            <li><strong>Cloudflare, Inc.</strong> — bot protection (Turnstile) and CDN. Data processed in accordance with Cloudflare's DPA.</li>
+          </ul>
         </section>
 
         <section>
@@ -59,23 +67,35 @@ export default function PrivacyPage() {
             <li><strong>Deletion</strong> — request deletion of your account and all associated data</li>
             <li><strong>Objection</strong> — object to processing based on legitimate interests</li>
           </ul>
-          <p className="mt-3">To exercise any of these rights, email <a href="mailto:magnus@bjelkerud.no" className="text-teal underline">magnus@bjelkerud.no</a>. We will respond within 30 days.</p>
+          <p className="mt-3">To exercise any of these rights, email <a href="mailto:post@deriskmatrix.com" className="text-teal underline">post@deriskmatrix.com</a>. We will respond within 30 days.</p>
+          <p className="mt-3">You also have the right to lodge a complaint with the Norwegian Data Protection Authority (<a href="https://www.datatilsynet.no" target="_blank" rel="noopener" className="text-teal underline">Datatilsynet</a>) if you believe we are processing your personal data unlawfully.</p>
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-navy mb-3">6. Cookies</h2>
+          <h2 className="text-xl font-bold text-navy mb-3">6. Security and breach notification</h2>
+          <p className="mb-3">We implement industry-standard technical and organisational measures to protect your data, including TLS encryption in transit, AES-256 encryption at rest, row-level access controls, and regular vulnerability scanning (GDPR Article 32).</p>
+          <p>In the event of a personal data breach that poses a risk to your rights and freedoms, we will notify the Norwegian Data Protection Authority (Datatilsynet) within 72 hours as required by GDPR Article 33. Where the breach is likely to result in a high risk to you, we will also notify affected individuals directly without undue delay (GDPR Article 34).</p>
+        </section>
+
+        <section>
+          <h2 className="text-xl font-bold text-navy mb-3">8. Cookies</h2>
           <p>This website uses only strictly necessary cookies for authentication and session management. No advertising or tracking cookies are used.</p>
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-navy mb-3">7. Data retention</h2>
+          <h2 className="text-xl font-bold text-navy mb-3">9. Data retention</h2>
           <p>We retain your data for as long as your account is active. You may delete your account at any time from within the platform. Inactive accounts may be deleted after 24 months of inactivity with prior notification.</p>
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-navy mb-3">8. Changes to this policy</h2>
+          <h2 className="text-xl font-bold text-navy mb-3">10. Changes to this policy</h2>
           <p>We may update this policy from time to time. Significant changes will be communicated by email. The &ldquo;last updated&rdquo; date at the top of this page reflects the most recent revision.</p>
         </section>
+
+        <div className="border-t border-slate-200 pt-8 flex gap-6 text-sm">
+          <a href="/terms" className="text-teal underline">Terms of Service →</a>
+          <a href="/dpa" className="text-teal underline">Data Processing Agreement →</a>
+        </div>
 
       </div>
 
