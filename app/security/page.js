@@ -52,7 +52,7 @@ const ROWS = [
 const BADGES = [
   { label: 'Stripe', sub: 'PCI DSS Level 1', color: '#635BFF' },
   { label: 'Supabase', sub: 'SOC 2 Type II', color: '#3ECF8E' },
-  { label: '🇪🇺 EU', sub: 'GDPR compliant', color: '#1D8A7A' },
+  { label: 'EU', sub: 'GDPR compliant', color: '#1D8A7A' },
   { label: 'HTTPS', sub: 'TLS 1.2+ everywhere', color: '#3A6B82' },
 ]
 
