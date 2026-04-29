@@ -31,7 +31,12 @@ const FEATURES = [
   { icon: '📋', title: 'Actions tied to risk state',     desc: 'Actions live on goals. When a goal turns Dire, you know what to do — and whether you\'ve done it.' },
 ]
 
-const FRAMEWORKS = ['ISO 31000', 'OKR', 'Balanced Scorecard', 'SMART Goals', 'SWOT', 'PESTEL', 'McKinsey 7S']
+const DATA_SOURCES = [
+  { icon: '📊', label: 'Financial data', eg: 'Revenue, EBITDA, margins' },
+  { icon: '👥', label: 'HR & people metrics', eg: 'Sick leave, engagement, turnover' },
+  { icon: '📋', label: 'Operational KPIs', eg: 'Delivery time, defect rate, NPS' },
+  { icon: '📁', label: 'Spreadsheets & exports', eg: 'Excel, CSV, Tripletex, Fiken' },
+]
 
 
 export default function Home() {
@@ -372,49 +377,65 @@ export default function Home() {
           <div className="text-center mb-12">
             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Pricing</p>
             <h2 className="text-4xl font-black text-navy mb-3">Simple, transparent pricing</h2>
-            <p className="text-lg text-slate-500">Two plans. All features included. 14-day trial on every account.</p>
+            <p className="text-lg text-slate-500">Three plans. All features included. 14-day trial on every account.</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             {[
-              { name: 'Lite',     users: 'Up to 10 users', price: '1 190', note: '1 490 NOK/month billed monthly', highlight: false },
-              { name: 'Business', users: 'Up to 50 users', price: '2 790', note: '3 490 NOK/month billed monthly', highlight: true  },
+              { name: 'Starter', users: 'Up to 5 users', annual: '€39', monthly: '€49', highlight: false },
+              { name: 'Growth',  users: 'Unlimited users', annual: '€119', monthly: '€149', highlight: true },
             ].map(plan => (
               <div key={plan.name} className={`rounded-2xl p-8 ${plan.highlight ? 'bg-navy' : 'bg-slate-50 border border-slate-200'}`}>
-                <div className={`text-xs font-bold uppercase tracking-wider mb-1 ${plan.highlight ? 'text-teal' : 'text-teal'}`}>{plan.users}</div>
+                {plan.highlight && (
+                  <div className="inline-block bg-teal text-white text-xs font-bold px-3 py-1 rounded-full mb-4">Most popular</div>
+                )}
+                <div className={`text-xs font-bold uppercase tracking-wider mb-1 text-teal`}>{plan.users}</div>
                 <h3 className={`text-xl font-black mb-3 ${plan.highlight ? 'text-white' : 'text-navy'}`}>{plan.name}</h3>
                 <div className="flex items-baseline gap-1 mb-1">
-                  <span className={`text-4xl font-black ${plan.highlight ? 'text-white' : 'text-navy'}`}>{plan.price}</span>
-                  <span className="text-slate-400 text-sm">NOK/month</span>
+                  <span className={`text-4xl font-black ${plan.highlight ? 'text-white' : 'text-navy'}`}>{plan.annual}</span>
+                  <span className="text-slate-400 text-sm">/month</span>
                 </div>
-                <p className={`text-xs mb-6 ${plan.highlight ? 'text-slate-400' : 'text-slate-400'}`}>{plan.note}</p>
+                <p className={`text-xs mb-6 text-slate-400`}>{plan.monthly}/month billed monthly</p>
                 <a href={`${APP_URL}/register`}
                   className={`block w-full py-3 rounded-xl font-bold text-center text-sm transition-colors ${plan.highlight ? 'bg-teal hover:bg-teal-dark text-white' : 'bg-navy hover:bg-slate-800 text-white'}`}>
                   Start 14-day trial →
                 </a>
+                <p className={`text-center text-xs mt-3 ${plan.highlight ? 'text-slate-500' : 'text-slate-400'}`}>No credit card required</p>
               </div>
             ))}
           </div>
 
           <div className="text-center">
             <Link href="/pricing" className="text-sm text-teal font-semibold hover:underline">
-              See full pricing, features and FAQ →
+              See full pricing, features, Enterprise and FAQ →
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── Compatible with ───────────────────────────────────────── */}
-      <section className="py-12 bg-slate-50 border-t border-slate-200">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-5">Works alongside your existing frameworks</p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            {FRAMEWORKS.map(f => (
-              <span key={f} className="bg-white border border-slate-200 text-slate-500 text-sm font-medium px-4 py-2 rounded-lg">
-                {f}
-              </span>
+      {/* ── Your data, strategically structured ──────────────────── */}
+      <section className="py-20 bg-slate-50 border-t border-slate-200">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-10">
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Your data, strategically structured</p>
+            <h2 className="text-2xl font-black text-navy mb-3">You already have the data. De-Risk Matrix gives it meaning.</h2>
+            <p className="text-slate-500 text-sm max-w-2xl mx-auto leading-relaxed">
+              Connect the numbers you already track — from your accounting system, HR tools, or spreadsheets — to strategic goals.
+              The platform tells you which goals are at risk, what patterns are emerging, and what leadership should prioritize next.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            {DATA_SOURCES.map(d => (
+              <div key={d.label} className="bg-white rounded-xl px-5 py-4 border border-slate-200 text-center">
+                <div className="text-2xl mb-2">{d.icon}</div>
+                <div className="text-sm font-bold text-navy mb-1">{d.label}</div>
+                <div className="text-xs text-slate-400">{d.eg}</div>
+              </div>
             ))}
           </div>
+          <p className="text-center text-xs text-slate-400">
+            Import via CSV, manual entry, or API webhook — data becomes a live risk state, not just a number in a spreadsheet.
+          </p>
         </div>
       </section>
 
