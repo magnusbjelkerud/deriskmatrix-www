@@ -1,5 +1,6 @@
 import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
+import ObfuscatedEmail from '../../components/ObfuscatedEmail'
 
 const ROWS = [
   {
@@ -134,12 +135,7 @@ export default function SecurityPage() {
                 Get in touch and we will respond as soon as possible.
               </p>
             </div>
-            <a
-              href="mailto:post@deriskmatrix.com"
-              className="flex-shrink-0 px-6 py-3 bg-teal hover:bg-teal-dark text-white font-bold rounded-xl text-sm transition-colors"
-            >
-              post@deriskmatrix.com
-            </a>
+            <ObfuscatedEmail className="flex-shrink-0 px-6 py-3 bg-teal hover:bg-teal-dark text-white font-bold rounded-xl text-sm transition-colors" />
           </div>
         </div>
       </section>

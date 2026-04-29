@@ -34,7 +34,7 @@ const PLANS = [
     desc: 'Custom setup for larger organizations with compliance, SSO, or integration needs.',
     highlight: false,
     cta: 'Book a demo',
-    href: 'mailto:post@deriskmatrix.com',
+    href: null,
   },
 ]
 
@@ -74,7 +74,7 @@ const FAQS = [
   },
   {
     q: 'What does Enterprise include?',
-    a: 'Everything in Business, plus: Tripletex/Fiken integration, SSO/BankID, GDPR data processing agreement, dedicated onboarding, and SLA. Contact post@deriskmatrix.com.',
+    a: 'Everything in Business, plus: Tripletex/Fiken integration, SSO/BankID, GDPR data processing agreement, dedicated onboarding, and SLA. Get in touch to discuss.',
   },
 ]
 
@@ -143,14 +143,26 @@ export default function PricingPage() {
                   {plan.desc}
                 </p>
 
-                <a href={plan.href}
-                  className={`w-full py-3.5 rounded-xl font-bold text-center text-sm transition-colors ${
-                    plan.highlight
-                      ? 'bg-teal hover:bg-teal-dark text-white'
-                      : 'bg-navy hover:bg-slate-800 text-white'
-                  }`}>
-                  {plan.cta}
-                </a>
+                {plan.href ? (
+                  <a href={plan.href}
+                    className={`w-full py-3.5 rounded-xl font-bold text-center text-sm transition-colors ${
+                      plan.highlight
+                        ? 'bg-teal hover:bg-teal-dark text-white'
+                        : 'bg-navy hover:bg-slate-800 text-white'
+                    }`}>
+                    {plan.cta}
+                  </a>
+                ) : (
+                  <button
+                    onClick={() => { window.location.href = 'mailto:' + ['post', 'deriskmatrix.com'].join('@') }}
+                    className={`w-full py-3.5 rounded-xl font-bold text-center text-sm transition-colors ${
+                      plan.highlight
+                        ? 'bg-teal hover:bg-teal-dark text-white'
+                        : 'bg-navy hover:bg-slate-800 text-white'
+                    }`}>
+                    {plan.cta}
+                  </button>
+                )}
                 {plan.monthly && (
                   <p className={`text-center text-xs mt-3 ${plan.highlight ? 'text-slate-500' : 'text-slate-400'}`}>
                     14-day trial · No credit card required
