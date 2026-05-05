@@ -69,11 +69,11 @@ const QUESTIONS = [
 ]
 
 const BANDS = [
-  { min: 80, label: 'Fully de-risked',  color: '#1a9e8a', bg: '#d5f5e3', emoji: '🟢', desc: 'Your organization has a mature, structured approach to goal-based risk management. You\'re operating close to best practice — the question now is whether you\'re raising the bar.' },
-  { min: 60, label: 'Well managed',     color: '#2ab09a', bg: '#d1f2eb', emoji: '🟢', desc: 'Strong foundations in place. There are gaps to close, but your leadership team has meaningful visibility into strategic risk. You\'re ahead of most organizations.' },
-  { min: 40, label: 'Building',         color: '#1d4ed8', bg: '#eff6ff', emoji: '🔵', desc: 'You\'ve made progress, but key elements are missing — especially structured thresholds and systematic forecasting. Strategic surprises are still common.' },
-  { min: 20, label: 'Significant gaps', color: '#ea580c', bg: '#fff7ed', emoji: '🟠', desc: 'Risk is largely reactive. Important strategic decisions are being made without sufficient visibility or structure. Preventable misses are happening regularly.' },
-  { min: 0,  label: 'Critical',         color: '#c0392b', bg: '#fadbd8', emoji: '🔴', desc: 'Strategic risk is not being managed systematically. Your organization is exposed to preventable surprises — and the next one may be costly.' },
+  { min: 80, label: 'Fully de-risked',  color: '#1a9e8a', bg: '#d5f5e3', emoji: '🟢', benchmark: 97, desc: 'Your organization has a mature, structured approach to goal-based risk management. You\'re operating close to best practice — the question now is whether you\'re raising the bar fast enough. At this level, the risk is complacency.' },
+  { min: 60, label: 'Well managed',     color: '#2ab09a', bg: '#d1f2eb', emoji: '🟢', benchmark: 82, desc: 'Strong foundations in place. But gaps remain — and at this score, roughly 1 in 3 goal breaches still happens without early warning. You\'re ahead of most organizations, but not yet protected.' },
+  { min: 40, label: 'Building',         color: '#1d4ed8', bg: '#eff6ff', emoji: '🔵', benchmark: 61, desc: 'Key elements are missing — especially structured thresholds and systematic forecasting. At this score, roughly 2 in 3 goal breaches are discovered after the fact. Strategic surprises are not a question of if, but when.' },
+  { min: 20, label: 'Significant gaps', color: '#ea580c', bg: '#fff7ed', emoji: '🟠', benchmark: 34, desc: 'Risk is largely reactive. Goals are drifting without structured early warning — and important misses are being discovered too late to course-correct. Preventable losses are happening right now.' },
+  { min: 0,  label: 'Critical',         color: '#c0392b', bg: '#fadbd8', emoji: '🔴', benchmark: 12, desc: 'Strategic risk is not being managed systematically. Goals can breach — and are breaching — without your leadership team knowing until it\'s too late. The next costly surprise may already be in motion.' },
 ]
 
 const IMPROVEMENTS = {
@@ -129,8 +129,11 @@ export default function ScorePage() {
               <h1 className="text-5xl font-black text-white mb-4 leading-tight">
                 How close to <span className="text-teal">100</span> are you?
               </h1>
-              <p className="text-xl text-slate-300 leading-relaxed mb-4">
+              <p className="text-xl text-slate-300 leading-relaxed mb-2">
                 Most organizations score below 40. Find out where you stand — and exactly what to fix first.
+              </p>
+              <p className="text-base text-slate-400 leading-relaxed">
+                Right now, goals are drifting in your organization. This tells you which ones — and how bad.
               </p>
               <div className="flex items-center justify-center gap-6 text-sm text-slate-400 mt-6">
                 <span>5 questions</span>
@@ -153,8 +156,11 @@ export default function ScorePage() {
                 {score}
               </div>
               <div className="text-white text-3xl font-black mb-1">/ 100</div>
-              <div style={{ background: band.color }} className="inline-block text-white text-sm font-bold px-5 py-2 rounded-full mt-3 mb-5">
+              <div style={{ background: band.color }} className="inline-block text-white text-sm font-bold px-5 py-2 rounded-full mt-3 mb-3">
                 {band.emoji} {band.label}
+              </div>
+              <div className="text-slate-400 text-sm mb-5">
+                You scored higher than <span className="text-white font-bold">{band.benchmark}%</span> of organizations in our benchmark
               </div>
 
               {/* Score bar */}
@@ -330,12 +336,18 @@ export default function ScorePage() {
 
             {/* CTA */}
             <div className="bg-navy rounded-2xl p-8 text-center">
-              <div className="text-4xl mb-3">🎯</div>
               <h3 className="text-white font-black text-2xl mb-2">
-                Ready to push toward 100?
+                {improvements.length > 0
+                  ? `You have ${improvements.length} unmanaged risk gap${improvements.length > 1 ? 's' : ''}.`
+                  : 'You\'re close to best practice.'}
               </h3>
-              <p className="text-slate-300 text-sm mb-6 leading-relaxed max-w-md mx-auto">
-                De-Risk Matrix gives you the structure, the risk states, and the tools to close every gap — in a single workspace. Free to start.
+              <p className="text-slate-300 text-sm mb-2 leading-relaxed max-w-md mx-auto">
+                {improvements.length > 0
+                  ? 'Each one is a goal that can breach without warning. De-Risk Matrix closes every gap — structure, risk states, AI tools, and forecasting — in a single workspace.'
+                  : 'De-Risk Matrix keeps you there. Real-time risk states, AI tools, and structured forecasting across your entire goal portfolio.'}
+              </p>
+              <p className="text-amber-400 text-xs font-semibold mb-6">
+                {improvements.length > 0 ? 'Close them in 30 days. Free to start.' : 'Keep raising the bar. Free to start.'}
               </p>
               <a
                 href={`${APP_URL}/register`}
@@ -343,7 +355,7 @@ export default function ScorePage() {
               >
                 Start your trial →
               </a>
-              <p className="text-slate-500 text-xs mt-3">No lock-in required</p>
+              <p className="text-slate-500 text-xs mt-3">No credit card required · Cancel anytime</p>
             </div>
 
             <div className="text-center pb-4">

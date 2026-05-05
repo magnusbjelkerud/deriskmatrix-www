@@ -36,10 +36,18 @@ export default function AboutPage() {
             </div>
             <div className="font-bold text-navy">Magnus Bjelkerud</div>
             <div className="text-slate-500 text-sm mt-1">Creator, De-Risk Matrix</div>
+            <div className="mt-3 space-y-1.5">
+              <div className="flex items-center gap-2 text-xs text-slate-500">
+                <span className="text-teal font-bold">✓</span> Master of Science
+              </div>
+              <div className="flex items-center gap-2 text-xs text-slate-500">
+                <span className="text-teal font-bold">✓</span> Master of Management
+              </div>
+            </div>
           </div>
           <div className="md:col-span-2 space-y-4 text-slate-600 leading-relaxed">
             <p>
-              Magnus developed the De-Risk Matrix methodology after identifying a persistent gap: existing frameworks failed to integrate strategic goal-setting with structured risk management and the organizational culture required to act on it.
+              With a Master of Science and a Master of Management, Magnus developed the De-Risk Matrix methodology after identifying a persistent gap: existing frameworks failed to integrate strategic goal-setting with structured risk management and the organizational culture required to act on it.
             </p>
             <p>
               Most risk frameworks treat risk as a separate discipline from strategy. Most goal frameworks — OKR, Balanced Scorecard, SMART — treat targets as single points without explicit risk floors. De-Risk Matrix connects the two: goals define the risk appetite; risk states drive the cultural response.
