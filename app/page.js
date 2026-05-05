@@ -831,42 +831,58 @@ export default function Home() {
       {/* ── [12] PRICING ──────────────────────────────────────────────── */}
       <section id="pricing" className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-6">
-          <div className="text-center mb-12">
+          <div className="text-center mb-4">
             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Pricing</p>
-            <h2 className="text-4xl font-black text-navy mb-3">Simple, transparent pricing</h2>
-            <p className="text-lg text-slate-500">All features included. 14-day trial on every account.</p>
+            <h2 className="text-4xl font-black text-navy mb-3">All features. Always.</h2>
+            <p className="text-lg text-slate-500">Pay only for how many people you invite.</p>
+          </div>
+
+          <div className="text-center mb-10">
+            <span className="inline-block bg-slate-100 border border-slate-200 text-slate-600 text-xs font-semibold px-4 py-2 rounded-full">
+              All features identical · The only difference is how many people you invite
+            </span>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             {[
               {
                 name: 'Starter',
-                users: 'Up to 5 users',
+                invite: 'Invite up to 5 people',
+                inviteNote: 'Team members · Executives · Board observers',
                 annual: '€39',
                 monthly: '€49',
                 highlight: false,
-                features: ['All 6 risk states', 'AI tools included', 'Multi-language', 'Workshop mode', 'CSV import'],
+                tag: null,
+                features: ['All 6 risk states & AI tools', 'Multi-language collaboration', 'Workshop → live system', 'Goal hierarchy & forecasting', 'CSV import & evidence scoring'],
               },
               {
                 name: 'Growth',
-                users: 'Unlimited users',
+                invite: 'Invite as many as you need',
+                inviteNote: 'Team · Managers · Executives · Board · Stakeholders',
                 annual: '€119',
                 monthly: '€149',
                 highlight: true,
-                features: ['Everything in Starter', 'Unlimited goals & hierarchy', 'Full team collaboration', 'API webhooks', 'Priority support'],
+                tag: 'Most popular',
+                features: ['Everything in Starter', 'Unlimited users — no seat caps', 'Full enterprise goal hierarchy', 'API webhooks & integrations', 'Priority support'],
               },
             ].map(plan => (
               <div key={plan.name} className={`rounded-2xl p-8 ${plan.highlight ? 'bg-navy' : 'bg-slate-50 border border-slate-200'}`}>
-                {plan.highlight && (
-                  <div className="inline-block bg-teal text-white text-xs font-bold px-3 py-1 rounded-full mb-4">Most popular</div>
+                {plan.tag && (
+                  <div className="inline-block bg-teal text-white text-xs font-bold px-3 py-1 rounded-full mb-4">{plan.tag}</div>
                 )}
-                <div className="text-xs font-bold uppercase tracking-wider mb-1 text-teal">{plan.users}</div>
-                <h3 className={`text-xl font-black mb-3 ${plan.highlight ? 'text-white' : 'text-navy'}`}>{plan.name}</h3>
+                <h3 className={`text-xl font-black mb-4 ${plan.highlight ? 'text-white' : 'text-navy'}`}>{plan.name}</h3>
+
+                {/* Invite box */}
+                <div className={`rounded-xl px-4 py-3 mb-5 ${plan.highlight ? 'bg-white/10' : 'bg-teal/10 border border-teal/20'}`}>
+                  <div className={`text-sm font-bold mb-0.5 ${plan.highlight ? 'text-teal' : 'text-teal'}`}>{plan.invite}</div>
+                  <div className={`text-xs ${plan.highlight ? 'text-slate-400' : 'text-slate-500'}`}>{plan.inviteNote}</div>
+                </div>
+
                 <div className="flex items-baseline gap-1 mb-1">
                   <span className={`text-4xl font-black ${plan.highlight ? 'text-white' : 'text-navy'}`}>{plan.annual}</span>
                   <span className="text-slate-400 text-sm">/month</span>
                 </div>
-                <p className="text-xs mb-6 text-slate-400">{plan.monthly}/month billed monthly</p>
+                <p className="text-xs mb-6 text-slate-400">{plan.monthly}/month billed monthly · 14-day free trial</p>
                 <ul className="space-y-2 mb-6">
                   {plan.features.map(f => (
                     <li key={f} className={`text-sm flex items-center gap-2 ${plan.highlight ? 'text-slate-300' : 'text-slate-600'}`}>
@@ -876,7 +892,7 @@ export default function Home() {
                 </ul>
                 <a href={`${APP_URL}/register`}
                   className={`block w-full py-3 rounded-xl font-bold text-center text-sm transition-colors ${plan.highlight ? 'bg-teal hover:bg-teal-dark text-white' : 'bg-navy hover:bg-slate-800 text-white'}`}>
-                  Start 14-day trial →
+                  Start free trial →
                 </a>
                 <p className={`text-center text-xs mt-3 ${plan.highlight ? 'text-slate-500' : 'text-slate-400'}`}>No credit card required</p>
               </div>
@@ -884,9 +900,9 @@ export default function Home() {
           </div>
 
           <div className="text-center">
-            <p className="text-sm text-slate-500 mb-2">Need more than 50 users, custom integrations, or dedicated onboarding?</p>
+            <p className="text-sm text-slate-500 mb-2">Board packages, executive access, and full feature breakdown →</p>
             <Link href="/pricing" className="text-sm text-teal font-semibold hover:underline">
-              See full pricing, Enterprise plan, and FAQ →
+              See full pricing details and FAQ →
             </Link>
           </div>
         </div>
