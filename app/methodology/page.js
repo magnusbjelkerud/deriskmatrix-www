@@ -35,7 +35,7 @@ export default function MethodologyPage() {
           <div className="inline-block bg-white/10 text-teal-light text-xs font-semibold px-3 py-1 rounded-full mb-6 border border-white/10">
             Aligned with ISO 31000
           </div>
-          <h1 className="text-5xl font-black text-white mb-5 leading-tight">
+          <h1 className="text-4xl md:text-5xl font-black text-white mb-5 leading-tight">
             Most strategic failures aren&apos;t sudden.
           </h1>
           <p className="text-xl text-slate-300 leading-relaxed mb-4">

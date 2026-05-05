@@ -257,8 +257,8 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Comparison table */}
-          <div className="rounded-2xl border border-slate-200 overflow-hidden mb-12 shadow-sm">
+          {/* Comparison table — desktop */}
+          <div className="hidden md:block rounded-2xl border border-slate-200 overflow-hidden mb-12 shadow-sm">
             <div className="grid grid-cols-3 bg-slate-50 border-b border-slate-200">
               <div className="px-5 py-4 text-xs font-bold text-slate-300 uppercase tracking-wider" />
               <div className="px-5 py-4 text-xs font-bold text-red-400 uppercase tracking-wider border-l border-slate-200">5&times;5 Risk Matrix</div>
@@ -280,6 +280,33 @@ export default function Home() {
                 </div>
                 <div className="px-5 py-4 text-sm text-navy font-medium border-l border-slate-100 flex items-start gap-2">
                   <span className="text-teal flex-shrink-0 mt-0.5">✓</span><span>{row.good}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Comparison table — mobile cards */}
+          <div className="md:hidden space-y-3 mb-12">
+            {[
+              { dim: 'Direction',  bad: 'Downside only — threats and harms',         good: 'Upside + downside — all forms of uncertainty' },
+              { dim: 'Goal link',  bad: 'Disconnected from strategic goals',          good: 'Risk IS goal achievement — inseparable' },
+              { dim: 'Frequency',  bad: 'Annual workshop → static risk register',    good: 'Continuous — every data point updates states' },
+              { dim: 'Output',     bad: 'A list ranked by probability × impact',      good: 'A live state with prescribed leadership action' },
+              { dim: 'Targets',    bad: 'Single-point targets — binary pass/fail',    good: 'Spans: target + threshold — explicit risk appetite' },
+              { dim: 'Culture',    bad: 'Not addressed',                             good: 'Each state prescribes specific leader behaviors' },
+              { dim: 'Evidence',   bad: 'Subjective scoring in a workshop',          good: '14 evidence factors — AI-assisted, auditable' },
+            ].map(row => (
+              <div key={row.dim} className="rounded-xl border border-slate-200 overflow-hidden">
+                <div className="bg-slate-50 px-4 py-2 text-xs font-bold text-slate-400 uppercase tracking-wider">{row.dim}</div>
+                <div className="grid grid-cols-2 divide-x divide-slate-100">
+                  <div className="p-3 flex items-start gap-1.5 bg-red-50/50">
+                    <span className="text-red-300 flex-shrink-0 text-xs mt-0.5">✕</span>
+                    <span className="text-xs text-slate-500 leading-relaxed">{row.bad}</span>
+                  </div>
+                  <div className="p-3 flex items-start gap-1.5">
+                    <span className="text-teal flex-shrink-0 text-xs mt-0.5">✓</span>
+                    <span className="text-xs text-navy font-medium leading-relaxed">{row.good}</span>
+                  </div>
                 </div>
               </div>
             ))}

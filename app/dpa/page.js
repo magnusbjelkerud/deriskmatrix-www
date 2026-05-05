@@ -132,20 +132,22 @@ export default function DPAPage() {
             sub-processors. The Processor will notify the Controller of any intended changes to this
             list, giving the Controller the opportunity to object.
           </p>
-          <div className="rounded-xl overflow-hidden border border-slate-200">
-            <div className="grid grid-cols-4 bg-navy">
-              {['Sub-processor', 'Purpose', 'Location', 'Certification'].map(h => (
-                <div key={h} className="px-4 py-3 text-xs font-bold text-white/80 uppercase tracking-widest border-r border-white/10 last:border-0">{h}</div>
+          <div className="overflow-x-auto rounded-xl border border-slate-200">
+            <div className="min-w-[560px]">
+              <div className="grid grid-cols-4 bg-navy">
+                {['Sub-processor', 'Purpose', 'Location', 'Certification'].map(h => (
+                  <div key={h} className="px-4 py-3 text-xs font-bold text-white/80 uppercase tracking-widest border-r border-white/10 last:border-0">{h}</div>
+                ))}
+              </div>
+              {SUB_PROCESSORS.map((sp, i) => (
+                <div key={i} className={`grid grid-cols-4 border-t border-slate-200 ${i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}`}>
+                  <div className="px-4 py-3 text-sm font-semibold text-slate-700 border-r border-slate-200">{sp.name}</div>
+                  <div className="px-4 py-3 text-sm text-slate-500 border-r border-slate-200">{sp.purpose}</div>
+                  <div className="px-4 py-3 text-sm text-slate-500 border-r border-slate-200">{sp.location}</div>
+                  <div className="px-4 py-3 text-sm text-slate-500">{sp.cert}</div>
+                </div>
               ))}
             </div>
-            {SUB_PROCESSORS.map((sp, i) => (
-              <div key={i} className={`grid grid-cols-4 border-t border-slate-200 ${i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}`}>
-                <div className="px-4 py-3 text-sm font-semibold text-slate-700 border-r border-slate-200">{sp.name}</div>
-                <div className="px-4 py-3 text-sm text-slate-500 border-r border-slate-200">{sp.purpose}</div>
-                <div className="px-4 py-3 text-sm text-slate-500 border-r border-slate-200">{sp.location}</div>
-                <div className="px-4 py-3 text-sm text-slate-500">{sp.cert}</div>
-              </div>
-            ))}
           </div>
           <p className="mt-4 text-sm">
             Sub-processors are bound by data processing agreements that impose data protection

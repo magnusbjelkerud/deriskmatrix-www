@@ -101,7 +101,7 @@ export default function PricingPage() {
       {/* ── Hero ──────────────────────────────────────────────────── */}
       <section className="hero-gradient pt-32 pb-20 text-center px-6">
         <p className="text-xs font-bold text-teal uppercase tracking-widest mb-4">Pricing</p>
-        <h1 className="text-5xl font-black text-white mb-4 leading-tight">
+        <h1 className="text-4xl md:text-5xl font-black text-white mb-4 leading-tight">
           All features. Always.<br />
           <span className="gradient-text">Pay only for how many you invite.</span>
         </h1>

@@ -15,7 +15,7 @@ export default function AboutPage() {
 
       <div className="hero-gradient pt-32 pb-20">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <h1 className="text-5xl font-black text-white mb-4">About</h1>
+          <h1 className="text-4xl md:text-5xl font-black text-white mb-4">About</h1>
           <p className="text-xl text-slate-300">The story behind De-Risk Matrix.</p>
         </div>
       </div>

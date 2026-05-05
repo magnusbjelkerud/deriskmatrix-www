@@ -126,7 +126,7 @@ export default function ScorePage() {
               <div className="inline-block bg-white/10 text-white text-xs font-semibold px-3 py-1.5 rounded-full mb-5 border border-white/20">
                 2 minutes · No sign-up required
               </div>
-              <h1 className="text-5xl font-black text-white mb-4 leading-tight">
+              <h1 className="text-4xl md:text-5xl font-black text-white mb-4 leading-tight">
                 How close to <span className="text-teal">100</span> are you?
               </h1>
               <p className="text-xl text-slate-300 leading-relaxed mb-2">
@@ -151,7 +151,7 @@ export default function ScorePage() {
           <div className="hero-gradient pt-28 pb-16 mb-10">
             <div className="max-w-2xl mx-auto px-6 text-center">
               <div className="text-sm font-semibold text-slate-400 mb-2 uppercase tracking-wider">Your De-Risk Score</div>
-              <div style={{ color: band.color }} className="text-9xl font-black mb-1 leading-none"
+              <div className="text-7xl md:text-9xl font-black mb-1 leading-none"
                    style={{ WebkitTextStroke: '2px ' + band.color, color: band.color }}>
                 {score}
               </div>
