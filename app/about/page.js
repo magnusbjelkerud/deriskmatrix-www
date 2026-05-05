@@ -65,10 +65,10 @@ export default function AboutPage() {
             Questions about the methodology, enterprise pricing, or partnership opportunities?
           </p>
           <a
-            href="mailto:magnus@bjelkerud.no"
+            href="mailto:post@deriskmatrix.com"
             className="inline-flex items-center gap-2 px-6 py-3 bg-navy text-white font-semibold rounded-xl hover:bg-slate-800 transition-colors"
           >
-            magnus@bjelkerud.no →
+            post@deriskmatrix.com →
           </a>
         </section>
 
