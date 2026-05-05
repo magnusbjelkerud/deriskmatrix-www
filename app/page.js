@@ -429,6 +429,93 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── [6b] RISK CULTURE ─────────────────────────────────────────── */}
+      <section className="py-24 bg-slate-900" id="culture">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <p className="text-xs font-bold text-teal uppercase tracking-widest mb-3">Risk culture</p>
+            <h2 className="text-4xl font-black text-white mb-5 leading-tight">
+              The risk state tells you where you are.<br className="hidden md:block" />
+              Culture determines where you go.
+            </h2>
+            <p className="text-lg text-slate-400 max-w-2xl mx-auto">
+              Most risk tools report the state. De-Risk Matrix changes it — by prescribing specific
+              leadership behaviors for each state. A Dire goal only improves when leaders act differently.
+            </p>
+          </div>
+
+          {/* 2×3 cultural response grid */}
+          <div className="grid md:grid-cols-2 gap-4 mb-10">
+            {[
+              {
+                label: 'Defensive', action: 'Raise',
+                color: '#1d4e6b', bg: 'rgba(29,78,107,0.15)', border: 'rgba(29,78,107,0.35)',
+                behavior: "Don't coast on success. Raise the ambition. Celebrate — then immediately recalibrate targets upward. Challenge complacency before it takes root.",
+                value: 'Ambition', quote: '"Good is not good enough if we can do better."',
+              },
+              {
+                label: 'Potent', action: 'Explore',
+                color: '#148f77', bg: 'rgba(20,143,119,0.15)', border: 'rgba(20,143,119,0.35)',
+                behavior: 'Investigate before celebrating. Demand measurement clarity. Is this real performance — or a gap in how we measure? Great results need great explanations.',
+                value: 'Intellectual honesty', quote: '"Unexplained success is a risk we haven\'t named yet."',
+              },
+              {
+                label: 'Harmonious', action: 'Ensure',
+                color: '#1a9e8a', bg: 'rgba(26,158,138,0.15)', border: 'rgba(26,158,138,0.35)',
+                behavior: 'Protect the conditions that got you here. Avoid unnecessary disruption. Maintain momentum. Stability is not complacency — it is a strategic choice.',
+                value: 'Discipline', quote: '"Don\'t fix what isn\'t broken. Protect what works."',
+              },
+              {
+                label: 'Optimistic', action: 'Prove',
+                color: '#2ab09a', bg: 'rgba(42,176,154,0.15)', border: 'rgba(42,176,154,0.35)',
+                behavior: 'Challenge assumptions. Create measurement discipline. Gut feel is not evidence. Demand the data that proves this trajectory is real — before the quarter ends.',
+                value: 'Epistemic rigour', quote: '"Optimism without evidence is a risk you haven\'t measured."',
+              },
+              {
+                label: 'Dire', action: 'Lower',
+                color: '#c0392b', bg: 'rgba(192,57,43,0.15)', border: 'rgba(192,57,43,0.35)',
+                behavior: 'Escalate immediately. Create urgency without panic. Lower uncertainty through structured action. There is no "wait and see" in a Dire state.',
+                value: 'Psychological safety', quote: '"Acknowledging Dire is not failure — staying silent is."',
+              },
+              {
+                label: 'Pessimistic', action: 'Intervene',
+                color: '#e07070', bg: 'rgba(224,112,112,0.15)', border: 'rgba(224,112,112,0.35)',
+                behavior: 'Intervene even with limited information. Do not wait for certainty before acting. Prioritize evidence gathering alongside stabilization — in parallel.',
+                value: 'Courage under uncertainty', quote: '"When data is scarce, gather it — don\'t wait for it."',
+              },
+            ].map(s => (
+              <div key={s.label} style={{ background: s.bg, border: `1.5px solid ${s.border}`, borderRadius: 16, padding: '22px 24px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+                  <span style={{ fontSize: 17, fontWeight: 900, color: s.color }}>{s.label}</span>
+                  <span style={{ fontSize: 10, fontWeight: 800, padding: '3px 10px', borderRadius: 20, background: s.color + '28', color: s.color, letterSpacing: '.04em' }}>→ {s.action}</span>
+                </div>
+                <p style={{ fontSize: 13, color: '#cbd5e1', lineHeight: 1.65, marginBottom: 12 }}>{s.behavior}</p>
+                <div style={{ borderTop: `1px solid ${s.border}`, paddingTop: 10, display: 'flex', flexDirection: 'column', gap: 3 }}>
+                  <span style={{ fontSize: 10, fontWeight: 800, color: s.color, textTransform: 'uppercase', letterSpacing: '.06em' }}>{s.value}</span>
+                  <span style={{ fontSize: 11, color: s.color + 'bb', fontStyle: 'italic' }}>{s.quote}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Core message + link */}
+          <div style={{ background: 'rgba(26,158,138,0.08)', border: '1px solid rgba(26,158,138,0.22)', borderRadius: 16, padding: '28px 36px', textAlign: 'center' }}>
+            <p className="text-white text-lg font-semibold mb-3">
+              De-Risk Matrix is the only risk framework that connects goal achievement,<br className="hidden md:block" />
+              evidence strength, and prescribed leadership culture — in one live system.
+            </p>
+            <p className="text-slate-400 text-sm max-w-2xl mx-auto mb-6">
+              Culture is not a soft topic. It is the primary variable that determines whether a Dire goal gets fixed
+              or stays Dire. Every risk state in De-Risk Matrix comes with a specific leadership response — grounded
+              in ISO 31000, ISO 45003, and psychological safety research.
+            </p>
+            <Link href="/culture" className="inline-flex items-center gap-2 text-teal font-bold text-sm hover:underline">
+              Deep dive: risk culture and leadership →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ── [7] MULTI-LANGUAGE & COLLABORATION ────────────────────────── */}
       <section className="py-24 bg-navy relative overflow-hidden" id="collaboration">
         <div className="absolute inset-0 pointer-events-none">

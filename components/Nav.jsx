@@ -37,6 +37,9 @@ export default function Nav() {
           <Link href="/methodology" className={`text-sm font-medium hover:text-teal transition-colors ${scrolled ? 'text-slate-600' : 'text-white/80'}`}>
             Methodology
           </Link>
+          <Link href="/culture" className={`text-sm font-medium hover:text-teal transition-colors ${scrolled ? 'text-slate-600' : 'text-white/80'}`}>
+            Risk Culture
+          </Link>
           <Link href="/score" className={`text-sm font-medium hover:text-teal transition-colors ${scrolled ? 'text-slate-600' : 'text-white/80'}`}>
             De-Risk Score
           </Link>
@@ -45,9 +48,6 @@ export default function Nav() {
           </Link>
           <Link href="/about" className={`text-sm font-medium hover:text-teal transition-colors ${scrolled ? 'text-slate-600' : 'text-white/80'}`}>
             About
-          </Link>
-          <Link href="/security" className={`text-sm font-medium hover:text-teal transition-colors ${scrolled ? 'text-slate-600' : 'text-white/80'}`}>
-            Security
           </Link>
         </div>
 
@@ -84,6 +84,7 @@ export default function Nav() {
       {open && (
         <div className="md:hidden bg-white border-t border-slate-100 px-6 py-4 flex flex-col gap-4">
           <Link href="/methodology" className="text-sm font-medium text-slate-700" onClick={() => setOpen(false)}>Methodology</Link>
+          <Link href="/culture" className="text-sm font-medium text-slate-700" onClick={() => setOpen(false)}>Risk Culture</Link>
           <Link href="/score" className="text-sm font-medium text-slate-700" onClick={() => setOpen(false)}>De-Risk Score</Link>
           <Link href="/pricing" className="text-sm font-medium text-slate-700" onClick={() => setOpen(false)}>Pricing</Link>
           <Link href="/about" className="text-sm font-medium text-slate-700" onClick={() => setOpen(false)}>About</Link>
