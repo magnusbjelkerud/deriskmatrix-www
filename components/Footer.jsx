@@ -46,7 +46,7 @@ export default function Footer() {
 
         <div className="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-slate-500 text-xs">
-            © {new Date().getFullYear()} Magnus Bjelkerud. Methodology free for use; commercial use requires agreement.
+            © {new Date().getFullYear()} Magnus Bjelkerud. All rights reserved.
           </p>
           <div className="flex items-center gap-2 text-xs text-slate-500">
             <span className="w-2 h-2 rounded-full bg-teal inline-block" />
