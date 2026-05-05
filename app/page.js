@@ -81,8 +81,11 @@ export default function Home() {
                 is your{' '}
                 <span className="gradient-text">choice of risk.</span>
               </h1>
-              <p className="text-xl text-slate-300 leading-relaxed mb-4">
+              <p className="text-xl text-slate-300 leading-relaxed mb-3">
                 De-Risk Matrix gives every strategic goal a live risk state — so your leadership team acts <em>before</em> it&apos;s too late, not after.
+              </p>
+              <p className="text-base text-teal font-semibold mb-3">
+                Never been easier to develop and achieve goals with thorough risk management.
               </p>
               <p className="text-sm text-slate-400 mb-10">
                 Most organizations discover goal risk in the quarterly review. By then it&apos;s already a crisis.
@@ -143,6 +146,52 @@ export default function Home() {
                 <span className="text-slate-500">{s.label}</span>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── [2b] WHO THIS IS FOR ──────────────────────────────────────── */}
+      <section className="py-20 bg-white">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Who it&apos;s for</p>
+            <h2 className="text-3xl md:text-4xl font-black text-navy mb-4">
+              Wherever goals exist, risk exists.
+            </h2>
+            <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+              De-Risk Matrix works for any organization of any size, sector, or structure —
+              because every organization sets goals, and every goal carries uncertainty.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+            {[
+              { icon: '🏢', title: 'Companies & corporations', desc: 'Strategic goals, revenue targets, market position, operational KPIs.' },
+              { icon: '🏗️', title: 'Project organizations', desc: 'Cost, time, quality, scope — four goals every project lives or dies by.' },
+              { icon: '🏛️', title: 'Public sector & municipalities', desc: 'Service delivery targets, budget adherence, citizen outcomes.' },
+              { icon: '🌍', title: 'NGOs & nonprofits', desc: 'Impact goals, funding targets, program outcomes — risk is just as real.' },
+              { icon: '🏥', title: 'Healthcare & social services', desc: 'Patient outcomes, capacity goals, quality metrics, compliance targets.' },
+              { icon: '⚖️', title: 'Regulated industries', desc: 'Finance, insurance, energy — where structured risk documentation is mandatory.' },
+              { icon: '🎓', title: 'Education & research', desc: 'Enrollment targets, grant goals, research milestones, accreditation.' },
+              { icon: '🤝', title: 'Consultancies & agencies', desc: 'Manage and report on goal risk across multiple client engagements.' },
+            ].map(item => (
+              <div key={item.title} className="bg-slate-50 rounded-2xl p-5 border border-slate-100 hover:border-teal/30 hover:bg-teal/5 transition-colors">
+                <div className="text-2xl mb-3">{item.icon}</div>
+                <h3 className="font-bold text-navy text-sm mb-1.5 leading-snug">{item.title}</h3>
+                <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-navy rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+              <p className="text-white font-bold text-lg mb-1">De-Risk Matrix gives your team superpowers.</p>
+              <p className="text-slate-400 text-sm">Structured risk management used to require specialist consultants. Now any team can do it — continuously, in any language, with AI assistance.</p>
+            </div>
+            <a href={`${APP_URL}/register`}
+              className="flex-shrink-0 px-7 py-3.5 bg-teal hover:bg-teal-dark text-white font-bold rounded-xl transition-colors whitespace-nowrap shadow-lg">
+              Start free trial →
+            </a>
           </div>
         </div>
       </section>
