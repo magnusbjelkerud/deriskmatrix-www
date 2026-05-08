@@ -291,6 +291,25 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── [3b] TESTIMONIAL ─────────────────────────────────────────── */}
+      <section className="py-16 bg-white border-t border-slate-100">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <div className="text-4xl text-teal/20 mb-4 font-serif leading-none">&ldquo;</div>
+          <blockquote className="text-xl md:text-2xl font-medium text-navy leading-relaxed mb-8 italic">
+            Impressive intellectual effort. The De-Risk Matrix clearly shows an important insight:
+            risk only exists in relation to objectives or goals.
+            That connection is often overlooked, and recognising it is a meaningful step forward.
+          </blockquote>
+          <div className="flex items-center justify-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-500 font-bold text-sm flex-shrink-0">PB</div>
+            <div className="text-left">
+              <div className="font-bold text-navy text-sm">Peter Blokland</div>
+              <div className="text-slate-500 text-xs">Total Respect Management Expert</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── [4] THE CONTRAST ──────────────────────────────────────────── */}
       <section className="py-24 bg-white" id="why">
         <div className="max-w-5xl mx-auto px-6">
