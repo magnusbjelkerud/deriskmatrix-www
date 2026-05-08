@@ -302,10 +302,12 @@ export default function Home() {
               That connection is often overlooked, and recognising it is a meaningful step forward.
             </blockquote>
             <div className="flex items-center justify-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-teal/20 border border-teal/30 flex items-center justify-center text-teal font-bold text-sm flex-shrink-0">PB</div>
+              <div className="w-11 h-11 rounded-full overflow-hidden border-2 border-teal/30 flex-shrink-0">
+                <Image src="/images/peter-blokland.jpg" alt="Peter Blokland" width={44} height={44} className="w-full h-full object-cover" />
+              </div>
               <div className="text-left">
-                <div className="font-bold text-navy text-sm">Peter Blokland</div>
-                <div className="text-slate-500 text-xs">Total Respect Management Expert</div>
+                <div className="font-bold text-navy text-sm">Peter Blokland, PhD</div>
+                <div className="text-slate-500 text-xs">Member, Belgian ISO Technical Committee on Risk Management</div>
               </div>
             </div>
           </div>
