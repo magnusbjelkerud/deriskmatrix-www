@@ -81,14 +81,13 @@ export default function Home() {
                 is your{' '}
                 <span className="gradient-text">choice of risk.</span>
               </h1>
-              <p className="text-xl text-slate-300 leading-relaxed mb-3">
-                De-Risk Matrix gives every strategic goal a live risk state — so your leadership team acts <em>before</em> it&apos;s too late, not after.
-              </p>
-              <p className="text-base text-teal font-semibold mb-3">
-                Never been easier to develop and achieve goals with thorough risk management.
+              <p className="text-xl text-slate-300 leading-relaxed mb-4">
+                Every strategic goal gets a live risk state — so you see which goals need attention
+                <em> now</em>, not when the quarterly review reveals a crisis.
               </p>
               <p className="text-sm text-slate-400 mb-10">
-                Most organizations discover goal risk in the quarterly review. By then it&apos;s already a crisis.
+                Progress without confidence is noise. De-Risk Matrix shows you both — where each goal
+                stands, and how much you should trust that reading.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -107,9 +106,9 @@ export default function Home() {
               </div>
 
               <div className="flex items-center gap-6 text-xs text-slate-500">
+                <span className="flex items-center gap-1.5"><span className="text-teal">✓</span> First risk state in &lt;10 min</span>
                 <span className="flex items-center gap-1.5"><span className="text-teal">✓</span> 14-day trial</span>
                 <span className="flex items-center gap-1.5"><span className="text-teal">✓</span> No lock-in</span>
-                <span className="flex items-center gap-1.5"><span className="text-teal">✓</span> Any language</span>
               </div>
             </div>
 
@@ -133,12 +132,12 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs">
             {[
-              { icon: '◎', val: 'ISO 31000',      label: 'aligned' },
-              { icon: '◈', val: '6 risk states',  label: 'always live' },
-              { icon: '⚡', val: '5 AI tools',     label: 'purpose-built' },
-              { icon: '🌐', val: 'Multi-language', label: 'any team, any language' },
-              { icon: '⬡', val: 'Collaboration',  label: 'real-time shared canvas' },
-              { icon: '◉', val: 'Workshop-ready', label: 'workshop → live system' },
+              { icon: '◎', val: 'ISO 31000',        label: 'aligned' },
+              { icon: '◈', val: '6 risk states',    label: 'always live, per goal' },
+              { icon: '⚡', val: '5 AI tools',       label: 'goal-aware, not generic' },
+              { icon: '🌐', val: 'Any language',     label: 'one risk picture, any team' },
+              { icon: '◉', val: 'Early warning',    label: 'before the quarterly surprise' },
+              { icon: '⬡', val: 'Live canvas',      label: 'shared, real-time, always current' },
             ].map(s => (
               <div key={s.val} className="flex items-center gap-1.5">
                 <span className="text-teal">{s.icon}</span>
@@ -185,8 +184,8 @@ export default function Home() {
 
           <div className="bg-navy rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <p className="text-white font-bold text-lg mb-1">De-Risk Matrix gives your team superpowers.</p>
-              <p className="text-slate-400 text-sm">Structured risk management used to require specialist consultants. Now any team can do it — continuously, in any language, with AI assistance.</p>
+              <p className="text-white font-bold text-lg mb-1">Know which goals are at risk — before it&apos;s too late.</p>
+              <p className="text-slate-400 text-sm">Live risk states on every goal. Used to require specialist consultants and quarterly workshops. Now any team sees their full risk picture — continuously, in any language, with AI assistance.</p>
             </div>
             <a href={`${APP_URL}/register`}
               className="flex-shrink-0 px-7 py-3.5 bg-teal hover:bg-teal-dark text-white font-bold rounded-xl transition-colors whitespace-nowrap shadow-lg">
@@ -298,11 +297,12 @@ export default function Home() {
           <div className="text-center mb-14">
             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Why De-Risk Matrix</p>
             <h2 className="text-4xl font-black text-navy mb-4">
-              The 5&times;5 matrix was designed for projects.<br className="hidden md:block" />
-              Not for strategy.
+              Your goals already have a risk state.<br className="hidden md:block" />
+              Now you can see it.
             </h2>
             <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-              If your strategic goals aren&apos;t in the risk picture, you&apos;re managing the wrong risks.
+              Most tools track whether you&apos;re on track. De-Risk Matrix adds the second question:
+              how confident should you be in that reading?
             </p>
           </div>
 
@@ -400,9 +400,9 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-16">
             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">How it works</p>
-            <h2 className="text-4xl font-black text-navy">Goals. States. Culture. Learning.</h2>
+            <h2 className="text-4xl font-black text-navy">Set goals. Read the risk. Act early. Learn.</h2>
             <p className="text-lg text-slate-500 mt-4 max-w-xl mx-auto">
-              Four steps. Repeated each period. Each cycle sharper than the last.
+              Four steps. Repeated each period. Each cycle, your risk picture gets sharper.
             </p>
           </div>
           <div className="grid md:grid-cols-4 gap-5">
@@ -872,7 +872,7 @@ export default function Home() {
       <section className="py-14 bg-teal">
         <div className="max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
-            <h3 className="text-2xl font-black text-white mb-1">Ready to see your goals in a new light?</h3>
+            <h3 className="text-2xl font-black text-white mb-1">Know which goals are at risk — before it&apos;s too late.</h3>
             <p className="text-white/70 text-sm">14-day trial. All features. Your first risk state overview in under 10 minutes. Any language.</p>
           </div>
           <a

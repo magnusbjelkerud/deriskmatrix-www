@@ -1,12 +1,12 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'De-Risk Matrix — Strategic Goal & Risk Management',
-  description: 'Your choice of goals is your choice of risk. De-Risk Matrix turns strategic goals into measurable risk states — so you can act before it\'s too late.',
-  keywords: 'risk management, strategic goals, OKR, ISO 31000, risk matrix, goal tracking',
+  title: 'De-Risk Matrix — Know which goals are at risk before it\'s too late',
+  description: 'De-Risk Matrix gives every strategic goal a live risk state — so your leadership team acts before the quarterly review surprise. AI-powered. ISO 31000 aligned.',
+  keywords: 'goal risk management, strategic goal tracking, live risk states, ISO 31000, goal health monitoring, at-risk goals, early warning goals, OKR risk',
   openGraph: {
-    title: 'De-Risk Matrix',
-    description: 'Your choice of goals is your choice of risk.',
+    title: 'De-Risk Matrix — Know which goals are at risk',
+    description: 'Every goal gets a live risk state. See which goals need attention — before the quarterly surprise.',
     url: 'https://www.deriskmatrix.com',
     siteName: 'De-Risk Matrix',
     type: 'website',
