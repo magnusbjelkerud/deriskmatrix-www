@@ -956,7 +956,7 @@ export default function Home() {
               },
               {
                 name: 'Growth',
-                invite: '10+ people — unlimited',
+                invite: 'Up to 50 people',
                 inviteNote: 'Team · Managers · Executives · Board · Stakeholders',
                 annual: '€119',
                 monthly: '€149',

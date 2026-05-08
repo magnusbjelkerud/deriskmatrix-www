@@ -38,7 +38,7 @@ const PLANS = [
   },
   {
     name: 'Growth',
-    users: '10+ users — unlimited',
+    users: 'Up to 50 users',
     usersNote: 'Team · Managers · Executives · Board · Stakeholders',
     annual: '€119',
     monthly: '€149',
@@ -107,7 +107,7 @@ const ALL_FEATURES = [
 const FAQS = [
   {
     q: 'What is the difference between Mini, Starter, and Growth?',
-    a: 'The number of people you can invite. Mini supports up to 3 users, Starter up to 10, Growth is unlimited (10+ with no cap). Every feature — including all AI tools, multi-language, workshop mode, and the full forecast engine — is identical across all three plans.',
+    a: 'The number of people you can invite. Mini supports up to 3 users, Starter up to 10, Growth up to 50. Every feature — including all AI tools, multi-language, workshop mode, and the full forecast engine — is identical across all three plans. For 50+ users, contact us for Enterprise.',
   },
   {
     q: 'Can I invite board members and executives?',
@@ -123,7 +123,7 @@ const FAQS = [
   },
   {
     q: 'How many users does Growth support?',
-    a: 'Growth starts at 10 users and scales without limit. Invite your full team, all executives, board members, and external stakeholders — no seat cap.',
+    a: 'Growth supports up to 50 users — enough for your full leadership team, executives, department managers, and board members. For larger organizations, contact us for Enterprise pricing.',
   },
   {
     q: 'Can I switch between plans?',
@@ -248,11 +248,23 @@ export default function PricingPage() {
             ))}
           </div>
 
-          <div className="text-center">
-            <p className="text-sm text-slate-400 mb-1">Need dedicated onboarding, compliance documentation, or volume pricing?</p>
-            <a href="mailto:post@deriskmatrix.com" className="text-sm text-teal font-semibold hover:underline">
-              Contact us →
-            </a>
+          {/* Enterprise tier */}
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-7 flex flex-col md:flex-row items-center gap-6 justify-between">
+            <div>
+              <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Enterprise</div>
+              <h3 className="text-2xl font-black text-navy mb-1">50+ users</h3>
+              <p className="text-slate-500 text-sm leading-relaxed max-w-md">
+                Dedicated onboarding, compliance documentation, volume pricing, SLA, and custom integrations.
+                Built for large organizations and regulated industries.
+              </p>
+            </div>
+            <div className="flex-shrink-0 text-center">
+              <a href="mailto:post@deriskmatrix.com?subject=Enterprise%20inquiry"
+                className="inline-block px-8 py-3.5 bg-navy hover:bg-slate-800 text-white font-bold rounded-xl text-sm transition-colors whitespace-nowrap">
+                Contact us →
+              </a>
+              <p className="text-xs text-slate-400 mt-2">post@deriskmatrix.com</p>
+            </div>
           </div>
         </div>
       </section>
@@ -322,7 +334,7 @@ export default function PricingPage() {
               </div>
               <div className="bg-teal/12 border border-teal/25 rounded-xl p-4">
                 <p className="text-xs font-bold text-teal uppercase tracking-wide mb-1">Recommended plan</p>
-                <p className="text-white font-black">Growth — 10+ users, unlimited · €119/month</p>
+                <p className="text-white font-black">Growth — Up to 50 users · €119/month</p>
               </div>
             </div>
           </div>
@@ -351,8 +363,8 @@ export default function PricingPage() {
                 {[
                   {
                     icon: '◎',
-                    title: 'Invite without seat anxiety',
-                    desc: 'Growth starts at 10 users and scales without limit. Board members, CFO, CEO, advisors — all on one canvas.',
+                    title: 'Room for the whole leadership team',
+                    desc: 'Growth supports up to 50 users — board members, CFO, CEO, department managers, and advisors all on one canvas.',
                   },
                   {
                     icon: '◈',
@@ -438,7 +450,7 @@ export default function PricingPage() {
 
           <div className="mt-8 bg-navy rounded-2xl p-6 text-center">
             <p className="text-white font-semibold mb-1">All of the above — on every plan, for every user.</p>
-            <p className="text-slate-400 text-sm">Mini: up to 3 · Starter: up to 10 · Growth: unlimited</p>
+            <p className="text-slate-400 text-sm">Mini: up to 3 · Starter: up to 10 · Growth: up to 50 · Enterprise: contact us</p>
           </div>
         </div>
       </section>
