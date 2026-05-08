@@ -306,7 +306,7 @@ export default function Home() {
                 <Image src="/images/peter-blokland.jpg" alt="Peter Blokland" width={44} height={44} className="w-full h-full object-cover" />
               </div>
               <div className="text-left">
-                <div className="font-bold text-navy text-sm">Peter Blokland, PhD</div>
+                <a href="https://www.linkedin.com/in/peterblokland-total-respect-management-expert/" target="_blank" rel="noopener noreferrer" className="font-bold text-navy text-sm hover:text-teal transition-colors">Peter Blokland, PhD ↗</a>
                 <div className="text-slate-500 text-xs">Member, Belgian ISO Technical Committee on Risk Management</div>
               </div>
             </div>
