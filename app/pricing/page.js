@@ -38,7 +38,7 @@ const PLANS = [
   },
   {
     name: 'Growth',
-    users: 'Up to 10 users',
+    users: '10+ users — unlimited',
     usersNote: 'Team · Managers · Executives · Board · Stakeholders',
     annual: '€119',
     monthly: '€149',
@@ -122,8 +122,8 @@ const FAQS = [
     a: 'No. After the trial, a subscription is required. This keeps the platform focused and properly maintained.',
   },
   {
-    q: 'What happens when I need more than 10 users?',
-    a: 'Contact us at post@deriskmatrix.com. We offer custom plans for larger organizations and enterprise deployments.',
+    q: 'How many users does Growth support?',
+    a: 'Growth starts at 10 users and scales without limit. Invite your full team, all executives, board members, and external stakeholders — no seat cap.',
   },
   {
     q: 'Can I switch between plans?',
@@ -249,9 +249,9 @@ export default function PricingPage() {
           </div>
 
           <div className="text-center">
-            <p className="text-sm text-slate-400 mb-1">Need more than 10 users, dedicated onboarding, or compliance documentation?</p>
+            <p className="text-sm text-slate-400 mb-1">Need dedicated onboarding, compliance documentation, or volume pricing?</p>
             <a href="mailto:post@deriskmatrix.com" className="text-sm text-teal font-semibold hover:underline">
-              Contact us for custom plans →
+              Contact us →
             </a>
           </div>
         </div>
@@ -322,7 +322,7 @@ export default function PricingPage() {
               </div>
               <div className="bg-teal/12 border border-teal/25 rounded-xl p-4">
                 <p className="text-xs font-bold text-teal uppercase tracking-wide mb-1">Recommended plan</p>
-                <p className="text-white font-black">Growth — Up to 10 users · €119/month</p>
+                <p className="text-white font-black">Growth — 10+ users, unlimited · €119/month</p>
               </div>
             </div>
           </div>
@@ -352,7 +352,7 @@ export default function PricingPage() {
                   {
                     icon: '◎',
                     title: 'Invite without seat anxiety',
-                    desc: 'Up to 10 people on Growth. Board members, CFO, CEO, advisors — all on one canvas.',
+                    desc: 'Growth starts at 10 users and scales without limit. Board members, CFO, CEO, advisors — all on one canvas.',
                   },
                   {
                     icon: '◈',
@@ -438,7 +438,7 @@ export default function PricingPage() {
 
           <div className="mt-8 bg-navy rounded-2xl p-6 text-center">
             <p className="text-white font-semibold mb-1">All of the above — on every plan, for every user.</p>
-            <p className="text-slate-400 text-sm">Mini: 3 users · Starter: 5 users · Growth: 10 users</p>
+            <p className="text-slate-400 text-sm">Mini: up to 3 · Starter: up to 5 · Growth: 10+ unlimited</p>
           </div>
         </div>
       </section>

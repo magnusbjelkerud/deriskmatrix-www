@@ -956,7 +956,7 @@ export default function Home() {
               },
               {
                 name: 'Growth',
-                invite: 'Up to 10 people',
+                invite: '10+ people — unlimited',
                 inviteNote: 'Team · Managers · Executives · Board · Stakeholders',
                 annual: '€119',
                 monthly: '€149',
@@ -990,7 +990,7 @@ export default function Home() {
           </div>
 
           <div className="text-center">
-            <p className="text-sm text-slate-500 mb-2">Need more than 10 users, or full feature breakdown?</p>
+            <p className="text-sm text-slate-500 mb-2">Full feature breakdown and enterprise options →</p>
             <Link href="/pricing" className="text-sm text-teal font-semibold hover:underline">
               See full pricing details and FAQ →
             </Link>
