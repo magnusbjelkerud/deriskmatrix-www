@@ -947,7 +947,7 @@ export default function Home() {
               },
               {
                 name: 'Starter',
-                invite: 'Up to 5 people',
+                invite: 'Up to 10 people',
                 inviteNote: 'Team members · Executives · Board observers',
                 annual: '€39',
                 monthly: '€49',

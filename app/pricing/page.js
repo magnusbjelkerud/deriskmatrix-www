@@ -25,7 +25,7 @@ const PLANS = [
   },
   {
     name: 'Starter',
-    users: 'Up to 5 users',
+    users: 'Up to 10 users',
     usersNote: 'Team members · Executives · Board observers',
     annual: '€39',
     monthly: '€49',
@@ -107,7 +107,7 @@ const ALL_FEATURES = [
 const FAQS = [
   {
     q: 'What is the difference between Mini, Starter, and Growth?',
-    a: 'The number of people you can invite. Mini supports up to 3 users, Starter up to 5, Growth up to 10. Every feature — including all AI tools, multi-language, workshop mode, and the full forecast engine — is identical across all three plans.',
+    a: 'The number of people you can invite. Mini supports up to 3 users, Starter up to 10, Growth is unlimited (10+ with no cap). Every feature — including all AI tools, multi-language, workshop mode, and the full forecast engine — is identical across all three plans.',
   },
   {
     q: 'Can I invite board members and executives?',
@@ -438,7 +438,7 @@ export default function PricingPage() {
 
           <div className="mt-8 bg-navy rounded-2xl p-6 text-center">
             <p className="text-white font-semibold mb-1">All of the above — on every plan, for every user.</p>
-            <p className="text-slate-400 text-sm">Mini: up to 3 · Starter: up to 5 · Growth: 10+ unlimited</p>
+            <p className="text-slate-400 text-sm">Mini: up to 3 · Starter: up to 10 · Growth: unlimited</p>
           </div>
         </div>
       </section>
