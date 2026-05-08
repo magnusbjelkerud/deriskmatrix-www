@@ -22,7 +22,7 @@ export default function PrivacyPage() {
 
         <section>
           <h2 className="text-xl font-bold text-navy mb-3">1. Who we are</h2>
-          <p>De-Risk Matrix is a SaaS platform for strategic goal and risk management, developed and operated by Magnus Bjelkerud, Norway. Contact: <a href="mailto:post@deriskmatrix.com" className="text-teal underline">post@deriskmatrix.com</a>.</p>
+          <p>De-Risk Matrix is a SaaS platform for strategic goal and risk management, developed and operated by De-Risk Matrix Company AS, Norway. Contact: <a href="mailto:post@deriskmatrix.com" className="text-teal underline">post@deriskmatrix.com</a>.</p>
         </section>
 
         <section>

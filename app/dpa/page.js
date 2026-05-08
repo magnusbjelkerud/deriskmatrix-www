@@ -7,7 +7,7 @@ export const metadata = {
   description: 'GDPR Article 28 Data Processing Agreement between De-Risk Matrix and its customers.',
 }
 
-const PROCESSOR  = 'Magnus Bjelkerud (De-Risk Matrix)'
+const PROCESSOR  = 'De-Risk Matrix Company AS'
 const UPDATED    = 'April 2026'
 
 const SUB_PROCESSORS = [

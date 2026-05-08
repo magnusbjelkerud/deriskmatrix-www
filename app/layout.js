@@ -1,4 +1,5 @@
 import './globals.css'
+import CookieBanner from '../components/CookieBanner'
 
 export const metadata = {
   title: 'De-Risk Matrix — Know which goals are at risk before it\'s too late',
@@ -20,7 +21,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
       </head>
-      <body>{children}</body>
+      <body>{children}<CookieBanner /></body>
     </html>
   )
 }
