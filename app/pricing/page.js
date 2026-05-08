@@ -4,10 +4,52 @@ import Footer from '../../components/Footer'
 
 export const metadata = {
   title: 'Pricing — De-Risk Matrix',
-  description: 'Two plans. All features included. The only difference is how many people you invite. 14-day trial, no credit card required.',
+  description: 'Three plans. All features included. The only difference is how many people you invite. From €19/month. 14-day trial, no credit card required.',
 }
 
 const APP_URL = 'https://app.deriskmatrix.com'
+
+const PLANS = [
+  {
+    name: 'Mini',
+    users: 'Up to 3 users',
+    usersNote: 'Founder · Solo operator · Small team',
+    annual: '€19',
+    monthly: '€24',
+    monthlyNote: '€24/month billed monthly',
+    highlight: false,
+    tag: null,
+    desc: 'For founders, solo operators, and very small teams who want a live risk picture from day one.',
+    recommended: 'For projects',
+    recommendedColor: 'bg-blue-50 border-blue-100 text-blue-600',
+  },
+  {
+    name: 'Starter',
+    users: 'Up to 5 users',
+    usersNote: 'Team members · Executives · Board observers',
+    annual: '€39',
+    monthly: '€49',
+    monthlyNote: '€49/month billed monthly',
+    highlight: false,
+    tag: null,
+    desc: 'A project team, a small leadership group, or a founding team getting structured on risk.',
+    recommended: 'For small teams',
+    recommendedColor: 'bg-blue-50 border-blue-100 text-blue-600',
+  },
+  {
+    name: 'Growth',
+    users: 'Up to 10 users',
+    usersNote: 'Team · Managers · Executives · Board · Stakeholders',
+    annual: '€119',
+    monthly: '€149',
+    monthlyNote: '€149/month billed monthly',
+    highlight: true,
+    tag: 'Most popular',
+    desc: 'Full leadership team, departments, and board members — all on one live risk canvas.',
+    recommended: 'For leadership teams',
+    recommendedColor: 'bg-teal/10 border-teal/20 text-teal',
+  },
+]
 
 const ALL_FEATURES = [
   {
@@ -64,8 +106,8 @@ const ALL_FEATURES = [
 
 const FAQS = [
   {
-    q: 'What is the only difference between Starter and Growth?',
-    a: 'The number of people you can invite. Starter supports up to 5 users. Growth is unlimited. Every feature — including all AI tools, multi-language, workshop mode, and the full forecast engine — is identical across both plans.',
+    q: 'What is the difference between Mini, Starter, and Growth?',
+    a: 'The number of people you can invite. Mini supports up to 3 users, Starter up to 5, Growth up to 10. Every feature — including all AI tools, multi-language, workshop mode, and the full forecast engine — is identical across all three plans.',
   },
   {
     q: 'Can I invite board members and executives?',
@@ -80,16 +122,16 @@ const FAQS = [
     a: 'No. After the trial, a subscription is required. This keeps the platform focused and properly maintained.',
   },
   {
-    q: 'What happens when I need more than 5 users on Starter?',
-    a: 'You can upgrade to Growth at any time from your account settings. The upgrade takes effect immediately.',
+    q: 'What happens when I need more than 10 users?',
+    a: 'Contact us at post@deriskmatrix.com. We offer custom plans for larger organizations and enterprise deployments.',
+  },
+  {
+    q: 'Can I switch between plans?',
+    a: 'Yes — upgrade or downgrade at any time from your account settings. Changes take effect immediately.',
   },
   {
     q: 'Can I switch between monthly and annual billing?',
     a: 'Yes. Switch to annual billing at any time and start saving 20% immediately.',
-  },
-  {
-    q: 'Is there an Enterprise or custom plan?',
-    a: 'The Growth plan covers unlimited users and the full feature set. For questions about volume, custom onboarding, dedicated support, or compliance requirements, contact us at post@deriskmatrix.com.',
   },
 ]
 
@@ -103,89 +145,115 @@ export default function PricingPage() {
         <p className="text-xs font-bold text-teal uppercase tracking-widest mb-4">Pricing</p>
         <h1 className="text-4xl md:text-5xl font-black text-white mb-4 leading-tight">
           All features. Always.<br />
-          <span className="gradient-text">Pay only for how many you invite.</span>
+          <span className="gradient-text">From €19 per month.</span>
         </h1>
         <p className="text-xl text-slate-300 max-w-xl mx-auto">
-          Two plans. One difference: the number of people on your account.
+          Three plans. One difference: how many people you invite.
           Every feature is included from day one.
         </p>
       </section>
 
+      {/* ── Alternative cost framing ──────────────────────────────── */}
+      <section className="bg-slate-900 border-b border-slate-800 py-8 px-6">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-xs font-bold text-slate-500 uppercase tracking-widest text-center mb-6">What&apos;s your alternative?</p>
+          <div className="grid md:grid-cols-3 gap-4">
+            {[
+              {
+                label: 'Risk consultant — half-day workshop',
+                cost: '€2,000–5,000',
+                note: 'Once. Then it goes in a drawer.',
+                bad: true,
+              },
+              {
+                label: 'Quarterly review cycle (×4/year)',
+                cost: '€8,000–20,000/year',
+                note: 'Backward-looking. Already a crisis by then.',
+                bad: true,
+              },
+              {
+                label: 'De-Risk Matrix Growth',
+                cost: 'From €19/month',
+                note: 'Continuous. Live. Updated with every data point.',
+                bad: false,
+              },
+            ].map(item => (
+              <div key={item.label}
+                className={`rounded-xl px-5 py-4 border ${item.bad ? 'bg-white/3 border-white/8' : 'bg-teal/10 border-teal/25'}`}>
+                <div className={`text-xs font-semibold mb-2 ${item.bad ? 'text-slate-400' : 'text-teal'}`}>
+                  {item.bad ? '✕' : '✓'} {item.label}
+                </div>
+                <div className={`text-xl font-black mb-1 ${item.bad ? 'text-slate-300' : 'text-white'}`}>
+                  {item.cost}
+                </div>
+                <div className={`text-xs ${item.bad ? 'text-slate-500' : 'text-teal/80'}`}>{item.note}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Plans ─────────────────────────────────────────────────── */}
       <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-6">
+        <div className="max-w-5xl mx-auto px-6">
 
-          {/* The one difference — callout above cards */}
           <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 bg-teal/8 border border-teal/20 text-teal text-sm font-semibold px-5 py-2.5 rounded-full">
               ✓ All features identical · The only difference is how many people you invite
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 items-start mb-8">
+          <div className="grid md:grid-cols-3 gap-5 items-start mb-8">
+            {PLANS.map(plan => (
+              <div key={plan.name}
+                className={`rounded-2xl p-7 ${plan.highlight ? 'bg-navy shadow-2xl shadow-navy/20' : 'bg-slate-50 border border-slate-200'}`}>
+                {plan.tag && (
+                  <div className="inline-block bg-teal text-white text-xs font-bold px-3 py-1 rounded-full mb-4">{plan.tag}</div>
+                )}
+                <div className={`text-xs font-bold uppercase tracking-wider mb-1 ${plan.highlight ? 'text-teal' : 'text-slate-400'}`}>
+                  {plan.users}
+                </div>
+                <h3 className={`text-2xl font-black mb-2 ${plan.highlight ? 'text-white' : 'text-navy'}`}>{plan.name}</h3>
+                <p className={`text-sm mb-5 leading-relaxed ${plan.highlight ? 'text-slate-300' : 'text-slate-500'}`}>
+                  {plan.desc}
+                </p>
 
-            {/* Starter */}
-            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-8">
-              <div className="text-xs font-bold text-teal uppercase tracking-wider mb-1">Up to 5 users</div>
-              <h3 className="text-2xl font-black text-navy mb-1">Starter</h3>
-              <p className="text-slate-500 text-sm mb-5">
-                A project team, a small leadership group, or a founding team getting structured on risk.
-              </p>
-              <div className="flex items-baseline gap-1 mb-1">
-                <span className="text-5xl font-black text-navy">€39</span>
-                <span className="text-slate-400 text-sm">/month</span>
+                <div className="flex items-baseline gap-1 mb-1">
+                  <span className={`text-4xl font-black ${plan.highlight ? 'text-white' : 'text-navy'}`}>{plan.annual}</span>
+                  <span className="text-slate-400 text-sm">/month</span>
+                </div>
+                <p className={`text-xs mb-1 ${plan.highlight ? 'text-slate-400' : 'text-slate-400'}`}>{plan.monthlyNote}</p>
+                <p className="text-teal text-xs font-semibold mb-5">Annual billing — save 20%</p>
+
+                <div className={`rounded-xl px-4 py-3 mb-6 ${plan.highlight ? 'bg-teal/12 border border-teal/25' : 'bg-blue-50 border border-blue-100'}`}>
+                  <p className={`text-xs font-bold uppercase tracking-wide mb-1 ${plan.highlight ? 'text-teal' : 'text-blue-500'}`}>
+                    Invite up to
+                  </p>
+                  <p className={`text-xl font-black ${plan.highlight ? 'text-white' : 'text-navy'}`}>{plan.users.replace('Up to ', '')}</p>
+                  <p className={`text-xs mt-0.5 ${plan.highlight ? 'text-slate-400' : 'text-slate-500'}`}>{plan.usersNote}</p>
+                </div>
+
+                <a href={`${APP_URL}/register`}
+                  className={`block w-full py-3 rounded-xl font-bold text-center text-sm transition-colors mb-2 ${
+                    plan.highlight
+                      ? 'bg-teal hover:bg-teal-dark text-white'
+                      : 'bg-navy hover:bg-slate-800 text-white'
+                  }`}>
+                  Start 14-day trial →
+                </a>
+                <p className={`text-center text-xs ${plan.highlight ? 'text-slate-500' : 'text-slate-400'}`}>
+                  No credit card required
+                </p>
               </div>
-              <p className="text-slate-400 text-xs mb-1">€49/month billed monthly</p>
-              <p className="text-teal text-xs font-semibold mb-6">Annual billing — save 20%</p>
-
-              <div className="bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 mb-6">
-                <p className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-1">Invite up to</p>
-                <p className="text-2xl font-black text-navy">5 people</p>
-                <p className="text-xs text-slate-500 mt-0.5">Team members · Executives · Board observers</p>
-              </div>
-
-              <a href={`${APP_URL}/register`}
-                className="block w-full py-3.5 rounded-xl font-bold text-center text-sm bg-navy hover:bg-slate-800 text-white transition-colors mb-3">
-                Start 14-day trial →
-              </a>
-              <p className="text-center text-xs text-slate-400">No credit card required</p>
-            </div>
-
-            {/* Growth */}
-            <div className="bg-navy rounded-2xl p-8 shadow-2xl shadow-navy/20">
-              <div className="inline-block bg-teal text-white text-xs font-bold px-3 py-1 rounded-full mb-4">Most popular</div>
-              <div className="text-xs font-bold text-teal uppercase tracking-wider mb-1">Unlimited users</div>
-              <h3 className="text-2xl font-black text-white mb-1">Growth</h3>
-              <p className="text-slate-300 text-sm mb-5">
-                A full leadership team, departments, project teams, executives, and board members — all on one canvas.
-              </p>
-              <div className="flex items-baseline gap-1 mb-1">
-                <span className="text-5xl font-black text-white">€119</span>
-                <span className="text-slate-400 text-sm">/month</span>
-              </div>
-              <p className="text-slate-400 text-xs mb-1">€149/month billed monthly</p>
-              <p className="text-teal text-xs font-semibold mb-6">Annual billing — save 20%</p>
-
-              <div className="bg-teal/12 border border-teal/25 rounded-xl px-4 py-3 mb-6">
-                <p className="text-xs font-bold text-teal uppercase tracking-wide mb-1">Invite as many as you need</p>
-                <p className="text-2xl font-black text-white">Unlimited people</p>
-                <p className="text-xs text-slate-400 mt-0.5">Team · Managers · Executives · Board · Stakeholders</p>
-              </div>
-
-              <a href={`${APP_URL}/register`}
-                className="block w-full py-3.5 rounded-xl font-bold text-center text-sm bg-teal hover:bg-teal-dark text-white transition-colors mb-3">
-                Start 14-day trial →
-              </a>
-              <p className="text-center text-xs text-slate-500">No credit card required</p>
-            </div>
+            ))}
           </div>
 
-          <p className="text-center text-sm text-slate-400">
-            Need dedicated onboarding, compliance documentation, or volume pricing?{' '}
-            <a href="mailto:post@deriskmatrix.com" className="text-teal font-semibold hover:underline">
-              Contact us →
+          <div className="text-center">
+            <p className="text-sm text-slate-400 mb-1">Need more than 10 users, dedicated onboarding, or compliance documentation?</p>
+            <a href="mailto:post@deriskmatrix.com" className="text-sm text-teal font-semibold hover:underline">
+              Contact us for custom plans →
             </a>
-          </p>
+          </div>
         </div>
       </section>
 
@@ -194,31 +262,30 @@ export default function PricingPage() {
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Who uses it</p>
-            <h2 className="text-3xl font-black text-navy mb-3">For projects. For the entire enterprise.</h2>
+            <h2 className="text-3xl font-black text-navy mb-3">For projects. For the entire leadership team.</h2>
             <p className="text-slate-500 max-w-xl mx-auto">
-              De-Risk Matrix scales from a single project team to company-wide strategic risk management.
+              De-Risk Matrix scales from a solo founder to a full leadership team.
               The methodology is the same. The canvas grows with you.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {/* For projects */}
             <div className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
               <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 text-xs font-bold px-3 py-1.5 rounded-full mb-5 border border-blue-100">
-                ◈ For projects
+                ◈ Mini or Starter
               </div>
-              <h3 className="text-xl font-black text-navy mb-3">Project teams managing delivery risk</h3>
+              <h3 className="text-xl font-black text-navy mb-3">Solo operators and small project teams</h3>
               <p className="text-slate-500 text-sm leading-relaxed mb-5">
-                Define project goals with targets and thresholds — timeline, cost, quality, scope.
-                Track actuals against the risk corridor. Catch drift before the deadline.
+                Define goals with targets and thresholds. Track actuals. Catch drift before it becomes a crisis.
+                Works for a single founder or a project team of 3–5.
               </p>
               <div className="space-y-2.5 mb-6">
                 {[
-                  'Project manager + team (2–5 people)',
-                  'Goals: time, cost, quality, NPS, defect rate',
-                  'Risk state visible to all stakeholders',
-                  'Actions tied to risk state — owned, tracked',
-                  'Invite the client or board as observer',
+                  'Founder, solo operator, or project manager',
+                  'Goals: revenue, cost, quality, timeline, NPS',
+                  'Risk state visible — always current',
+                  'Actions tied to risk state — owned and tracked',
+                  'Invite an advisor or board observer',
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-2.5 text-sm text-slate-600">
                     <span className="text-teal flex-shrink-0">✓</span>{item}
@@ -227,24 +294,23 @@ export default function PricingPage() {
               </div>
               <div className="bg-blue-50 rounded-xl p-4">
                 <p className="text-xs font-bold text-blue-500 uppercase tracking-wide mb-1">Recommended plan</p>
-                <p className="text-navy font-black">Starter — Up to 5 users · €39/month</p>
+                <p className="text-navy font-black">Mini — Up to 3 users · €19/month</p>
               </div>
             </div>
 
-            {/* For enterprise */}
             <div className="bg-navy rounded-2xl p-7 shadow-sm">
               <div className="inline-flex items-center gap-2 bg-teal/15 text-teal text-xs font-bold px-3 py-1.5 rounded-full mb-5 border border-teal/25">
-                ◎ For enterprise
+                ◎ Growth
               </div>
-              <h3 className="text-xl font-black text-white mb-3">Company-wide strategic risk management</h3>
+              <h3 className="text-xl font-black text-white mb-3">Full leadership team and company strategy</h3>
               <p className="text-slate-300 text-sm leading-relaxed mb-5">
                 Enterprise goals cascade into departments and projects. Every goal, every team,
                 every level — on one canvas. Leadership sees the full picture. Departments own their goals.
               </p>
               <div className="space-y-2.5 mb-6">
                 {[
-                  'Executive team + department managers (unlimited)',
-                  'Goals: enterprise, department, project hierarchy',
+                  'CEO + leadership team + department managers',
+                  'Goals: enterprise, department, and project hierarchy',
                   'Board members invited — live view, no deck needed',
                   'Multi-language — global teams, one risk picture',
                   'Workshops feed directly into the live system',
@@ -256,7 +322,7 @@ export default function PricingPage() {
               </div>
               <div className="bg-teal/12 border border-teal/25 rounded-xl p-4">
                 <p className="text-xs font-bold text-teal uppercase tracking-wide mb-1">Recommended plan</p>
-                <p className="text-white font-black">Growth — Unlimited users · €119/month</p>
+                <p className="text-white font-black">Growth — Up to 10 users · €119/month</p>
               </div>
             </div>
           </div>
@@ -285,8 +351,8 @@ export default function PricingPage() {
                 {[
                   {
                     icon: '◎',
-                    title: 'Invite without limits',
-                    desc: 'Add board members, CFO, CEO, external advisors. Growth plan has no user cap.',
+                    title: 'Invite without seat anxiety',
+                    desc: 'Up to 10 people on Growth. Board members, CFO, CEO, advisors — all on one canvas.',
                   },
                   {
                     icon: '◈',
@@ -349,7 +415,7 @@ export default function PricingPage() {
             <h2 className="text-3xl font-black text-navy mb-3">Everything included. No exceptions.</h2>
             <p className="text-slate-500 max-w-xl mx-auto">
               Every user on every plan gets the full platform from day one.
-              Starter and Growth differ only in how many people you can invite.
+              Mini, Starter, and Growth differ only in how many people you can invite.
             </p>
           </div>
 
@@ -372,7 +438,7 @@ export default function PricingPage() {
 
           <div className="mt-8 bg-navy rounded-2xl p-6 text-center">
             <p className="text-white font-semibold mb-1">All of the above — on every plan, for every user.</p>
-            <p className="text-slate-400 text-sm">Starter: up to 5 users · Growth: unlimited users</p>
+            <p className="text-slate-400 text-sm">Mini: 3 users · Starter: 5 users · Growth: 10 users</p>
           </div>
         </div>
       </section>

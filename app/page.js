@@ -910,73 +910,87 @@ export default function Home() {
           <div className="text-center mb-4">
             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Pricing</p>
             <h2 className="text-4xl font-black text-navy mb-3">All features. Always.</h2>
-            <p className="text-lg text-slate-500">Pay only for how many people you invite.</p>
+            <p className="text-lg text-slate-500">From €19/month. The only difference is how many people you invite.</p>
           </div>
 
-          <div className="text-center mb-10">
+          <div className="text-center mb-8">
             <span className="inline-block bg-slate-100 border border-slate-200 text-slate-600 text-xs font-semibold px-4 py-2 rounded-full">
-              All features identical · The only difference is how many people you invite
+              All features identical across all plans · Choose by team size
             </span>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
+          {/* Alternative cost context */}
+          <div className="bg-slate-800 rounded-2xl px-6 py-4 mb-8 grid md:grid-cols-3 gap-4">
+            {[
+              { bad: true,  label: 'Risk consultant workshop', cost: '€2,000–5,000', note: 'Once. Then filed away.' },
+              { bad: true,  label: 'Quarterly review cycle ×4', cost: '€8,000–20,000/yr', note: 'Backward-looking. Already too late.' },
+              { bad: false, label: 'De-Risk Matrix Growth', cost: 'From €19/month', note: 'Continuous. Live. Every data point.' },
+            ].map(item => (
+              <div key={item.label} className={`rounded-xl px-4 py-3 ${item.bad ? 'bg-white/5' : 'bg-teal/15 border border-teal/30'}`}>
+                <div className={`text-xs font-semibold mb-1 ${item.bad ? 'text-slate-400' : 'text-teal'}`}>{item.bad ? '✕' : '✓'} {item.label}</div>
+                <div className={`text-lg font-black ${item.bad ? 'text-slate-300' : 'text-white'}`}>{item.cost}</div>
+                <div className={`text-xs mt-0.5 ${item.bad ? 'text-slate-500' : 'text-teal/70'}`}>{item.note}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5 mb-8">
             {[
               {
+                name: 'Mini',
+                invite: 'Up to 3 people',
+                inviteNote: 'Founder · Solo operator · Small team',
+                annual: '€19',
+                monthly: '€24',
+                highlight: false,
+                tag: null,
+              },
+              {
                 name: 'Starter',
-                invite: 'Invite up to 5 people',
+                invite: 'Up to 5 people',
                 inviteNote: 'Team members · Executives · Board observers',
                 annual: '€39',
                 monthly: '€49',
                 highlight: false,
                 tag: null,
-                features: ['All 6 risk states & AI tools', 'Multi-language collaboration', 'Workshop → live system', 'Goal hierarchy & forecasting', 'CSV import & evidence scoring'],
               },
               {
                 name: 'Growth',
-                invite: 'Invite as many as you need',
+                invite: 'Up to 10 people',
                 inviteNote: 'Team · Managers · Executives · Board · Stakeholders',
                 annual: '€119',
                 monthly: '€149',
                 highlight: true,
                 tag: 'Most popular',
-                features: ['Everything in Starter', 'Unlimited users — no seat caps', 'Full enterprise goal hierarchy', 'API webhooks & integrations', 'Priority support'],
               },
             ].map(plan => (
-              <div key={plan.name} className={`rounded-2xl p-8 ${plan.highlight ? 'bg-navy' : 'bg-slate-50 border border-slate-200'}`}>
+              <div key={plan.name} className={`rounded-2xl p-7 ${plan.highlight ? 'bg-navy' : 'bg-slate-50 border border-slate-200'}`}>
                 {plan.tag && (
-                  <div className="inline-block bg-teal text-white text-xs font-bold px-3 py-1 rounded-full mb-4">{plan.tag}</div>
+                  <div className="inline-block bg-teal text-white text-xs font-bold px-3 py-1 rounded-full mb-3">{plan.tag}</div>
                 )}
-                <h3 className={`text-xl font-black mb-4 ${plan.highlight ? 'text-white' : 'text-navy'}`}>{plan.name}</h3>
+                <h3 className={`text-xl font-black mb-3 ${plan.highlight ? 'text-white' : 'text-navy'}`}>{plan.name}</h3>
 
-                {/* Invite box */}
-                <div className={`rounded-xl px-4 py-3 mb-5 ${plan.highlight ? 'bg-white/10' : 'bg-teal/10 border border-teal/20'}`}>
-                  <div className={`text-sm font-bold mb-0.5 ${plan.highlight ? 'text-teal' : 'text-teal'}`}>{plan.invite}</div>
+                <div className={`rounded-xl px-4 py-3 mb-4 ${plan.highlight ? 'bg-white/10' : 'bg-teal/10 border border-teal/20'}`}>
+                  <div className="text-teal text-sm font-bold mb-0.5">{plan.invite}</div>
                   <div className={`text-xs ${plan.highlight ? 'text-slate-400' : 'text-slate-500'}`}>{plan.inviteNote}</div>
                 </div>
 
                 <div className="flex items-baseline gap-1 mb-1">
-                  <span className={`text-4xl font-black ${plan.highlight ? 'text-white' : 'text-navy'}`}>{plan.annual}</span>
+                  <span className={`text-3xl font-black ${plan.highlight ? 'text-white' : 'text-navy'}`}>{plan.annual}</span>
                   <span className="text-slate-400 text-sm">/month</span>
                 </div>
-                <p className="text-xs mb-6 text-slate-400">{plan.monthly}/month billed monthly · 14-day free trial</p>
-                <ul className="space-y-2 mb-6">
-                  {plan.features.map(f => (
-                    <li key={f} className={`text-sm flex items-center gap-2 ${plan.highlight ? 'text-slate-300' : 'text-slate-600'}`}>
-                      <span className="text-teal flex-shrink-0">✓</span>{f}
-                    </li>
-                  ))}
-                </ul>
+                <p className="text-xs mb-5 text-slate-400">{plan.monthly}/month billed monthly · 14-day trial</p>
                 <a href={`${APP_URL}/register`}
                   className={`block w-full py-3 rounded-xl font-bold text-center text-sm transition-colors ${plan.highlight ? 'bg-teal hover:bg-teal-dark text-white' : 'bg-navy hover:bg-slate-800 text-white'}`}>
                   Start free trial →
                 </a>
-                <p className={`text-center text-xs mt-3 ${plan.highlight ? 'text-slate-500' : 'text-slate-400'}`}>No credit card required</p>
+                <p className={`text-center text-xs mt-2 ${plan.highlight ? 'text-slate-500' : 'text-slate-400'}`}>No credit card required</p>
               </div>
             ))}
           </div>
 
           <div className="text-center">
-            <p className="text-sm text-slate-500 mb-2">Board packages, executive access, and full feature breakdown →</p>
+            <p className="text-sm text-slate-500 mb-2">Need more than 10 users, or full feature breakdown?</p>
             <Link href="/pricing" className="text-sm text-teal font-semibold hover:underline">
               See full pricing details and FAQ →
             </Link>
