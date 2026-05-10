@@ -42,7 +42,7 @@ async function fetchWebsite(domain) {
           .trim()
           .slice(0, 5000)
         const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i)
-        const title = titleMatch ? titleMatch[1].replace(/[\|\-–].*/, '').trim() : domain
+        const title = titleMatch ? titleMatch[1].replace(/\s*[|–—].*$|\s+-\s+.*$/, '').trim() : domain
         return { text, title, success: true }
       }
     } catch { continue }
