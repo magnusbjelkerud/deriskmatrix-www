@@ -10,20 +10,36 @@ const PLANS = [
   { name: 'Growth',  price: '€119', users: 'Up to 50 users', highlight: true, tag: 'Most popular' },
 ]
 
+const CONFIDENCE_META = {
+  high:   { label: 'High confidence',   color: '#16a34a', bg: '#dcfce7' },
+  medium: { label: 'Medium confidence', color: '#d97706', bg: '#fef3c7' },
+  low:    { label: 'Limited data',      color: '#6b7280', bg: '#f3f4f6' },
+}
+
 function GoalCard({ goal, blurred = false }) {
+  const [showEvidence, setShowEvidence] = useState(false)
+  const conf = CONFIDENCE_META[goal.confidence] || CONFIDENCE_META.medium
+
   return (
     <div
       className="bg-white rounded-2xl border border-slate-200 p-6 relative overflow-hidden"
       style={blurred ? { filter: 'blur(5px)', userSelect: 'none', pointerEvents: 'none' } : {}}
     >
-      <div className="flex items-center justify-between mb-4">
-        <span className="text-xs font-bold px-3 py-1.5 rounded-full" style={{ background: goal.stateBg, color: goal.stateColor }}>
-          {goal.stateLabel}
-        </span>
+      <div className="flex items-start justify-between mb-4 gap-2 flex-wrap">
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-xs font-bold px-3 py-1.5 rounded-full" style={{ background: goal.stateBg, color: goal.stateColor }}>
+            {goal.stateLabel}
+          </span>
+          <span className="text-xs font-semibold px-2.5 py-1 rounded-full" style={{ background: conf.bg, color: conf.color }}>
+            {conf.label}
+          </span>
+        </div>
         <span className="text-xs text-slate-400 font-medium">{goal.evidence === 'strong' ? 'Strong evidence' : 'Weak evidence'}</span>
       </div>
+
       <h3 className="text-base font-bold text-navy mb-1">{goal.name}</h3>
       <p className="text-sm text-slate-500 mb-4 leading-relaxed">{goal.context}</p>
+
       <div className="flex gap-6 text-sm mb-4">
         <div>
           <span className="text-xs font-semibold text-slate-400 uppercase tracking-wide block mb-0.5">Target</span>
@@ -34,11 +50,33 @@ function GoalCard({ goal, blurred = false }) {
           <span className="font-bold text-slate-600">{goal.threshold} {goal.unit}</span>
         </div>
       </div>
+
       <div className="border-t border-slate-100 pt-4">
         <span className="text-xs font-bold text-slate-400 uppercase tracking-wide">Suggested action: </span>
         <span className="text-sm font-semibold" style={{ color: goal.stateColor }}>{goal.stateAction}</span>
         <span className="text-sm text-slate-600"> — {goal.action_detail}</span>
       </div>
+
+      {goal.evidence_bullets?.length > 0 && (
+        <div className="mt-3">
+          <button
+            onClick={() => setShowEvidence(v => !v)}
+            className="text-xs font-semibold text-slate-400 hover:text-slate-600 flex items-center gap-1 transition-colors"
+          >
+            Why we suggest this {showEvidence ? '↑' : '→'}
+          </button>
+          {showEvidence && (
+            <ul className="mt-2 space-y-1.5">
+              {goal.evidence_bullets.map((b, i) => (
+                <li key={i} className="text-xs text-slate-500 flex items-start gap-2">
+                  <span style={{ color: '#1a9e8a' }} className="mt-0.5 flex-shrink-0">–</span>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
     </div>
   )
 }
@@ -174,9 +212,19 @@ export default function ResultClient({ analysis }) {
   const [emailSubmitted, setEmailSubmitted] = useState(false)
   const [copied, setCopied] = useState(false)
 
-  const goals = Array.isArray(analysis.goals_json) ? analysis.goals_json : []
+  const rawGoals = Array.isArray(analysis.goals_json) ? analysis.goals_json : []
   const drivers = Array.isArray(analysis.drivers_json) ? analysis.drivers_json : []
   const actions = Array.isArray(analysis.actions_json) ? analysis.actions_json : []
+
+  // Dire-first sort: dire → pessimistic → rest (preserves rank ordering within each group)
+  const STATE_SORT = { dire: 0, pessimistic: 1 }
+  const goals = [...rawGoals].sort((a, b) => {
+    const aP = STATE_SORT[a.state] ?? 2
+    const bP = STATE_SORT[b.state] ?? 2
+    if (aP !== bP) return aP - bP
+    return (a.rank || 0) - (b.rank || 0)
+  })
+
   const visibleGoals = goals.filter(g => g.visible)
   const hiddenGoals = goals.filter(g => !g.visible)
   const createdDate = new Date(analysis.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
@@ -323,7 +371,7 @@ export default function ResultClient({ analysis }) {
 
           <div className="text-center mb-6">
             <a
-              href={`${APP_URL}/register?from=analyzer&domain=${analysis.domain}`}
+              href={`${APP_URL}/register?from=analyzer&domain=${analysis.domain}&analysisId=${analysis.id}`}
               className="inline-block bg-teal hover:bg-teal-dark text-white font-bold text-base px-10 py-4 rounded-xl transition-colors shadow-lg"
             >
               Start free trial →
