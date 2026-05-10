@@ -21,9 +21,42 @@ export default function HeroAnalyzer() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ domain: cleaned }),
       })
-      const data = await res.json()
-      if (!res.ok || data.error) { setError(data.error || 'Analysis failed. Please try again.'); setLoading(false); return }
-      router.push(`/analysis/${data.slug}`)
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        setError(data.error || 'Analysis failed. Please try again.')
+        setLoading(false)
+        return
+      }
+
+      // API returns SSE — read stream and wait for done event
+      const reader = res.body.getReader()
+      const decoder = new TextDecoder()
+      let buffer = ''
+
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+        buffer += decoder.decode(value, { stream: true })
+        const lines = buffer.split('\n')
+        buffer = lines.pop()
+
+        for (const line of lines) {
+          if (!line.startsWith('data: ')) continue
+          let event
+          try { event = JSON.parse(line.slice(6)) } catch { continue }
+
+          if (event.type === 'done') {
+            router.push(`/analysis/${event.slug}`)
+            return
+          }
+          if (event.type === 'error') {
+            setError(event.message || 'Analysis failed. Please try again.')
+            setLoading(false)
+            return
+          }
+        }
+      }
     } catch {
       setError('Could not connect. Please try again.')
       setLoading(false)
