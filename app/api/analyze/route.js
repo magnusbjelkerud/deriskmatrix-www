@@ -4,6 +4,8 @@ import { detectIndustry, generateGoals, INDUSTRY_LABELS } from '../../../lib/goa
 import { generateGoalsWithClaude } from '../../../lib/claudeAnalyzer'
 import crypto from 'crypto'
 
+export const maxDuration = 300
+
 const ANALYZER_OPEN = process.env.ANALYZER_OPEN === 'true'
 const RATE_LIMIT = parseInt(process.env.ANALYZER_RATE_LIMIT_PER_IP || '5')
 const CACHE_DAYS = parseInt(process.env.ANALYZER_CACHE_DAYS || '90')
@@ -279,7 +281,10 @@ export async function POST(request) {
           .select('id')
           .single()
 
-        if (error) throw error
+        if (error) {
+          console.error('[analyze:upsert]', error.code, error.message, error.details, { slug, domain })
+          throw error
+        }
 
         // Store resolver evidence
         if (brreg) {
