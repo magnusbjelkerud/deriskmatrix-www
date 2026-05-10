@@ -99,109 +99,111 @@ const CELL_POS = {
   pessimistic: { row: 2, col: 1 },
 }
 
-const TILE_SRCS = [
-  ['/images/risk-state-01.png', '/images/risk-state-02.png'],
-  ['/images/risk-state-03.png', '/images/risk-state-04.png'],
-  ['/images/risk-state-05.png', '/images/risk-state-06.png'],
+const CELL_GRID = [
+  ['defensive', 'potent'],
+  ['harmonious', 'optimistic'],
+  ['dire', 'pessimistic'],
 ]
 
-const ICON_FILTER = 'brightness(0) saturate(100%) invert(93%) sepia(8%) saturate(300%) hue-rotate(340deg) brightness(103%)'
+const CELL_BG = {
+  defensive:   'rgba(29,78,107,0.28)',    potent:      'rgba(20,143,119,0.22)',
+  harmonious:  'rgba(26,158,138,0.22)',   optimistic:  'rgba(42,176,154,0.16)',
+  dire:        'rgba(192,57,43,0.28)',    pessimistic: 'rgba(224,112,112,0.16)',
+}
 
-function CanvasPreview({ goals }) {
-  const cellW = 200
-  const cellH = 140
-  const gap = 5
-  const leftW = 88
-  const dotR = 18
-  const iconSize = 52
-  const targetY  = cellH + gap / 2
-  const threshY  = 2 * cellH + 1.5 * gap
-  const gridH    = 3 * cellH + 2 * gap
+const CELL_BORDER = {
+  defensive:   'rgba(29,78,107,0.45)',    potent:      'rgba(20,143,119,0.38)',
+  harmonious:  'rgba(26,158,138,0.38)',   optimistic:  'rgba(42,176,154,0.3)',
+  dire:        'rgba(192,57,43,0.45)',    pessimistic: 'rgba(224,112,112,0.3)',
+}
 
-  // Build 3×2 buckets of goals per cell
+const ROW_LABELS = ['Beyond\ntarget', 'On\ntrack', 'Below\nthreshold']
+
+function CanvasPreview({ goals, lockedCount }) {
+  // Build 3×2 buckets — only visible goals
   const buckets = Array.from({ length: 3 }, () => [[], []])
   goals.forEach((g, i) => {
-    const pos = CELL_POS[g.state]
-    if (pos) buckets[pos.row][pos.col].push({ ...g, num: i + 1 })
+    const state = g.predicted_state || g.state
+    const pos = CELL_POS[state]
+    if (pos) buckets[pos.row][pos.col].push({ ...g, displayNum: i + 1 })
   })
 
   return (
-    <div style={{ background: '#0f2337', borderRadius: 16, padding: '22px 26px 26px', overflowX: 'auto' }}>
-      <div style={{ color: '#8aafc4', fontSize: 10, fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 10, marginLeft: leftW }}>
+    <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #18394b 100%)', borderRadius: 16, padding: '20px 20px 22px' }}>
+      <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: '#475569', marginBottom: 14 }}>
         Canvas preview — where your goals sit in the matrix
       </div>
 
       {/* Column headers */}
-      <div style={{ display: 'flex', marginLeft: leftW, marginBottom: 8 }}>
-        {['Strong Evidence', 'Weak Evidence'].map((label, i) => (
-          <div key={i} style={{ width: cellW + (i === 0 ? gap : 0), textAlign: 'center', color: '#e8dfd0', fontWeight: 800, fontSize: 10, letterSpacing: '.12em', textTransform: 'uppercase', paddingRight: i === 0 ? gap : 0 }}>
-            {label}
-          </div>
+      <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr 1fr', gap: 6, marginBottom: 5 }}>
+        <div />
+        {['Strong evidence', 'Weak evidence'].map(l => (
+          <div key={l} style={{ textAlign: 'center', fontSize: 10, fontWeight: 700, color: '#94a3b8', letterSpacing: '.06em', textTransform: 'uppercase' }}>{l}</div>
         ))}
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-        {/* Left label column */}
-        <div style={{ width: leftW, position: 'relative', height: gridH, flexShrink: 0 }}>
-          {[
-            { y: targetY, src: '/images/Icon_Target.png', alt: 'Target', label: 'Target\nValue' },
-            { y: threshY, src: '/images/Icon_Threshold.png', alt: 'Threshold', label: 'Threshold\nValue' },
-          ].map(({ y, src, alt, label }) => (
-            <div key={alt}>
-              <div style={{ position: 'absolute', top: y - iconSize / 2, right: -iconSize / 2, width: iconSize, height: iconSize, borderRadius: '50%', background: '#162d42', border: '2px solid #1e3d58', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10, boxShadow: '0 0 0 3px #0f2337' }}>
-                <img src={src} alt={alt} style={{ width: 34, height: 34, objectFit: 'contain', filter: ICON_FILTER }} />
-              </div>
-              <div style={{ position: 'absolute', top: y - 14, right: iconSize / 2 + 6, textAlign: 'right', lineHeight: 1.2 }}>
-                <span style={{ color: '#e8dfd0', fontWeight: 700, fontSize: 10, letterSpacing: '.04em', textTransform: 'uppercase', whiteSpace: 'pre-line' }}>{label}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Tile grid + goal dots */}
-        <div style={{ position: 'relative', flexShrink: 0 }}>
-          {TILE_SRCS.map((row, rowIdx) => (
-            <div key={rowIdx} style={{ display: 'flex', marginBottom: rowIdx < 2 ? gap : 0 }}>
-              {row.map((src, colIdx) => (
-                <img key={colIdx} src={src} alt="" draggable={false}
-                  style={{ width: cellW, height: cellH, objectFit: 'fill', display: 'block', marginRight: colIdx === 0 ? gap : 0, userSelect: 'none' }} />
-              ))}
-            </div>
-          ))}
-
-          {/* Goal dots */}
-          {buckets.map((row, rowIdx) =>
-            row.map((cellGoals, colIdx) =>
-              cellGoals.map((g, dotIdx) => {
-                const spread = (dotIdx - (cellGoals.length - 1) / 2) * (dotR * 2 + 5)
-                const cx = colIdx * (cellW + gap) + cellW / 2 + spread
-                const cy = rowIdx * (cellH + gap) + cellH / 2
-                const color = STATE_COLOR[g.state] || '#94a3b8'
-                return (
-                  <div key={`${rowIdx}-${colIdx}-${dotIdx}`} title={g.name} style={{ position: 'absolute', left: cx - dotR, top: cy - dotR, width: dotR * 2, height: dotR * 2, borderRadius: '50%', background: '#fff', border: `3px solid ${color}`, boxShadow: '0 2px 10px rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: 12, color, zIndex: 20, fontFamily: 'system-ui, sans-serif' }}>
-                    {g.num}
-                  </div>
-                )
-              })
-            )
-          )}
-        </div>
-      </div>
-
-      {/* Legend */}
-      {goals.length > 0 && (
-        <div style={{ marginTop: 14, marginLeft: leftW, display: 'flex', flexWrap: 'wrap', gap: '8px 14px' }}>
-          {goals.map((g, i) => {
-            const color = STATE_COLOR[g.state] || '#94a3b8'
+      {/* 3 rows */}
+      {CELL_GRID.map((rowStates, rowIdx) => (
+        <div key={rowIdx} style={{ display: 'grid', gridTemplateColumns: '60px 1fr 1fr', gap: 6, marginBottom: 6 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: 8 }}>
+            <span style={{ fontSize: 9, fontWeight: 700, color: '#334155', textTransform: 'uppercase', letterSpacing: '.04em', textAlign: 'right', lineHeight: 1.4, whiteSpace: 'pre-line' }}>
+              {ROW_LABELS[rowIdx]}
+            </span>
+          </div>
+          {rowStates.map((stateKey, colIdx) => {
+            const cellGoals = buckets[rowIdx][colIdx]
+            const active = cellGoals.length > 0
             return (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-                <span style={{ width: 22, height: 22, borderRadius: '50%', background: '#fff', border: `2px solid ${color}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: 10, color, flexShrink: 0 }}>{i + 1}</span>
-                <span style={{ color: '#e8dfd0', fontSize: 12 }}>{g.name}</span>
+              <div key={colIdx} style={{
+                borderRadius: 9,
+                background: active ? CELL_BG[stateKey] : 'rgba(255,255,255,0.03)',
+                border: `1px solid ${active ? CELL_BORDER[stateKey] : 'rgba(255,255,255,0.07)'}`,
+                minHeight: 58,
+                padding: '8px 10px',
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: 6,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+                {active ? cellGoals.map(g => (
+                  <div key={g.displayNum} title={g.name} style={{
+                    width: 30, height: 30, borderRadius: '50%',
+                    background: '#fff',
+                    border: `2.5px solid ${STATE_COLOR[stateKey]}`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontWeight: 900, fontSize: 12, color: STATE_COLOR[stateKey], flexShrink: 0,
+                    boxShadow: '0 1px 4px rgba(0,0,0,0.3)',
+                  }}>
+                    {g.displayNum}
+                  </div>
+                )) : (
+                  <span style={{ fontSize: 9, fontWeight: 600, color: 'rgba(255,255,255,0.08)', letterSpacing: '.04em', textTransform: 'uppercase' }}>
+                    {stateKey}
+                  </span>
+                )}
               </div>
             )
           })}
         </div>
-      )}
+      ))}
+
+      {/* Legend */}
+      <div style={{ marginTop: 12, display: 'flex', flexWrap: 'wrap', gap: '6px 18px', alignItems: 'center' }}>
+        {goals.map((g, i) => {
+          const state = g.predicted_state || g.state
+          const color = STATE_COLOR[state] || '#94a3b8'
+          return (
+            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span style={{ width: 20, height: 20, borderRadius: '50%', background: '#fff', border: `2px solid ${color}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: 9, color, flexShrink: 0 }}>{i + 1}</span>
+              <span style={{ color: '#94a3b8', fontSize: 11 }}>{g.name}</span>
+            </div>
+          )
+        })}
+        {lockedCount > 0 && (
+          <span style={{ fontSize: 11, color: '#334155' }}>🔒 +{lockedCount} goals visible in trial</span>
+        )}
+      </div>
     </div>
   )
 }
@@ -284,7 +286,7 @@ export default function ResultClient({ analysis }) {
         </div>
 
         {/* Canvas preview */}
-        <CanvasPreview goals={goals} />
+        <CanvasPreview goals={visibleGoals} lockedCount={hiddenGoals.length} />
 
         {/* Blurred section */}
         <div>
