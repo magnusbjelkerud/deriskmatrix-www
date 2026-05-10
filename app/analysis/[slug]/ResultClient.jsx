@@ -38,23 +38,23 @@ function GoalCard({ goal, blurred = false }) {
       </div>
 
       <h3 className="text-base font-bold text-navy mb-1">{goal.name}</h3>
-      <p className="text-sm text-slate-500 mb-4 leading-relaxed">{goal.context}</p>
+      <p className="text-sm text-slate-500 mb-4 leading-relaxed">{goal.context_line || goal.context}</p>
 
       <div className="flex gap-6 text-sm mb-4">
         <div>
           <span className="text-xs font-semibold text-slate-400 uppercase tracking-wide block mb-0.5">Target</span>
-          <span className="font-bold text-navy">{goal.target} {goal.unit}</span>
+          <span className="font-bold text-navy">{goal.target_display || goal.target} {!goal.target_display && goal.unit}</span>
         </div>
         <div>
           <span className="text-xs font-semibold text-slate-400 uppercase tracking-wide block mb-0.5">Threshold</span>
-          <span className="font-bold text-slate-600">{goal.threshold} {goal.unit}</span>
+          <span className="font-bold text-slate-600">{goal.threshold_display || goal.threshold} {!goal.threshold_display && goal.unit}</span>
         </div>
       </div>
 
       <div className="border-t border-slate-100 pt-4">
         <span className="text-xs font-bold text-slate-400 uppercase tracking-wide">Suggested action: </span>
         <span className="text-sm font-semibold" style={{ color: goal.stateColor }}>{goal.stateAction}</span>
-        <span className="text-sm text-slate-600"> — {goal.action_detail}</span>
+        <span className="text-sm text-slate-600"> — {goal.suggested_action || goal.action_detail}</span>
       </div>
 
       {goal.evidence_bullets?.length > 0 && (
@@ -225,8 +225,8 @@ export default function ResultClient({ analysis }) {
     return (a.rank || 0) - (b.rank || 0)
   })
 
-  const visibleGoals = goals.filter(g => g.visible)
-  const hiddenGoals = goals.filter(g => !g.visible)
+  const visibleGoals = goals.filter(g => g.visible_in_teaser ?? g.visible)
+  const hiddenGoals = goals.filter(g => !(g.visible_in_teaser ?? g.visible))
   const createdDate = new Date(analysis.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
   const pageUrl = `https://www.deriskmatrix.com/analysis/${analysis.slug}`
 
