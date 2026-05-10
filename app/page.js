@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
+import HeroAnalyzer from '../components/HeroAnalyzer'
 
 const APP_URL = 'https://app.deriskmatrix.com'
 
@@ -68,60 +69,21 @@ export default function Home() {
       {/* ── [1] HERO ──────────────────────────────────────────────────── */}
       <section className="hero-gradient min-h-screen flex items-center pt-16 overflow-hidden">
         <div className="max-w-6xl mx-auto px-6 py-20 w-full">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-
-            {/* Left — copy */}
-            <div>
-              <div className="inline-flex items-center gap-2 bg-white/10 text-white/80 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 border border-white/15">
-                <span className="w-1.5 h-1.5 rounded-full bg-teal inline-block animate-pulse" />
-                Aligned with ISO 31000
-              </div>
-              <h1 className="text-5xl md:text-6xl font-black text-white leading-[1.08] mb-6 tracking-tight">
-                Your choice of goals<br />
-                is your{' '}
-                <span className="gradient-text">choice of risk.</span>
-              </h1>
-              <p className="text-xl text-slate-300 leading-relaxed mb-4">
-                Every strategic goal gets a live risk state — so you see which goals need attention
-                <em> now</em>, not when the quarterly review reveals a crisis.
-              </p>
-              <p className="text-sm text-slate-400 mb-10">
-                Progress without confidence is noise. De-Risk Matrix shows you both — where each goal
-                stands, and how much you should trust that reading.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <a
-                  href={`${APP_URL}/register`}
-                  className="px-8 py-4 bg-teal hover:bg-teal-dark text-white font-bold rounded-xl text-center transition-all shadow-xl shadow-teal/30 text-lg"
-                >
-                  Start your trial →
-                </a>
-                <Link
-                  href="/score"
-                  className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl text-center transition-colors border border-white/20"
-                >
-                  What&apos;s your De-Risk Score?
-                </Link>
-              </div>
-
-              <div className="flex items-center gap-6 text-xs text-slate-500">
-                <span className="flex items-center gap-1.5"><span className="text-teal">✓</span> First risk state in &lt;10 min</span>
-                <span className="flex items-center gap-1.5"><span className="text-teal">✓</span> 14-day trial</span>
-                <span className="flex items-center gap-1.5"><span className="text-teal">✓</span> No lock-in</span>
-              </div>
+          <div className="relative z-10 text-center max-w-3xl mx-auto px-6">
+            <div className="inline-block text-xs font-semibold tracking-widest uppercase mb-6 px-4 py-1.5 rounded-full border" style={{ color: '#1a9e8a', borderColor: '#1a9e8a50', background: 'rgba(26,158,138,0.1)' }}>
+              ISO 31000 aligned &middot; AI-powered &middot; Live risk states
             </div>
-
-            {/* Right — De-Risk Matrix image */}
-            <div className="hidden md:flex items-center justify-center">
-              <Image
-                src="/images/derisk-matrix.png"
-                alt="The De-Risk Matrix — 6 risk states"
-                width={580}
-                height={560}
-                className="w-full h-auto drop-shadow-2xl"
-                priority
-              />
+            <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight tracking-tight">
+              Stop finding out<br />too late.
+            </h1>
+            <p className="text-xl text-white/70 mb-10 leading-relaxed max-w-xl mx-auto">
+              Some of your strategic goals are heading toward breach right now. The quarterly review will show you which ones &mdash; by then it&apos;s too late. De-Risk Matrix shows you today.
+            </p>
+            <HeroAnalyzer />
+            <div className="mt-8">
+              <a href={`${APP_URL}/register`} className="text-sm text-white/40 hover:text-white/70 transition-colors underline underline-offset-2">
+                Or start your 14-day trial directly &rarr;
+              </a>
             </div>
           </div>
         </div>
@@ -149,47 +111,41 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── [2b] WHO THIS IS FOR ──────────────────────────────────────── */}
-      <section className="py-20 bg-white">
+      {/* ── [2b] JTBD SITUATION CARDS ─────────────────────────────────── */}
+      <section className="py-20 bg-slate-50">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-12">
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Who it&apos;s for</p>
-            <h2 className="text-3xl md:text-4xl font-black text-navy mb-4">
-              Wherever goals exist, risk exists.
-            </h2>
-            <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-              De-Risk Matrix works for any organization of any size, sector, or structure —
-              because every organization sets goals, and every goal carries uncertainty.
-            </p>
+            <h2 className="text-3xl font-extrabold text-navy mb-4">Three moments when teams reach for De-Risk Matrix</h2>
+            <p className="text-slate-500 text-lg">You&apos;ll recognize at least one of these.</p>
           </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+          <div className="grid md:grid-cols-3 gap-6">
             {[
-              { icon: '🏢', title: 'Companies & corporations', desc: 'Strategic goals, revenue targets, market position, operational KPIs.' },
-              { icon: '🏗️', title: 'Project organizations', desc: 'Cost, time, quality, scope — four goals every project lives or dies by.' },
-              { icon: '🏛️', title: 'Public sector & municipalities', desc: 'Service delivery targets, budget adherence, citizen outcomes.' },
-              { icon: '🌍', title: 'NGOs & nonprofits', desc: 'Impact goals, funding targets, program outcomes — risk is just as real.' },
-              { icon: '🏥', title: 'Healthcare & social services', desc: 'Patient outcomes, capacity goals, quality metrics, compliance targets.' },
-              { icon: '⚖️', title: 'Regulated industries', desc: 'Finance, insurance, energy — where structured risk documentation is mandatory.' },
-              { icon: '🎓', title: 'Education & research', desc: 'Enrollment targets, grant goals, research milestones, accreditation.' },
-              { icon: '🤝', title: 'Consultancies & agencies', desc: 'Manage and report on goal risk across multiple client engagements.' },
-            ].map(item => (
-              <div key={item.title} className="bg-slate-50 rounded-2xl p-5 border border-slate-100 hover:border-teal/30 hover:bg-teal/5 transition-colors">
-                <div className="text-2xl mb-3">{item.icon}</div>
-                <h3 className="font-bold text-navy text-sm mb-1.5 leading-snug">{item.title}</h3>
-                <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
+              {
+                icon: '📉',
+                title: 'After the quarterly review you wish you\'d seen coming',
+                body: 'Numbers came in worse than expected. Nobody flagged it. The board has questions. You don\'t have answers. This can\'t happen again.',
+              },
+              {
+                icon: '📋',
+                title: 'Before the board meeting where you must defend the plan',
+                body: 'Targets were set six months ago. The world has shifted. Can you actually stand behind these numbers — and prove it in real time?',
+              },
+              {
+                icon: '📈',
+                title: 'When growth outpaces your overview',
+                body: 'Five goals you tracked in your head. Now twenty-five. Excel can\'t keep up. Neither can you. You need a system before something slips.',
+              },
+            ].map((card, i) => (
+              <div key={i} className="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm hover:shadow-md transition-shadow">
+                <div className="text-4xl mb-4">{card.icon}</div>
+                <h3 className="text-base font-bold text-navy mb-3 leading-snug">{card.title}</h3>
+                <p className="text-sm text-slate-500 leading-relaxed">{card.body}</p>
               </div>
             ))}
           </div>
-
-          <div className="bg-navy rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <p className="text-white font-bold text-lg mb-1">Know which goals are at risk — before it&apos;s too late.</p>
-              <p className="text-slate-400 text-sm">Live risk states on every goal. Used to require specialist consultants and quarterly workshops. Now any team sees their full risk picture — continuously, in any language, with AI assistance.</p>
-            </div>
-            <a href={`${APP_URL}/register`}
-              className="flex-shrink-0 px-7 py-3.5 bg-teal hover:bg-teal-dark text-white font-bold rounded-xl transition-colors whitespace-nowrap shadow-lg">
-              Start free trial →
+          <div className="text-center mt-10">
+            <a href={`${APP_URL}/register`} className="inline-block bg-teal hover:bg-teal-dark text-white font-bold px-8 py-4 rounded-xl transition-colors shadow-sm">
+              See your first risk picture in 10 minutes &rarr;
             </a>
           </div>
         </div>
@@ -315,105 +271,32 @@ export default function Home() {
       </section>
 
       {/* ── [4] THE CONTRAST ──────────────────────────────────────────── */}
-      <section className="py-24 bg-white" id="why">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="text-center mb-14">
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Why De-Risk Matrix</p>
-            <h2 className="text-4xl font-black text-navy mb-4">
-              Your goals already have a risk state.<br className="hidden md:block" />
-              Now you can see it.
-            </h2>
-            <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-              Most tools track whether you&apos;re on track. De-Risk Matrix adds the second question:
-              how confident should you be in that reading?
-            </p>
+      <section className="py-20 bg-white" id="why">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-extrabold text-navy mb-4">What you do today vs. De-Risk Matrix</h2>
+            <p className="text-slate-500">You&apos;re not competing against a methodology. You&apos;re competing against the consultant, the spreadsheet, and the gut feeling.</p>
           </div>
-
-          {/* Comparison table — desktop */}
-          <div className="hidden md:block rounded-2xl border border-slate-200 overflow-hidden mb-12 shadow-sm">
-            <div className="grid grid-cols-3 bg-slate-50 border-b border-slate-200">
-              <div className="px-5 py-4 text-xs font-bold text-slate-300 uppercase tracking-wider" />
-              <div className="px-5 py-4 text-xs font-bold text-red-400 uppercase tracking-wider border-l border-slate-200">5&times;5 Risk Matrix</div>
-              <div className="px-5 py-4 text-xs font-bold text-teal uppercase tracking-wider border-l border-slate-200">De-Risk Matrix</div>
+          <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
+            <div className="grid grid-cols-2 bg-slate-50 border-b border-slate-200">
+              <div className="px-6 py-4 text-sm font-bold text-slate-500 uppercase tracking-wide">What you do today</div>
+              <div className="px-6 py-4 text-sm font-bold uppercase tracking-wide" style={{ color: '#1a9e8a' }}>De-Risk Matrix</div>
             </div>
             {[
-              { dim: 'Direction',  bad: 'Downside only — threats and harms',         good: 'Upside + downside — all forms of uncertainty' },
-              { dim: 'Goal link',  bad: 'Disconnected from strategic goals',          good: 'Risk IS goal achievement — inseparable' },
-              { dim: 'Frequency',  bad: 'Annual workshop → static risk register',    good: 'Continuous — every data point updates states' },
-              { dim: 'Output',     bad: 'A list ranked by probability × impact',      good: 'A live state with prescribed leadership action' },
-              { dim: 'Targets',    bad: 'Single-point targets — binary pass/fail',    good: 'Spans: target + threshold — explicit risk appetite' },
-              { dim: 'Culture',    bad: 'Not addressed',                             good: 'Each state prescribes specific leader behaviors' },
-              { dim: 'Evidence',   bad: 'Subjective scoring in a workshop',          good: '14 evidence factors — AI-assisted, auditable' },
-            ].map((row, i) => (
-              <div key={row.dim} className={`grid grid-cols-3 ${i < 6 ? 'border-b border-slate-100' : ''}`}>
-                <div className="px-5 py-4 text-xs font-bold text-slate-400 uppercase tracking-wide flex items-center">{row.dim}</div>
-                <div className="px-5 py-4 text-sm text-slate-500 border-l border-slate-100 flex items-start gap-2">
-                  <span className="text-red-300 flex-shrink-0 mt-0.5">✕</span><span>{row.bad}</span>
+              ['Quarterly risk workshop with consultants — €2–5K, already history when you see it', 'Continuous — every data point updates the picture'],
+              ['Excel risk register, last updated 8 months ago', 'Live, never out of date'],
+              ['PowerPoint to the board — a snapshot of the past', 'Interactive canvas — share the actual state'],
+              ['Gut feel and experience — invisible to the rest of the team', 'Six explicit risk states everyone reads the same way'],
+            ].map(([before, after], i) => (
+              <div key={i} className={`grid grid-cols-2 ${i < 3 ? 'border-b border-slate-100' : ''}`}>
+                <div className="px-6 py-5 text-sm text-slate-600 border-r border-slate-100 flex items-start gap-2">
+                  <span className="text-red-400 mt-0.5 flex-shrink-0">&#10005;</span>{before}
                 </div>
-                <div className="px-5 py-4 text-sm text-navy font-medium border-l border-slate-100 flex items-start gap-2">
-                  <span className="text-teal flex-shrink-0 mt-0.5">✓</span><span>{row.good}</span>
+                <div className="px-6 py-5 text-sm text-slate-700 flex items-start gap-2">
+                  <span className="mt-0.5 flex-shrink-0" style={{ color: '#1a9e8a' }}>&#10003;</span>{after}
                 </div>
               </div>
             ))}
-          </div>
-
-          {/* Comparison table — mobile cards */}
-          <div className="md:hidden space-y-3 mb-12">
-            {[
-              { dim: 'Direction',  bad: 'Downside only — threats and harms',         good: 'Upside + downside — all forms of uncertainty' },
-              { dim: 'Goal link',  bad: 'Disconnected from strategic goals',          good: 'Risk IS goal achievement — inseparable' },
-              { dim: 'Frequency',  bad: 'Annual workshop → static risk register',    good: 'Continuous — every data point updates states' },
-              { dim: 'Output',     bad: 'A list ranked by probability × impact',      good: 'A live state with prescribed leadership action' },
-              { dim: 'Targets',    bad: 'Single-point targets — binary pass/fail',    good: 'Spans: target + threshold — explicit risk appetite' },
-              { dim: 'Culture',    bad: 'Not addressed',                             good: 'Each state prescribes specific leader behaviors' },
-              { dim: 'Evidence',   bad: 'Subjective scoring in a workshop',          good: '14 evidence factors — AI-assisted, auditable' },
-            ].map(row => (
-              <div key={row.dim} className="rounded-xl border border-slate-200 overflow-hidden">
-                <div className="bg-slate-50 px-4 py-2 text-xs font-bold text-slate-400 uppercase tracking-wider">{row.dim}</div>
-                <div className="grid grid-cols-2 divide-x divide-slate-100">
-                  <div className="p-3 flex items-start gap-1.5 bg-red-50/50">
-                    <span className="text-red-300 flex-shrink-0 text-xs mt-0.5">✕</span>
-                    <span className="text-xs text-slate-500 leading-relaxed">{row.bad}</span>
-                  </div>
-                  <div className="p-3 flex items-start gap-1.5">
-                    <span className="text-teal flex-shrink-0 text-xs mt-0.5">✓</span>
-                    <span className="text-xs text-navy font-medium leading-relaxed">{row.good}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Concrete 42M example */}
-          <div className="grid md:grid-cols-2 gap-5">
-            <div className="bg-red-50 border border-red-200 rounded-2xl p-6">
-              <div className="text-xs font-bold text-red-400 uppercase tracking-wider mb-4">Without De-Risk Matrix</div>
-              <div className="flex items-center gap-3 mb-2">
-                <div className="h-2 flex-1 bg-slate-200 rounded-full overflow-hidden">
-                  <div className="h-full bg-red-400 rounded-full" style={{ width: '84%' }} />
-                </div>
-                <span className="text-sm font-bold text-slate-600">42M / 50M</span>
-              </div>
-              <p className="text-red-700 text-sm font-semibold mb-1">❌ Miss? Or acceptable? Nobody knows.</p>
-              <p className="text-slate-400 text-xs">No threshold defined. No urgency signal. React after the fact.</p>
-            </div>
-            <div className="bg-teal-light border border-teal/30 rounded-2xl p-6">
-              <div className="text-xs font-bold text-teal uppercase tracking-wider mb-4">With De-Risk Matrix</div>
-              <div className="flex items-center gap-3 mb-1">
-                <div className="h-2 flex-1 bg-white/60 rounded-full overflow-hidden relative">
-                  <div className="h-full bg-teal rounded-full" style={{ width: '84%' }} />
-                  <div className="absolute top-0 h-full border-l-2 border-navy/30 border-dashed" style={{ left: '80%' }} />
-                </div>
-                <span className="text-sm font-bold text-navy">42M</span>
-              </div>
-              <div className="flex justify-between text-xs text-slate-500 mt-0.5 mb-3">
-                <span>0</span>
-                <span className="text-slate-400">Threshold: 40M ↑</span>
-                <span>Target: 50M</span>
-              </div>
-              <p className="text-teal font-semibold text-sm mb-1">✓ State: <strong>Harmonious</strong> — on track, act to ensure.</p>
-              <p className="text-slate-500 text-xs">42M is above the 40M threshold. Risk is visible. Response is clear.</p>
-            </div>
           </div>
         </div>
       </section>
@@ -902,7 +785,7 @@ export default function Home() {
             href={`${APP_URL}/register`}
             className="flex-shrink-0 px-8 py-4 bg-white text-teal font-black rounded-xl hover:bg-slate-50 transition-colors shadow-lg text-lg whitespace-nowrap"
           >
-            Start your trial →
+            Find out which goals are at risk &rarr;
           </a>
         </div>
       </section>
@@ -1038,7 +921,7 @@ export default function Home() {
               href={`${APP_URL}/register`}
               className="px-10 py-4 bg-teal hover:bg-teal-dark text-white font-black rounded-xl text-lg shadow-2xl shadow-teal/30 transition-colors"
             >
-              See your risk states in under 10 minutes →
+              Stop finding out too late &rarr;
             </a>
             <Link
               href="/score"

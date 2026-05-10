@@ -56,49 +56,100 @@ function GoalCard({ goal, blurred = false }) {
 }
 
 function MiniCanvas({ goals }) {
-  const STATE_POS = {
-    defensive:   { x: 25, y: 12 },
-    potent:      { x: 75, y: 12 },
-    harmonious:  { x: 25, y: 50 },
-    optimistic:  { x: 75, y: 50 },
-    dire:        { x: 25, y: 88 },
-    pessimistic: { x: 75, y: 88 },
+  const CELL_STATE = {
+    defensive:   { row: 0, col: 0 },
+    potent:      { row: 0, col: 1 },
+    harmonious:  { row: 1, col: 0 },
+    optimistic:  { row: 1, col: 1 },
+    dire:        { row: 2, col: 0 },
+    pessimistic: { row: 2, col: 1 },
   }
+
+  const STATE_COLORS = {
+    defensive:   { bg: '#d6eaf8', border: '#1d4e6b', text: '#1d4e6b', label: 'Defensive' },
+    potent:      { bg: '#d1f2eb', border: '#148f77', text: '#148f77', label: 'Potent' },
+    harmonious:  { bg: '#d5f5e3', border: '#1a9e8a', text: '#1a9e8a', label: 'Harmonious' },
+    optimistic:  { bg: '#d1f2eb', border: '#2ab09a', text: '#2ab09a', label: 'Optimistic' },
+    dire:        { bg: '#fadbd8', border: '#c0392b', text: '#c0392b', label: 'Dire' },
+    pessimistic: { bg: '#fde8e8', border: '#e07070', text: '#e07070', label: 'Pessimistic' },
+  }
+
   const visibleGoals = goals.slice(0, 3)
+
+  // Build cell contents: which goals sit in each cell?
+  const cells = Array(3).fill(null).map(() => Array(2).fill(null).map(() => []))
+  visibleGoals.forEach((g, i) => {
+    const pos = CELL_STATE[g.state]
+    if (pos) cells[pos.row][pos.col].push({ ...g, idx: i + 1 })
+  })
+
+  const rowLabels = ['BEYOND', 'ON TRACK', 'BELOW']
+  const colLabels = ['STRONG', 'WEAK']
+
   return (
-    <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6">
-      <div className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-4">Canvas preview &#8212; where your goals sit</div>
-      <div className="relative w-full" style={{ height: 160 }}>
-        {/* Grid lines */}
-        <div className="absolute inset-0 grid grid-cols-2 grid-rows-3 gap-1">
-          {[...Array(6)].map((_, i) => (
-            <div key={i} className="rounded-lg border border-slate-200 bg-white/60" />
-          ))}
-        </div>
-        {/* Zone labels */}
-        <div className="absolute left-0 top-0 h-full flex flex-col justify-between py-2 -ml-1 text-xs text-slate-400 font-medium">
-          <span>Beyond</span>
-          <span>On track</span>
-          <span>Below</span>
-        </div>
-        {/* Column labels */}
-        <div className="absolute bottom-0 left-0 right-0 flex justify-around text-xs text-slate-400 font-medium -mb-5">
-          <span>Strong</span>
-          <span>Weak</span>
-        </div>
-        {/* Goal dots */}
-        {visibleGoals.map((g, i) => {
-          const pos = STATE_POS[g.state] || { x: 50, y: 50 }
-          return (
-            <div
-              key={i}
-              className="absolute w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-md border-2 border-white"
-              style={{ left: `${pos.x}%`, top: `${pos.y}%`, transform: 'translate(-50%, -50%)', background: g.stateColor }}
-            >
-              {i + 1}
+    <div className="bg-white rounded-2xl border border-slate-200 p-6">
+      <div className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-5">
+        Canvas preview &#8212; where your goals sit in the matrix
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: '64px 1fr 1fr', gridTemplateRows: 'auto 1fr 1fr 1fr', gap: 0 }}>
+        {/* Top-left empty corner */}
+        <div />
+        {/* Column headers */}
+        {colLabels.map(label => (
+          <div key={label} className="text-center text-xs font-bold text-slate-400 uppercase tracking-widest pb-2">
+            {label}
+          </div>
+        ))}
+        {/* Rows */}
+        {rowLabels.map((rowLabel, rowIdx) => (
+          <>
+            {/* Row label */}
+            <div key={`label-${rowIdx}`} className="flex items-center justify-end pr-3">
+              <span className="text-xs font-bold text-slate-400 uppercase tracking-wide" style={{ writingMode: 'horizontal-tb' }}>
+                {rowLabel}
+              </span>
             </div>
-          )
-        })}
+            {/* Two cells */}
+            {[0, 1].map(colIdx => {
+              const stateName = Object.entries(CELL_STATE).find(([, pos]) => pos.row === rowIdx && pos.col === colIdx)?.[0]
+              const stateInfo = STATE_COLORS[stateName] || { bg: '#f8fafc', border: '#e2e8f0', text: '#94a3b8', label: stateName }
+              const goalsInCell = cells[rowIdx][colIdx]
+              return (
+                <div
+                  key={`cell-${rowIdx}-${colIdx}`}
+                  className="rounded-xl m-1 p-3 flex flex-col items-center justify-center min-h-[80px]"
+                  style={{ background: stateInfo.bg, border: `2px solid ${stateInfo.border}20` }}
+                >
+                  <div className="text-xs font-bold mb-2" style={{ color: stateInfo.text }}>{stateInfo.label}</div>
+                  <div className="flex flex-wrap gap-1 justify-center">
+                    {goalsInCell.map(g => (
+                      <div
+                        key={g.idx}
+                        className="w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-bold shadow"
+                        style={{ background: g.stateColor }}
+                        title={g.name}
+                      >
+                        {g.idx}
+                      </div>
+                    ))}
+                  </div>
+                  {goalsInCell.length === 0 && (
+                    <div className="w-5 h-5 rounded-full border-2 border-dashed opacity-20" style={{ borderColor: stateInfo.border }} />
+                  )}
+                </div>
+              )
+            })}
+          </>
+        ))}
+      </div>
+      {/* Legend */}
+      <div className="mt-4 flex flex-wrap gap-3 justify-center">
+        {visibleGoals.map((g, i) => (
+          <div key={i} className="flex items-center gap-1.5 text-xs text-slate-500">
+            <div className="w-4 h-4 rounded-full flex items-center justify-center text-white font-bold text-[10px]" style={{ background: g.stateColor }}>{i + 1}</div>
+            <span className="font-medium">{g.name}</span>
+          </div>
+        ))}
       </div>
     </div>
   )
