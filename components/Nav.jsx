@@ -53,6 +53,9 @@ export default function Nav() {
 
         {/* CTAs */}
         <div className="hidden md:flex items-center gap-3">
+          <Link href="/analyze" className={`text-sm font-semibold px-4 py-2 rounded-lg border transition-colors ${scrolled ? 'border-teal text-teal hover:bg-teal hover:text-white' : 'border-white/40 text-white hover:border-white'}`}>
+            Analyse your risk &rarr;
+          </Link>
           <a
             href={`${APP_URL}/login`}
             className={`text-sm font-medium px-4 py-2 rounded-lg transition-colors ${
@@ -90,6 +93,9 @@ export default function Nav() {
           <Link href="/about" className="text-sm font-medium text-slate-700" onClick={() => setOpen(false)}>About</Link>
           <Link href="/security" className="text-sm font-medium text-slate-700" onClick={() => setOpen(false)}>Security</Link>
           <hr className="border-slate-100" />
+          <Link href="/analyze" className="text-sm font-semibold text-teal border border-teal px-4 py-2.5 rounded-lg text-center" onClick={() => setOpen(false)}>
+            Analyse your risk &rarr;
+          </Link>
           <a href={`${APP_URL}/login`} className="text-sm font-medium text-slate-700">Log in</a>
           <a href={`${APP_URL}/register`} className="text-sm font-semibold text-white bg-teal px-4 py-2.5 rounded-lg text-center">
             Start your trial
