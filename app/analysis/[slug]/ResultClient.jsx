@@ -43,8 +43,16 @@ function GoalCard({ goal, blurred = false }) {
   )
 }
 
-// Mapping: state key → grid position (row 0=Beyond, 1=OnTrack, 2=Below; col 0=Strong, 1=Weak)
-const CELL_POSITION = {
+const STATE_COLOR = {
+  defensive:   '#1d4e6b',
+  potent:      '#148f77',
+  harmonious:  '#1a9e8a',
+  optimistic:  '#2ab09a',
+  dire:        '#c0392b',
+  pessimistic: '#e07070',
+}
+
+const CELL_POS = {
   defensive:   { row: 0, col: 0 },
   potent:      { row: 0, col: 1 },
   harmonious:  { row: 1, col: 0 },
@@ -53,106 +61,109 @@ const CELL_POSITION = {
   pessimistic: { row: 2, col: 1 },
 }
 
-const CELL_META = [
-  [
-    { key: 'defensive',   label: 'Defensive',  bg: '#dbeafe', border: '#1d4e6b', text: '#1d4e6b' },
-    { key: 'potent',      label: 'Potent',     bg: '#d1fae5', border: '#148f77', text: '#148f77' },
-  ],
-  [
-    { key: 'harmonious',  label: 'Harmonious', bg: '#d1fae5', border: '#1a9e8a', text: '#1a9e8a' },
-    { key: 'optimistic',  label: 'Optimistic', bg: '#ccfbf1', border: '#2ab09a', text: '#2ab09a' },
-  ],
-  [
-    { key: 'dire',        label: 'Dire',       bg: '#fee2e2', border: '#c0392b', text: '#c0392b' },
-    { key: 'pessimistic', label: 'Pessimistic',bg: '#fde8e8', border: '#e07070', text: '#e07070' },
-  ],
+const TILE_SRCS = [
+  ['/images/risk-state-01.png', '/images/risk-state-02.png'],
+  ['/images/risk-state-03.png', '/images/risk-state-04.png'],
+  ['/images/risk-state-05.png', '/images/risk-state-06.png'],
 ]
 
-function MiniCanvas({ goals }) {
-  const visibleGoals = goals.slice(0, 3)
+const ICON_FILTER = 'brightness(0) saturate(100%) invert(93%) sepia(8%) saturate(300%) hue-rotate(340deg) brightness(103%)'
 
-  // Build 3×2 cell buckets
-  const buckets = [[[], []], [[], []], [[], []]]
-  visibleGoals.forEach((g, i) => {
-    const pos = CELL_POSITION[g.state]
-    if (pos) buckets[pos.row][pos.col].push({ ...g, idx: i + 1 })
-  })
+function CanvasPreview({ goals }) {
+  const cellW = 200
+  const cellH = 140
+  const gap = 5
+  const leftW = 88
+  const dotR = 18
+  const iconSize = 52
+  const targetY  = cellH + gap / 2
+  const threshY  = 2 * cellH + 1.5 * gap
+  const gridH    = 3 * cellH + 2 * gap
 
-  const ROW_LABELS = ['BEYOND', 'ON TRACK', 'BELOW']
-  const COL_LABELS = ['STRONG', 'WEAK']
-
-  // Render as flat list of grid children — avoids Fragment-in-grid bug
-  const gridItems = []
-
-  // Header row: empty corner + 2 column labels
-  gridItems.push(<div key="corner" />)
-  COL_LABELS.forEach(label =>
-    gridItems.push(
-      <div key={`col-${label}`} className="text-center text-xs font-bold text-slate-500 uppercase tracking-widest pb-3 pt-1">
-        {label}
-      </div>
-    )
-  )
-
-  // Data rows: row label + 2 cells
-  ROW_LABELS.forEach((rowLabel, rowIdx) => {
-    // Row label cell
-    gridItems.push(
-      <div key={`row-${rowIdx}`} className="flex items-center justify-end pr-3">
-        <span className="text-xs font-bold text-slate-400 uppercase tracking-wide leading-tight text-right" style={{ maxWidth: 52 }}>
-          {rowLabel}
-        </span>
-      </div>
-    )
-    // Two data cells
-    ;[0, 1].forEach(colIdx => {
-      const meta = CELL_META[rowIdx][colIdx]
-      const cellGoals = buckets[rowIdx][colIdx]
-      gridItems.push(
-        <div
-          key={`cell-${rowIdx}-${colIdx}`}
-          className="rounded-xl m-1 p-3 flex flex-col items-center justify-center min-h-[72px]"
-          style={{ background: meta.bg, border: `1.5px solid ${meta.border}30` }}
-        >
-          <div className="text-xs font-bold mb-2" style={{ color: meta.text }}>{meta.label}</div>
-          <div className="flex flex-wrap gap-1 justify-center">
-            {cellGoals.map(g => (
-              <div
-                key={g.idx}
-                className="w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-sm border-2 border-white"
-                style={{ background: g.stateColor }}
-                title={g.name}
-              >
-                {g.idx}
-              </div>
-            ))}
-          </div>
-          {cellGoals.length === 0 && (
-            <div className="w-4 h-4 rounded-full border border-dashed opacity-25" style={{ borderColor: meta.border }} />
-          )}
-        </div>
-      )
-    })
+  // Build 3×2 buckets of goals per cell
+  const buckets = Array.from({ length: 3 }, () => [[], []])
+  goals.forEach((g, i) => {
+    const pos = CELL_POS[g.state]
+    if (pos) buckets[pos.row][pos.col].push({ ...g, num: i + 1 })
   })
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 p-6">
-      <div className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-4">
+    <div style={{ background: '#0f2337', borderRadius: 16, padding: '22px 26px 26px', overflowX: 'auto' }}>
+      <div style={{ color: '#8aafc4', fontSize: 10, fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 10, marginLeft: leftW }}>
         Canvas preview — where your goals sit in the matrix
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr 1fr', gridAutoRows: 'auto', gap: 0 }}>
-        {gridItems}
-      </div>
-      <div className="mt-4 flex flex-wrap gap-3 justify-center border-t border-slate-100 pt-4">
-        {visibleGoals.map((g, i) => (
-          <div key={i} className="flex items-center gap-1.5 text-xs text-slate-500">
-            <div className="w-5 h-5 rounded-full flex items-center justify-center text-white font-bold text-[10px] shadow-sm" style={{ background: g.stateColor }}>
-              {i + 1}
-            </div>
-            <span className="font-medium">{g.name}</span>
+
+      {/* Column headers */}
+      <div style={{ display: 'flex', marginLeft: leftW, marginBottom: 8 }}>
+        {['Strong Evidence', 'Weak Evidence'].map((label, i) => (
+          <div key={i} style={{ width: cellW + (i === 0 ? gap : 0), textAlign: 'center', color: '#e8dfd0', fontWeight: 800, fontSize: 10, letterSpacing: '.12em', textTransform: 'uppercase', paddingRight: i === 0 ? gap : 0 }}>
+            {label}
           </div>
         ))}
       </div>
+
+      <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+        {/* Left label column */}
+        <div style={{ width: leftW, position: 'relative', height: gridH, flexShrink: 0 }}>
+          {[
+            { y: targetY, src: '/images/Icon_Target.png', alt: 'Target', label: 'Target\nValue' },
+            { y: threshY, src: '/images/Icon_Threshold.png', alt: 'Threshold', label: 'Threshold\nValue' },
+          ].map(({ y, src, alt, label }) => (
+            <div key={alt}>
+              <div style={{ position: 'absolute', top: y - iconSize / 2, right: -iconSize / 2, width: iconSize, height: iconSize, borderRadius: '50%', background: '#162d42', border: '2px solid #1e3d58', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10, boxShadow: '0 0 0 3px #0f2337' }}>
+                <img src={src} alt={alt} style={{ width: 34, height: 34, objectFit: 'contain', filter: ICON_FILTER }} />
+              </div>
+              <div style={{ position: 'absolute', top: y - 14, right: iconSize / 2 + 6, textAlign: 'right', lineHeight: 1.2 }}>
+                <span style={{ color: '#e8dfd0', fontWeight: 700, fontSize: 10, letterSpacing: '.04em', textTransform: 'uppercase', whiteSpace: 'pre-line' }}>{label}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Tile grid + goal dots */}
+        <div style={{ position: 'relative', flexShrink: 0 }}>
+          {TILE_SRCS.map((row, rowIdx) => (
+            <div key={rowIdx} style={{ display: 'flex', marginBottom: rowIdx < 2 ? gap : 0 }}>
+              {row.map((src, colIdx) => (
+                <img key={colIdx} src={src} alt="" draggable={false}
+                  style={{ width: cellW, height: cellH, objectFit: 'fill', display: 'block', marginRight: colIdx === 0 ? gap : 0, userSelect: 'none' }} />
+              ))}
+            </div>
+          ))}
+
+          {/* Goal dots */}
+          {buckets.map((row, rowIdx) =>
+            row.map((cellGoals, colIdx) =>
+              cellGoals.map((g, dotIdx) => {
+                const spread = (dotIdx - (cellGoals.length - 1) / 2) * (dotR * 2 + 5)
+                const cx = colIdx * (cellW + gap) + cellW / 2 + spread
+                const cy = rowIdx * (cellH + gap) + cellH / 2
+                const color = STATE_COLOR[g.state] || '#94a3b8'
+                return (
+                  <div key={`${rowIdx}-${colIdx}-${dotIdx}`} title={g.name} style={{ position: 'absolute', left: cx - dotR, top: cy - dotR, width: dotR * 2, height: dotR * 2, borderRadius: '50%', background: '#fff', border: `3px solid ${color}`, boxShadow: '0 2px 10px rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: 12, color, zIndex: 20, fontFamily: 'system-ui, sans-serif' }}>
+                    {g.num}
+                  </div>
+                )
+              })
+            )
+          )}
+        </div>
+      </div>
+
+      {/* Legend */}
+      {goals.length > 0 && (
+        <div style={{ marginTop: 14, marginLeft: leftW, display: 'flex', flexWrap: 'wrap', gap: '8px 14px' }}>
+          {goals.map((g, i) => {
+            const color = STATE_COLOR[g.state] || '#94a3b8'
+            return (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+                <span style={{ width: 22, height: 22, borderRadius: '50%', background: '#fff', border: `2px solid ${color}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: 10, color, flexShrink: 0 }}>{i + 1}</span>
+                <span style={{ color: '#e8dfd0', fontSize: 12 }}>{g.name}</span>
+              </div>
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }
@@ -224,8 +235,8 @@ export default function ResultClient({ analysis }) {
           </div>
         </div>
 
-        {/* Mini canvas */}
-        <MiniCanvas goals={goals} />
+        {/* Canvas preview */}
+        <CanvasPreview goals={goals} />
 
         {/* Blurred section */}
         <div>
