@@ -153,12 +153,14 @@ export async function POST(request) {
   const encoder = new TextEncoder()
   const cors = corsHeaders(request)
 
-  let domain, mode, description
+  let domain, mode, description, confirmedCompanyName, confirmedOrgNr
   try {
     const body = await request.json()
     mode = body.mode === 'project' ? 'project' : 'company'
     description = (body.description || '').trim().slice(0, 500)
-    domain = (body.domain || '')
+    confirmedCompanyName = (body.confirmedCompanyName || '').trim() || null
+    confirmedOrgNr = body.confirmedOrgNr || null
+    domain = (body.confirmedDomain || body.domain || '')
       .toLowerCase()
       .replace(/^https?:\/\//, '')
       .replace(/^www\./, '')
@@ -168,7 +170,7 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Invalid request' }, { status: 400, headers: cors })
   }
 
-  if (mode === 'company' && (!domain || domain.length < 3)) {
+  if (mode === 'company' && !confirmedCompanyName && (!domain || domain.length < 3)) {
     return NextResponse.json({ error: 'Invalid domain' }, { status: 400, headers: cors })
   }
   if (mode === 'project' && (!description || description.length < 5)) {
@@ -306,19 +308,22 @@ export async function POST(request) {
         // ── Step 0: Reading website ──────────────────────────────────────────
         send({ type: 'step', step: 0 })
 
-        const [siteData, brreg] = await Promise.all([
-          fetchWebsite(domain),
-          fetchBrreg(domain),
+        // When confirmed values arrive from the resolver, skip Brreg name lookup
+        const [siteData, brregFull] = await Promise.all([
+          domain ? fetchWebsite(domain) : Promise.resolve({ text: '', title: '', success: false }),
+          confirmedCompanyName ? Promise.resolve(confirmedOrgNr ? { orgNr: confirmedOrgNr } : null) : fetchBrreg(domain),
         ])
+        const brreg = brregFull
 
-        const financials = brreg?.orgNr ? await fetchBrregFinancials(brreg.orgNr) : null
+        const orgNr = brreg?.orgNr || confirmedOrgNr || null
+        const financials = orgNr ? await fetchBrregFinancials(orgNr) : null
 
         // ── Step 1: Industry identified ──────────────────────────────────────
         const combinedText = [siteData.text, brreg?.naeringskode1?.beskrivelse || ''].join(' ')
-        const tld = domain.split('.').pop()
+        const tld = (domain || '').split('.').pop()
         const industry = detectIndustry(combinedText, tld, brreg)
         const industryLabel = INDUSTRY_LABELS[industry]
-        const companyName = brreg?.name || siteData.title || domain
+        const companyName = confirmedCompanyName || brreg?.name || siteData.title || domain
         const countryCode = tld === 'no' ? 'NO' : tld === 'de' ? 'DE' : tld === 'se' ? 'SE' : 'INT'
 
         send({ type: 'step', step: 1, industry: industryLabel, companyName })
