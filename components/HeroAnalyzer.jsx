@@ -324,7 +324,7 @@ export default function HeroAnalyzer() {
               type="text"
               value={input}
               onChange={e => setInput(e.target.value)}
-              placeholder="apotek1.no or Apotek 1 Gruppen"
+              placeholder="apple.com or Apple Inc."
               className="flex-1 bg-white text-navy placeholder-slate-400 rounded-xl px-5 py-4 text-base font-medium outline-none shadow-sm"
             />
           ) : (
