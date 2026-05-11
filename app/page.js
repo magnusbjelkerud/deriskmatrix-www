@@ -70,21 +70,16 @@ export default function Home() {
       <section className="hero-gradient min-h-screen flex items-center pt-16 overflow-hidden">
         <div className="max-w-6xl mx-auto px-6 py-20 w-full">
           <div className="relative z-10 text-center max-w-3xl mx-auto px-6">
-            <div className="inline-block text-xs font-semibold tracking-widest uppercase mb-6 px-4 py-1.5 rounded-full border" style={{ color: '#1a9e8a', borderColor: '#1a9e8a50', background: 'rgba(26,158,138,0.1)' }}>
-              ISO 31000 aligned &middot; AI-powered &middot; Live risk states
+            <div className="inline-block text-xs font-bold tracking-widest uppercase mb-6 px-4 py-1.5 rounded-full border" style={{ color: '#1a9e8a', borderColor: '#1a9e8a50', background: 'rgba(26,158,138,0.1)' }}>
+              For leadership teams
             </div>
-            <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight tracking-tight">
-              Stop finding out<br />too late.
+            <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-5 leading-tight tracking-tight">
+              Know which goals are at risk &mdash;<br />before it&apos;s too late.
             </h1>
-            <p className="text-xl text-white/70 mb-10 leading-relaxed max-w-xl mx-auto">
-              Some of your strategic goals are heading toward breach right now. The quarterly review will show you which ones &mdash; by then it&apos;s too late. De-Risk Matrix shows you today.
+            <p className="text-lg text-white/60 mb-10 leading-relaxed max-w-lg mx-auto">
+              See your first risk picture in 60 seconds.
             </p>
             <HeroAnalyzer />
-            <div className="mt-8">
-              <a href={`${APP_URL}/register`} className="text-sm text-white/40 hover:text-white/70 transition-colors underline underline-offset-2">
-                Or start your 14-day trial directly &rarr;
-              </a>
-            </div>
           </div>
         </div>
       </section>

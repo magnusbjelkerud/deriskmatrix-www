@@ -335,6 +335,55 @@ export default function ResultClient({ analysis, mode = 'company' }) {
           </div>
         </div>
 
+        {/* FOR LEADERSHIP TEAMS */}
+        <div className="rounded-2xl overflow-hidden" style={{ background: '#0f172a' }}>
+          <div className="px-8 pt-8 pb-6 border-b border-white/8">
+            <div className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: '#1a9e8a' }}>
+              For leadership teams
+            </div>
+            <h2 className="text-2xl font-extrabold text-white mb-2 leading-snug">
+              What a CFO actually needs<br />before the board meeting.
+            </h2>
+            <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
+              Inside, the same three goals become a working risk picture you can lead from — not just a snapshot of last quarter.
+            </p>
+          </div>
+          <div className="divide-y divide-white/6">
+            {[
+              {
+                title: 'Know which goals are slipping — before the board does',
+                body: 'Continuous risk states across every strategic goal. The quarterly surprise stops being a quarterly thing.',
+              },
+              {
+                title: 'See what\'s actually driving the risk',
+                body: 'Each Dire goal comes with root causes, recommended actions, and what to escalate this week. Decisions, not dashboards.',
+              },
+              {
+                title: 'Build the risk culture your strategy needs',
+                body: 'Patterns across your goals reveal where your leadership team decides too late, where evidence is thin, where ownership is unclear. The cultural work that actually moves results.',
+              },
+              {
+                title: 'Defend your numbers — with evidence, not opinion',
+                body: 'When the board asks "can we hit this?", you have an answer backed by current data, not last quarter\'s spreadsheet.',
+              },
+            ].map((item, i) => (
+              <div key={i} className="px-8 py-5 flex gap-4 items-start">
+                <span className="flex-shrink-0 mt-1 text-sm" style={{ color: '#1a9e8a' }}>✓</span>
+                <div>
+                  <div className="text-sm font-bold text-white mb-1">{item.title}</div>
+                  <div className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>{item.body}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="px-8 py-6 border-t border-white/8" style={{ background: 'rgba(26,158,138,0.07)' }}>
+            <div className="text-sm font-bold text-white mb-1">Stop finding out too late.</div>
+            <div className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
+              Every goal on your canvas updates the moment its evidence does. So you act when there&apos;s still time to act.
+            </div>
+          </div>
+        </div>
+
         {/* CTA strip */}
         <div className="rounded-2xl p-8" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #18394b 100%)' }}>
           <div className="text-center mb-8">
