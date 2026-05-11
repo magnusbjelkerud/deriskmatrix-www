@@ -110,6 +110,26 @@ function CanvasPreview({ goals, lockedCount }) {
   const targetY    = cellH + gap / 2
   const threshY    = 2 * cellH + 1.5 * gap
 
+  // Group goals by cell so overlapping dots can be spread
+  const cellGroups = {}
+  goals.forEach((g, i) => {
+    const pos = CELL_POS[g.predicted_state || g.state]
+    if (!pos) return
+    const key = `${pos.row}-${pos.col}`
+    if (!cellGroups[key]) cellGroups[key] = []
+    cellGroups[key].push(i)
+  })
+  function getCellOffset(i, pos) {
+    const key = `${pos.row}-${pos.col}`
+    const group = cellGroups[key] || []
+    const n = group.length
+    if (n <= 1) return { dx: 0, dy: 0 }
+    const idx = group.indexOf(i)
+    const r = Math.min(cellH / 2 - dotR - 6, 18 + 8 * (n - 2))
+    const angle = (2 * Math.PI * idx / n) - Math.PI / 2
+    return { dx: Math.round(Math.cos(angle) * r), dy: Math.round(Math.sin(angle) * r) }
+  }
+
   return (
     <div style={{ background: '#0f2337', borderRadius: 16, padding: '20px 24px 24px', overflowX: 'auto' }}>
       <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: '#475569', marginBottom: 12 }}>
@@ -176,8 +196,9 @@ function CanvasPreview({ goals, lockedCount }) {
               const state = g.predicted_state || g.state
               const pos   = CELL_POS[state]
               if (!pos) return null
-              const cx    = pos.col * (cellW + gap) + cellW / 2
-              const cy    = pos.row * (cellH + gap) + cellH / 2
+              const { dx, dy } = getCellOffset(i, pos)
+              const cx    = pos.col * (cellW + gap) + cellW / 2 + dx
+              const cy    = pos.row * (cellH + gap) + cellH / 2 + dy
               const color = STATE_COLOR[state] || '#94a3b8'
               return (
                 <div
