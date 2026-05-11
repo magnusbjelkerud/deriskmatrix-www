@@ -28,8 +28,9 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function AnalysisPage({ params }) {
+export default async function AnalysisPage({ params, searchParams }) {
   const { slug } = await params
+  const { mode } = await searchParams || {}
   const supabase = getSupabase()
 
   if (!supabase) {
@@ -59,7 +60,7 @@ export default async function AnalysisPage({ params }) {
   return (
     <>
       <Nav />
-      <ResultClient analysis={analysis} />
+      <ResultClient analysis={analysis} mode={mode || 'company'} />
       <Footer />
     </>
   )

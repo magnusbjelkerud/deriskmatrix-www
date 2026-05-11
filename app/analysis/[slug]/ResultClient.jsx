@@ -208,7 +208,7 @@ function CanvasPreview({ goals, lockedCount }) {
   )
 }
 
-export default function ResultClient({ analysis }) {
+export default function ResultClient({ analysis, mode = 'company' }) {
   const [email, setEmail] = useState('')
   const [marketingConsent, setMarketingConsent] = useState(false)
   const [emailSubmitted, setEmailSubmitted] = useState(false)
@@ -373,7 +373,7 @@ export default function ResultClient({ analysis }) {
 
           <div className="text-center mb-6">
             <a
-              href={`${APP_URL}/register?from=analyzer&domain=${analysis.domain}&analysisId=${analysis.id}`}
+              href={`${APP_URL}/register?from=analyzer&domain=${analysis.domain}&analysisId=${analysis.id}&mode=${mode}`}
               className="inline-block bg-teal hover:bg-teal-dark text-white font-bold text-base px-10 py-4 rounded-xl transition-colors shadow-lg"
             >
               Start free trial →

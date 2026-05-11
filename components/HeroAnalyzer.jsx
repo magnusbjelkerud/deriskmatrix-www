@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-const STEPS = [
+const STEPS_COMPANY = [
   'Reading website',
   'Identifying industry and business model',
   'Mapping typical goals for your sector',
@@ -10,29 +10,42 @@ const STEPS = [
   'Generating recommended actions',
 ]
 
+const STEPS_PROJECT = [
+  'Reading project description',
+  'Identifying project type and context',
+  'Mapping typical project goals',
+  'Suggesting thresholds and risk states',
+  'Generating recommended actions',
+]
+
 export default function HeroAnalyzer() {
+  const [mode, setMode] = useState('company') // 'company' | 'project'
   const [domain, setDomain] = useState('')
+  const [description, setDescription] = useState('')
   const [stage, setStage] = useState('input') // 'input' | 'analyzing'
   const [error, setError] = useState('')
   const [currentStep, setCurrentStep] = useState(0)
   const [completedSteps, setCompletedSteps] = useState([])
 
   const router = useRouter()
+  const STEPS = mode === 'project' ? STEPS_PROJECT : STEPS_COMPANY
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const cleaned = domain.toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/$/, '').trim()
-    if (!cleaned || cleaned.length < 3) { setError('Please enter a valid domain'); return }
     setError('')
     setStage('analyzing')
     setCurrentStep(0)
     setCompletedSteps([])
 
+    const body = mode === 'project'
+      ? { mode: 'project', description: description.trim() }
+      : { domain: domain.toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/$/, '').trim() }
+
     try {
       const res = await fetch('/api/analyze', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ domain: cleaned }),
+        body: JSON.stringify(body),
       })
 
       if (!res.ok) {
@@ -72,7 +85,7 @@ export default function HeroAnalyzer() {
           if (event.type === 'done') {
             setCompletedSteps([0, 1, 2, 3, 4])
             await new Promise(r => setTimeout(r, 300))
-            router.push(`/analysis/${event.slug}`)
+            router.push(`/analysis/${event.slug}?mode=${mode}`)
             return
           }
 
@@ -89,12 +102,16 @@ export default function HeroAnalyzer() {
     }
   }
 
+  const analyzingLabel = mode === 'project'
+    ? (description.split(/[.!?\n]/)[0] || 'your project').trim().slice(0, 40)
+    : domain.replace(/^https?:\/\//, '').replace(/^www\./, '')
+
   if (stage === 'analyzing') {
     return (
       <div className="w-full max-w-xl mx-auto">
         <div className="bg-white/10 backdrop-blur rounded-2xl p-6 text-left">
           <div className="text-xs font-semibold text-white/50 uppercase tracking-widest mb-4">
-            Analysing {domain.replace(/^https?:\/\//, '').replace(/^www\./, '')}
+            Analysing {analyzingLabel}
           </div>
           <div className="space-y-3">
             {STEPS.map((step, i) => {
@@ -128,20 +145,57 @@ export default function HeroAnalyzer() {
 
   return (
     <div className="w-full max-w-xl mx-auto">
+      {/* Tab switcher */}
+      <div className="flex gap-1 bg-white/10 backdrop-blur rounded-xl p-1 mb-3">
+        <button
+          type="button"
+          onClick={() => setMode('company')}
+          className="flex-1 py-2 rounded-lg text-sm font-semibold transition-all"
+          style={{
+            background: mode === 'company' ? '#fff' : 'transparent',
+            color: mode === 'company' ? '#0f172a' : 'rgba(255,255,255,0.6)',
+          }}
+        >
+          Company
+        </button>
+        <button
+          type="button"
+          onClick={() => setMode('project')}
+          className="flex-1 py-2 rounded-lg text-sm font-semibold transition-all"
+          style={{
+            background: mode === 'project' ? '#fff' : 'transparent',
+            color: mode === 'project' ? '#0f172a' : 'rgba(255,255,255,0.6)',
+          }}
+        >
+          Project
+        </button>
+      </div>
+
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-col sm:flex-row gap-2 bg-white/10 backdrop-blur rounded-2xl p-2">
-          <input
-            type="text"
-            value={domain}
-            onChange={e => setDomain(e.target.value)}
-            placeholder="yourcompany.com"
-            className="flex-1 bg-white text-navy placeholder-slate-400 rounded-xl px-5 py-4 text-base font-medium outline-none shadow-sm"
-          />
+        <div className="flex flex-col gap-2 bg-white/10 backdrop-blur rounded-2xl p-2">
+          {mode === 'company' ? (
+            <input
+              type="text"
+              value={domain}
+              onChange={e => setDomain(e.target.value)}
+              placeholder="yourcompany.com"
+              className="flex-1 bg-white text-navy placeholder-slate-400 rounded-xl px-5 py-4 text-base font-medium outline-none shadow-sm"
+            />
+          ) : (
+            <textarea
+              value={description}
+              onChange={e => setDescription(e.target.value)}
+              placeholder="Describe your project in one sentence — e.g. "Launching a new logistics platform for Nordic SMBs""
+              rows={3}
+              className="flex-1 bg-white text-navy placeholder-slate-400 rounded-xl px-5 py-4 text-base font-medium outline-none shadow-sm resize-none"
+            />
+          )}
           <button
             type="submit"
-            className="bg-teal hover:bg-teal-dark text-white font-bold px-7 py-4 rounded-xl transition-colors whitespace-nowrap shadow-sm"
+            disabled={mode === 'company' ? !domain.trim() : !description.trim()}
+            className="bg-teal hover:bg-teal-dark text-white font-bold px-7 py-4 rounded-xl transition-colors whitespace-nowrap shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            See your risk picture →
+            {mode === 'company' ? 'Generate company risk picture →' : 'Generate project risk picture →'}
           </button>
         </div>
         {error && <div className="mt-2 text-sm text-red-300 text-center">{error}</div>}

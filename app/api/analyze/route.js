@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { detectIndustry, generateGoals, INDUSTRY_LABELS } from '../../../lib/goalPacks'
-import { generateGoalsWithClaude } from '../../../lib/claudeAnalyzer'
+import { generateGoalsWithClaude, generateProjectGoalsWithClaude } from '../../../lib/claudeAnalyzer'
 import crypto from 'crypto'
 
 export const maxDuration = 300
@@ -9,6 +9,28 @@ export const maxDuration = 300
 const ANALYZER_OPEN = process.env.ANALYZER_OPEN === 'true'
 const RATE_LIMIT = parseInt(process.env.ANALYZER_RATE_LIMIT_PER_IP || '5')
 const CACHE_DAYS = parseInt(process.env.ANALYZER_CACHE_DAYS || '90')
+
+const ALLOWED_ORIGINS = [
+  'https://app.deriskmatrix.com',
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'http://localhost:3000',
+]
+
+function corsHeaders(request) {
+  const origin = request.headers.get('origin') || ''
+  if (!ALLOWED_ORIGINS.includes(origin)) return {}
+  return {
+    'Access-Control-Allow-Origin': origin,
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Max-Age': '86400',
+  }
+}
+
+export async function OPTIONS(request) {
+  return new Response(null, { status: 204, headers: corsHeaders(request) })
+}
 
 function getSupabase() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
@@ -129,10 +151,13 @@ async function fetchBrregFinancials(orgNr) {
 
 export async function POST(request) {
   const encoder = new TextEncoder()
+  const cors = corsHeaders(request)
 
-  let domain
+  let domain, mode, description
   try {
     const body = await request.json()
+    mode = body.mode === 'project' ? 'project' : 'company'
+    description = (body.description || '').trim().slice(0, 500)
     domain = (body.domain || '')
       .toLowerCase()
       .replace(/^https?:\/\//, '')
@@ -140,25 +165,32 @@ export async function POST(request) {
       .replace(/\/$/, '')
       .trim()
   } catch {
-    return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
+    return NextResponse.json({ error: 'Invalid request' }, { status: 400, headers: cors })
   }
 
-  if (!domain || domain.length < 3) {
-    return NextResponse.json({ error: 'Invalid domain' }, { status: 400 })
+  if (mode === 'company' && (!domain || domain.length < 3)) {
+    return NextResponse.json({ error: 'Invalid domain' }, { status: 400, headers: cors })
+  }
+  if (mode === 'project' && (!description || description.length < 5)) {
+    return NextResponse.json({ error: 'Please describe your project' }, { status: 400, headers: cors })
   }
 
   if (!ANALYZER_OPEN) {
-    return NextResponse.json({ error: 'Analyzer is in private beta. Request access at magnus@deriskmatrix.com.' }, { status: 403 })
+    return NextResponse.json({ error: 'Analyzer is in private beta. Request access at magnus@deriskmatrix.com.' }, { status: 403, headers: cors })
   }
 
   const supabase = getSupabase()
   if (!supabase) {
-    return NextResponse.json({ error: 'Service not configured.' }, { status: 503 })
+    return NextResponse.json({ error: 'Service not configured.' }, { status: 503, headers: cors })
   }
 
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0] || 'unknown'
   const ipHash = hashIP(ip)
-  const slug = slugify(domain)
+
+  // For project mode: derive a deterministic slug from the description
+  const slug = mode === 'project'
+    ? `project-${crypto.createHash('sha256').update(description.slice(0, 200)).digest('hex').slice(0, 12)}`
+    : slugify(domain)
 
   // Check cache
   const { data: cached } = await supabase
@@ -172,13 +204,12 @@ export async function POST(request) {
     const stream = new ReadableStream({
       start(controller) {
         const send = d => controller.enqueue(encoder.encode(`data: ${JSON.stringify(d)}\n\n`))
-        // Fast-forward all steps for cached result
         for (let i = 0; i < 5; i++) send({ type: 'step', step: i })
         send({ type: 'done', slug, companyName: cached.company_name, industry: cached.industry, analysisId: cached.id })
         controller.close()
       }
     })
-    return new Response(stream, { headers: sseHeaders() })
+    return new Response(stream, { headers: { ...sseHeaders(), ...cors } })
   }
 
   // Rate limit check
@@ -190,10 +221,83 @@ export async function POST(request) {
     .gte('created_at', oneHourAgo)
 
   if (count >= RATE_LIMIT) {
-    return NextResponse.json({ error: 'Rate limit reached. Please try again in an hour.' }, { status: 429 })
+    return NextResponse.json({ error: 'Rate limit reached. Please try again in an hour.' }, { status: 429, headers: cors })
   }
 
-  // SSE streaming pipeline
+  // ── Project mode SSE pipeline ────────────────────────────────────────────────
+  if (mode === 'project') {
+    const projectName = description.split(/[.!?\n]/)[0].trim().slice(0, 80) || 'Project'
+
+    const stream = new ReadableStream({
+      async start(controller) {
+        const send = d => controller.enqueue(encoder.encode(`data: ${JSON.stringify(d)}\n\n`))
+        try {
+          send({ type: 'step', step: 0 })  // Reading description
+          send({ type: 'step', step: 1 })  // Identifying project type
+          send({ type: 'step', step: 2 })  // Claude starts
+
+          let goals, drivers, actions
+          let usedClaude = false
+
+          if (process.env.ANTHROPIC_API_KEY) {
+            try {
+              const result = await generateProjectGoalsWithClaude({ description, projectName })
+              goals = result.goals
+              drivers = result.drivers
+              actions = result.actions
+              usedClaude = true
+            } catch (claudeErr) {
+              console.warn('[analyze:project] Claude failed, falling back to templates:', claudeErr.message)
+            }
+          }
+
+          if (!usedClaude) {
+            const fallback = generateGoals('technology', false, false)
+            goals = fallback.goals; drivers = fallback.drivers; actions = fallback.actions
+          }
+
+          send({ type: 'step', step: 3 })
+          send({ type: 'step', step: 4 })
+
+          const cachedUntil = new Date()
+          cachedUntil.setDate(cachedUntil.getDate() + CACHE_DAYS)
+
+          const { data: analysis, error } = await supabase
+            .from('website_analyses')
+            .upsert({
+              slug,
+              domain: slug,
+              company_name: projectName,
+              country_code: 'INT',
+              industry: 'Project',
+              sub_industry: description.slice(0, 120),
+              size_segment: 'Project',
+              goals_json: goals,
+              drivers_json: drivers,
+              actions_json: actions,
+              cached_until: cachedUntil.toISOString(),
+              ip_hash: ipHash,
+              conversion_status: 'viewed',
+              pipeline_version: usedClaude ? 'v2_project' : 'v1_templates',
+            }, { onConflict: 'slug' })
+            .select('id')
+            .single()
+
+          if (error) { console.error('[analyze:project:upsert]', error); throw error }
+
+          send({ type: 'done', slug, companyName: projectName, industry: 'Project', analysisId: analysis.id })
+          controller.close()
+        } catch (err) {
+          console.error('[analyze:project]', err)
+          send({ type: 'error', message: 'Analysis failed. Please try again.' })
+          controller.close()
+        }
+      }
+    })
+    return new Response(stream, { headers: { ...sseHeaders(), ...cors } })
+  }
+
+  // ── Company mode SSE pipeline ────────────────────────────────────────────────
   const stream = new ReadableStream({
     async start(controller) {
       const send = d => controller.enqueue(encoder.encode(`data: ${JSON.stringify(d)}\n\n`))
@@ -207,7 +311,6 @@ export async function POST(request) {
           fetchBrreg(domain),
         ])
 
-        // Also fetch financials in background if we got an orgNr
         const financials = brreg?.orgNr ? await fetchBrregFinancials(brreg.orgNr) : null
 
         // ── Step 1: Industry identified ──────────────────────────────────────
@@ -243,12 +346,9 @@ export async function POST(request) {
         }
 
         if (!usedClaude) {
-          // Template fallback (goalPacks.js)
           const hasRevenue = !!(brreg?.employees > 5)
           const fallback = generateGoals(industry, hasRevenue, false)
-          goals = fallback.goals
-          drivers = fallback.drivers
-          actions = fallback.actions
+          goals = fallback.goals; drivers = fallback.drivers; actions = fallback.actions
         }
 
         // ── Step 3: Thresholds and states done ──────────────────────────────
@@ -286,7 +386,6 @@ export async function POST(request) {
           throw error
         }
 
-        // Store resolver evidence
         if (brreg) {
           await supabase.from('analysis_evidence').upsert({
             id: crypto.randomUUID(),
@@ -310,7 +409,7 @@ export async function POST(request) {
     }
   })
 
-  return new Response(stream, { headers: sseHeaders() })
+  return new Response(stream, { headers: { ...sseHeaders(), ...cors } })
 }
 
 function sseHeaders() {
