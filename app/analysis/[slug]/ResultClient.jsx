@@ -1,14 +1,7 @@
 'use client'
 import { useState } from 'react'
-import Link from 'next/link'
 
 const APP_URL = 'https://app.deriskmatrix.com'
-
-const PLANS = [
-  { name: 'Mini',    price: '€19',  users: 'Up to 3 users',  highlight: false },
-  { name: 'Starter', price: '€39',  users: 'Up to 10 users', highlight: false },
-  { name: 'Growth',  price: '€119', users: 'Up to 50 users', highlight: true, tag: 'Most popular' },
-]
 
 const CONFIDENCE_META = {
   high:   { label: 'High confidence',   color: '#16a34a', bg: '#dcfce7' },
@@ -120,7 +113,6 @@ const CELL_BORDER = {
 const ROW_LABELS = ['Beyond\ntarget', 'On\ntrack', 'Below\nthreshold']
 
 function CanvasPreview({ goals, lockedCount }) {
-  // Build 3×2 buckets — only visible goals
   const buckets = Array.from({ length: 3 }, () => [[], []])
   goals.forEach((g, i) => {
     const state = g.predicted_state || g.state
@@ -133,16 +125,12 @@ function CanvasPreview({ goals, lockedCount }) {
       <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: '#475569', marginBottom: 14 }}>
         Canvas preview — where your goals sit in the matrix
       </div>
-
-      {/* Column headers */}
       <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr 1fr', gap: 6, marginBottom: 5 }}>
         <div />
         {['Strong evidence', 'Weak evidence'].map(l => (
           <div key={l} style={{ textAlign: 'center', fontSize: 10, fontWeight: 700, color: '#94a3b8', letterSpacing: '.06em', textTransform: 'uppercase' }}>{l}</div>
         ))}
       </div>
-
-      {/* 3 rows */}
       {CELL_GRID.map((rowStates, rowIdx) => (
         <div key={rowIdx} style={{ display: 'grid', gridTemplateColumns: '60px 1fr 1fr', gap: 6, marginBottom: 6 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: 8 }}>
@@ -187,8 +175,6 @@ function CanvasPreview({ goals, lockedCount }) {
           })}
         </div>
       ))}
-
-      {/* Legend */}
       <div style={{ marginTop: 12, display: 'flex', flexWrap: 'wrap', gap: '6px 18px', alignItems: 'center' }}>
         {goals.map((g, i) => {
           const state = g.predicted_state || g.state
@@ -208,17 +194,76 @@ function CanvasPreview({ goals, lockedCount }) {
   )
 }
 
+const COPY = {
+  company: {
+    headerLabel: 'YOUR COMPANY RISK PICTURE',
+    headlinesuffix: ' is ready',
+    assumptionNote: 'Based on public filings, industry benchmarks and your website.',
+    fomoLabel: 'For leadership teams',
+    fomoHeader: 'What a CFO actually needs\nbefore the board meeting.',
+    fomoIntro: 'Inside, the same three goals become a working risk picture you can lead from — not just a snapshot of last quarter.',
+    fomoItems: [
+      {
+        title: 'Know which goals are slipping before the board does',
+        body: 'Continuous risk states across every strategic goal. The quarterly surprise stops being a quarterly thing.',
+      },
+      {
+        title: "See what's actually driving the risk",
+        body: 'Each Dire goal comes with root causes, recommended actions, and what to escalate this week. Decisions, not dashboards.',
+      },
+      {
+        title: 'Build the risk culture your strategy needs',
+        body: "Patterns across your goals reveal where your leadership team decides too late, where evidence is thin, where ownership is unclear. The cultural work that actually moves results.",
+      },
+      {
+        title: 'Defend your numbers with evidence',
+        body: "When the board asks \"can we hit this?\", you have an answer backed by current data, not last quarter's spreadsheet.",
+      },
+    ],
+    closing: 'Stop finding out too late.',
+    closingBody: "Every goal on your canvas updates the moment its evidence does. So you act when there's still time to act.",
+    ctaLabel: name => `Continue as ${name} →`,
+  },
+  project: {
+    headerLabel: 'YOUR PROJECT RISK PICTURE',
+    headlinePrefix: '',
+    headlineSuffix: ' — risk picture ready',
+    assumptionNote: 'Based on your project description and benchmarks from similar initiatives.',
+    fomoLabel: 'For project leads',
+    fomoHeader: 'What a project lead actually needs.',
+    fomoIntro: 'Inside, the same three goals become a working risk picture you can steer from — not just a status update.',
+    fomoItems: [
+      {
+        title: 'Know which milestones are slipping — before the steering committee does',
+        body: 'Continuous risk states across budget, timeline, scope, and quality. The status meeting surprise stops being a thing.',
+      },
+      {
+        title: "See what's actually driving project risk",
+        body: 'Each Dire goal comes with root causes, recommended actions, and what to escalate this week.',
+      },
+      {
+        title: 'Build the project discipline your delivery needs',
+        body: 'Patterns across your goals reveal where decisions slip, where evidence is thin, where dependencies are unclear.',
+      },
+      {
+        title: 'Defend your timeline — with evidence, not optimism',
+        body: 'When the sponsor asks "are we on track?", you have an answer backed by current data, not last week\'s status report.',
+      },
+    ],
+    closing: 'Stop finding out at the next milestone review.',
+    closingBody: "Every goal on your canvas updates the moment its evidence does. So you act when there's still time to act.",
+    ctaLabel: () => 'Continue with my project →',
+  },
+}
+
 export default function ResultClient({ analysis, mode = 'company' }) {
-  const [email, setEmail] = useState('')
-  const [marketingConsent, setMarketingConsent] = useState(false)
-  const [emailSubmitted, setEmailSubmitted] = useState(false)
-  const [copied, setCopied] = useState(false)
+  const copy = COPY[mode] || COPY.company
+  const isProject = mode === 'project'
 
   const rawGoals = Array.isArray(analysis.goals_json) ? analysis.goals_json : []
   const drivers = Array.isArray(analysis.drivers_json) ? analysis.drivers_json : []
   const actions = Array.isArray(analysis.actions_json) ? analysis.actions_json : []
 
-  // Dire-first sort: dire → pessimistic → rest (preserves rank ordering within each group)
   const STATE_SORT = { dire: 0, pessimistic: 1 }
   const goals = [...rawGoals].sort((a, b) => {
     const aP = STATE_SORT[a.state] ?? 2
@@ -228,58 +273,42 @@ export default function ResultClient({ analysis, mode = 'company' }) {
   })
 
   const visibleGoals = goals.filter(g => g.visible_in_teaser ?? g.visible)
-  const hiddenGoals = goals.filter(g => !(g.visible_in_teaser ?? g.visible))
-  const createdDate = new Date(analysis.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
-  const pageUrl = `https://www.deriskmatrix.com/analysis/${analysis.slug}`
+  const hiddenGoals  = goals.filter(g => !(g.visible_in_teaser ?? g.visible))
+  const createdDate  = new Date(analysis.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+  const companyName  = analysis.company_name || analysis.domain
 
-  function copyLink() {
-    navigator.clipboard.writeText(pageUrl)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+  // Subline for company: Industry · Country · Size. For project: description snippet.
+  const subline = isProject
+    ? analysis.sub_industry || 'Project'
+    : [analysis.industry, analysis.country_code !== 'INT' ? analysis.country_code : null, analysis.size_segment]
+        .filter(Boolean).join(' · ')
 
-  async function submitEmail(e) {
-    e.preventDefault()
-    if (!email) return
-    await fetch('/api/capture-email', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ analysisId: analysis.id, email, marketingConsent }),
-    })
-    setEmailSubmitted(true)
-  }
+  const registerUrl = `${APP_URL}/register?from=analyzer&domain=${analysis.domain}&analysisId=${analysis.id}&mode=${mode}`
 
   return (
     <div className="min-h-screen bg-slate-50 pt-20">
       {/* Header strip */}
       <div className="bg-white border-b border-slate-100">
-        <div className="max-w-3xl mx-auto px-6 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-          <div>
-            <div className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1">Suggested risk picture for</div>
-            <div className="text-xl font-extrabold text-navy">{analysis.company_name || analysis.domain}</div>
-            <div className="text-sm text-slate-400 mt-0.5">
-              Industry: <span className="font-medium text-slate-600">{analysis.industry}</span>
-              {analysis.size_segment && <> · <span className="font-medium text-slate-600">{analysis.size_segment}</span></>}
-            </div>
+        <div className="max-w-3xl mx-auto px-6 py-5">
+          <div className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1">
+            {copy.headerLabel}
           </div>
-          <div className="flex items-center gap-3">
-            <button
-              onClick={copyLink}
-              className="text-sm font-medium text-slate-500 hover:text-navy border border-slate-200 px-4 py-2 rounded-lg transition-colors"
-            >
-              {copied ? 'Copied ✓' : 'Copy link'}
-            </button>
-            <Link href="/analyze" className="text-sm font-medium text-teal hover:text-teal-dark transition-colors">
-              Try another →
-            </Link>
+          <div className="text-xl font-extrabold text-navy">
+            {companyName}{isProject ? ' — risk picture ready' : ' is ready'}
           </div>
+          {subline && (
+            <div className="text-sm text-slate-400 mt-0.5 leading-snug">{subline}</div>
+          )}
         </div>
       </div>
 
       <div className="max-w-3xl mx-auto px-6 py-10 space-y-8">
         {/* Visible goals */}
         <div>
-          <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-wide mb-4">Suggested goals — 3 of 7 shown</h2>
+          <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-wide mb-1">
+            Suggested goals — 3 of 7 shown
+          </h2>
+          <p className="text-xs text-slate-400 mb-4">{copy.assumptionNote}</p>
           <div className="space-y-4">
             {visibleGoals.map((goal, i) => <GoalCard key={i} goal={goal} />)}
           </div>
@@ -288,7 +317,7 @@ export default function ResultClient({ analysis, mode = 'company' }) {
         {/* Canvas preview */}
         <CanvasPreview goals={visibleGoals} lockedCount={hiddenGoals.length} />
 
-        {/* Blurred section */}
+        {/* Blurred drivers / actions */}
         <div>
           <div className="flex items-center gap-2 mb-4">
             <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-wide">Risk drivers and recommended actions</h2>
@@ -328,45 +357,28 @@ export default function ResultClient({ analysis, mode = 'company' }) {
         <div className="bg-white rounded-2xl border-2 border-dashed border-slate-200 p-7 text-center">
           <div className="text-3xl mb-3">🔒</div>
           <div className="text-base font-bold text-navy mb-2">
-            {hiddenGoals.length} more goals identified — start your trial to see them all
+            {hiddenGoals.length} more goals identified — including
           </div>
-          <div className="text-sm text-slate-400">
-            Including: <span className="font-medium text-slate-600">{hiddenGoals.map(g => g.name).join(', ')}</span>
+          <div className="text-sm text-slate-500">
+            <span className="font-medium text-slate-600">{hiddenGoals.map(g => g.name).join(', ')}</span>
           </div>
         </div>
 
-        {/* FOR LEADERSHIP TEAMS */}
+        {/* FOMO block */}
         <div className="rounded-2xl overflow-hidden" style={{ background: '#0f172a' }}>
           <div className="px-8 pt-8 pb-6 border-b border-white/8">
             <div className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: '#1a9e8a' }}>
-              For leadership teams
+              {copy.fomoLabel}
             </div>
-            <h2 className="text-2xl font-extrabold text-white mb-2 leading-snug">
-              What a CFO actually needs<br />before the board meeting.
+            <h2 className="text-2xl font-extrabold text-white mb-2 leading-snug" style={{ whiteSpace: 'pre-line' }}>
+              {copy.fomoHeader}
             </h2>
             <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
-              Inside, the same three goals become a working risk picture you can lead from — not just a snapshot of last quarter.
+              {copy.fomoIntro}
             </p>
           </div>
           <div className="divide-y divide-white/6">
-            {[
-              {
-                title: 'Know which goals are slipping — before the board does',
-                body: 'Continuous risk states across every strategic goal. The quarterly surprise stops being a quarterly thing.',
-              },
-              {
-                title: 'See what\'s actually driving the risk',
-                body: 'Each Dire goal comes with root causes, recommended actions, and what to escalate this week. Decisions, not dashboards.',
-              },
-              {
-                title: 'Build the risk culture your strategy needs',
-                body: 'Patterns across your goals reveal where your leadership team decides too late, where evidence is thin, where ownership is unclear. The cultural work that actually moves results.',
-              },
-              {
-                title: 'Defend your numbers — with evidence, not opinion',
-                body: 'When the board asks "can we hit this?", you have an answer backed by current data, not last quarter\'s spreadsheet.',
-              },
-            ].map((item, i) => (
+            {copy.fomoItems.map((item, i) => (
               <div key={i} className="px-8 py-5 flex gap-4 items-start">
                 <span className="flex-shrink-0 mt-1 text-sm" style={{ color: '#1a9e8a' }}>✓</span>
                 <div>
@@ -377,90 +389,37 @@ export default function ResultClient({ analysis, mode = 'company' }) {
             ))}
           </div>
           <div className="px-8 py-6 border-t border-white/8" style={{ background: 'rgba(26,158,138,0.07)' }}>
-            <div className="text-sm font-bold text-white mb-1">Stop finding out too late.</div>
+            <div className="text-sm font-bold text-white mb-1">{copy.closing}</div>
             <div className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
-              Every goal on your canvas updates the moment its evidence does. So you act when there&apos;s still time to act.
+              {copy.closingBody}
             </div>
           </div>
         </div>
 
-        {/* CTA strip */}
-        <div className="rounded-2xl p-8" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #18394b 100%)' }}>
-          <div className="text-center mb-8">
-            <div className="text-xl font-extrabold text-white mb-2">
-              This took 30 seconds. Imagine what we find with your real data.
-            </div>
-            <div className="text-sm text-white/60 leading-relaxed">
-              Sign up free. Refine these targets, add your numbers, see live risk states.<br />
-              14-day trial — no credit card required.
-            </div>
+        {/* Primary CTA */}
+        <div className="rounded-2xl p-8 text-center" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #18394b 100%)' }}>
+          <div className="text-xl font-extrabold text-white mb-2">
+            {isProject
+              ? 'This took 30 seconds. Imagine managing it with live data.'
+              : 'This took 30 seconds. Imagine what we find with your real data.'}
           </div>
-
-          <div className="grid sm:grid-cols-3 gap-3 mb-6">
-            {PLANS.map(p => (
-              <div
-                key={p.name}
-                className="rounded-xl p-4 text-center relative"
-                style={{
-                  background: p.highlight ? '#1a9e8a' : 'rgba(255,255,255,0.08)',
-                  border: p.highlight ? '2px solid #1a9e8a' : '1.5px solid rgba(255,255,255,0.12)',
-                }}
-              >
-                {p.tag && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-teal text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">
-                    {p.tag}
-                  </div>
-                )}
-                <div className="text-white font-bold mb-1">{p.name}</div>
-                <div className="text-2xl font-extrabold text-white mb-1">
-                  {p.price}<span className="text-sm font-normal text-white/60">/mo</span>
-                </div>
-                <div className="text-xs text-white/60">{p.users}</div>
-              </div>
-            ))}
+          <div className="text-sm text-white/60 leading-relaxed mb-8">
+            {isProject
+              ? 'Refine these targets, add your actuals, track risk states live.\n14-day trial — no credit card required.'
+              : 'Refine these targets, add your numbers, see live risk states.\n14-day trial — no credit card required.'}
           </div>
-
-          <div className="text-center mb-6">
-            <a
-              href={`${APP_URL}/register?from=analyzer&domain=${analysis.domain}&analysisId=${analysis.id}&mode=${mode}`}
-              className="inline-block bg-teal hover:bg-teal-dark text-white font-bold text-base px-10 py-4 rounded-xl transition-colors shadow-lg"
-            >
-              Start free trial →
-            </a>
-          </div>
-
-          {!emailSubmitted ? (
-            <div className="border-t border-white/10 pt-6">
-              <div className="text-sm text-white/60 text-center mb-3">
-                Or — get the full 7-goal analysis emailed as PDF
-              </div>
-              <form onSubmit={submitEmail} className="flex flex-col sm:flex-row gap-2 max-w-sm mx-auto">
-                <input
-                  type="email"
-                  required
-                  placeholder="your@email.com"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  className="flex-1 bg-white/10 text-white placeholder-white/30 border border-white/20 rounded-lg px-4 py-2.5 text-sm outline-none focus:border-teal"
-                />
-                <button type="submit" className="bg-white/15 hover:bg-white/25 text-white font-semibold px-5 py-2.5 rounded-lg text-sm transition-colors border border-white/20">
-                  Send PDF
-                </button>
-              </form>
-              <label className="flex items-center justify-center gap-2 mt-3 text-xs text-white/40 cursor-pointer">
-                <input type="checkbox" checked={marketingConsent} onChange={e => setMarketingConsent(e.target.checked)} className="rounded" />
-                Also send me product tips and updates
-              </label>
-            </div>
-          ) : (
-            <div className="border-t border-white/10 pt-6 text-center text-sm text-white/60">
-              ✓ PDF request received — we'll send it to {email}
-            </div>
-          )}
+          <a
+            href={registerUrl}
+            className="inline-block bg-teal hover:bg-teal-dark text-white font-bold text-base px-10 py-4 rounded-xl transition-colors shadow-lg"
+          >
+            {copy.ctaLabel(companyName)}
+          </a>
         </div>
 
         <div className="text-xs text-slate-400 text-center leading-relaxed pb-4">
-          Suggestions are based on public website analysis and industry benchmarks. They are starting points for discussion — not validated for your actual situation. Real data inside the app refines them.
+          {isProject
+            ? 'Suggestions are based on your project description and benchmarks from similar initiatives. They are starting points for discussion — not validated for your actual situation.'
+            : 'Suggestions are based on public website analysis and industry benchmarks. They are starting points for discussion — not validated for your actual situation. Real data inside the app refines them.'}
           <br />Generated on {createdDate}.
         </div>
       </div>
