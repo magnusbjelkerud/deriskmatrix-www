@@ -185,7 +185,7 @@ export default function HeroAnalyzer() {
             <textarea
               value={description}
               onChange={e => setDescription(e.target.value)}
-              placeholder="Describe your project in one sentence — e.g. "Launching a new logistics platform for Nordic SMBs""
+              placeholder={'Describe your project in one sentence — e.g. "Launching a new logistics platform for Nordic SMBs"'}
               rows={3}
               className="flex-1 bg-white text-navy placeholder-slate-400 rounded-xl px-5 py-4 text-base font-medium outline-none shadow-sm resize-none"
             />
