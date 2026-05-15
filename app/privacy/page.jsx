@@ -6,8 +6,8 @@ export const metadata = {
   description: 'How De-Risk Matrix collects, uses, and protects your data. GDPR compliant.',
 }
 
-const COMPANY = '[SELSKAPSNAVN]'
-const ORG_NR  = '[ORG.NR]'
+const COMPANY = 'De-Risk Matrix Company AS'
+const ORG_NR  = '937 716 125'
 const EMAIL   = 'hello@deriskmatrix.com'
 const UPDATED = 'April 2026'
 

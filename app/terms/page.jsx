@@ -6,8 +6,8 @@ export const metadata = {
   description: 'Terms of Service for the De-Risk Matrix application.',
 }
 
-const COMPANY = 'Magnus Bjelkerud'
-const ORG_NR  = 'TBD'
+const COMPANY = 'De-Risk Matrix Company AS'
+const ORG_NR  = '937 716 125'
 const EMAIL   = 'post@deriskmatrix.com'
 const UPDATED = 'April 2026'
 
