@@ -285,12 +285,15 @@ export async function POST(request) {
             .select('id')
             .single()
 
-          if (error) { console.error('[analyze:project:upsert]', error); throw error }
+          if (error || !analysis) {
+            console.error('[analyze:project:upsert]', JSON.stringify({ code: error?.code, msg: error?.message, analysis, slug }))
+            throw error || new Error(`Project upsert returned null for slug=${slug}`)
+          }
 
           send({ type: 'done', slug, companyName: projectName, industry: 'Project', analysisId: analysis.id })
           controller.close()
         } catch (err) {
-          console.error('[analyze:project]', err)
+          console.error('[analyze:project] ERROR type=%s msg=%s stack=%s', err?.constructor?.name, err?.message, err?.stack?.split('\n').slice(0, 6).join(' | '))
           send({ type: 'error', message: 'Analysis failed. Please try again.' })
           controller.close()
         }
@@ -386,12 +389,12 @@ export async function POST(request) {
           .select('id')
           .single()
 
-        if (error) {
-          console.error('[analyze:upsert]', error.code, error.message, error.details, { slug, domain })
-          throw error
+        if (error || !analysis) {
+          console.error('[analyze:upsert]', JSON.stringify({ code: error?.code, msg: error?.message, details: error?.details, hint: error?.hint, analysis, slug }))
+          throw error || new Error(`Upsert returned null data for slug=${slug}`)
         }
 
-        if (brreg) {
+        if (brreg && analysis?.id) {
           await supabase.from('analysis_evidence').upsert({
             id: crypto.randomUUID(),
             analysis_id: analysis.id,
@@ -407,7 +410,7 @@ export async function POST(request) {
         controller.close()
 
       } catch (err) {
-        console.error('[analyze]', err)
+        console.error('[analyze] ERROR type=%s msg=%s stack=%s', err?.constructor?.name, err?.message, err?.stack?.split('\n').slice(0, 6).join(' | '))
         send({ type: 'error', message: 'Analysis failed. Please try again.' })
         controller.close()
       }
