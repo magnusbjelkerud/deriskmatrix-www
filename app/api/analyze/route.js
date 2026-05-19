@@ -395,15 +395,17 @@ export async function POST(request) {
         }
 
         if (brreg && analysis?.id) {
-          await supabase.from('analysis_evidence').upsert({
-            id: crypto.randomUUID(),
-            analysis_id: analysis.id,
-            evidence_id: 'resolver_001',
-            agent_name: 'resolver',
-            source: 'Brønnøysund',
-            evidence_strength: 'high',
-            raw_data: { ...brreg, financials },
-          }, { onConflict: 'analysis_id,evidence_id' }).catch(() => { /* non-critical */ })
+          try {
+            await supabase.from('analysis_evidence').upsert({
+              id: crypto.randomUUID(),
+              analysis_id: analysis.id,
+              evidence_id: 'resolver_001',
+              agent_name: 'resolver',
+              source: 'Brønnøysund',
+              evidence_strength: 'high',
+              raw_data: { ...brreg, financials },
+            }, { onConflict: 'analysis_id,evidence_id' })
+          } catch { /* non-critical */ }
         }
 
         send({ type: 'done', slug, companyName, industry: industryLabel, analysisId: analysis.id })
