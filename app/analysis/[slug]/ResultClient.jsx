@@ -351,6 +351,26 @@ export default function ResultClient({ analysis, mode = 'company' }) {
       </div>
 
       <div className="max-w-3xl mx-auto px-6 py-10 space-y-8">
+        {/* Primary CTA — shown before goals */}
+        <div className="rounded-2xl p-8 text-center" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #18394b 100%)' }}>
+          <div className="text-xl font-extrabold text-white mb-2">
+            {isProject
+              ? 'This took 30 seconds. Imagine managing it with live data.'
+              : 'This took 30 seconds. Imagine what we find with your real data.'}
+          </div>
+          <div className="text-sm text-white/60 leading-relaxed mb-8" style={{ whiteSpace: 'pre-line' }}>
+            {isProject
+              ? 'Refine these targets, add your actuals, track risk states live.\n14-day trial — no credit card required.'
+              : 'Refine these targets, add your numbers, see live risk states.\n14-day trial — no credit card required.'}
+          </div>
+          <a
+            href={registerUrl}
+            className="inline-block bg-teal hover:bg-teal-dark text-white font-bold text-base px-10 py-4 rounded-xl transition-colors shadow-lg"
+          >
+            {copy.ctaLabel(companyName)}
+          </a>
+        </div>
+
         {/* Visible goals */}
         <div>
           <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-wide mb-1">
@@ -444,31 +464,15 @@ export default function ResultClient({ analysis, mode = 'company' }) {
           </div>
         </div>
 
-        {/* Primary CTA */}
-        <div className="rounded-2xl p-8 text-center" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #18394b 100%)' }}>
-          <div className="text-xl font-extrabold text-white mb-2">
-            {isProject
-              ? 'This took 30 seconds. Imagine managing it with live data.'
-              : 'This took 30 seconds. Imagine what we find with your real data.'}
-          </div>
-          <div className="text-sm text-white/60 leading-relaxed mb-8">
-            {isProject
-              ? 'Refine these targets, add your actuals, track risk states live.\n14-day trial — no credit card required.'
-              : 'Refine these targets, add your numbers, see live risk states.\n14-day trial — no credit card required.'}
-          </div>
-          <a
-            href={registerUrl}
-            className="inline-block bg-teal hover:bg-teal-dark text-white font-bold text-base px-10 py-4 rounded-xl transition-colors shadow-lg"
-          >
-            {copy.ctaLabel(companyName)}
-          </a>
-        </div>
-
         <div className="text-xs text-slate-400 text-center leading-relaxed pb-4">
           {isProject
             ? 'Suggestions are based on your project description and benchmarks from similar initiatives. They are starting points for discussion — not validated for your actual situation.'
             : 'Suggestions are based on public website analysis and industry benchmarks. They are starting points for discussion — not validated for your actual situation. Real data inside the app refines them.'}
           <br />Generated on {createdDate}.
+          <br /><br />
+          <a href={registerUrl} className="font-semibold text-teal hover:underline">
+            {copy.ctaLabel(companyName)}
+          </a>
         </div>
       </div>
     </div>
