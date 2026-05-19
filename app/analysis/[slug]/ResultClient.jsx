@@ -355,13 +355,13 @@ export default function ResultClient({ analysis, mode = 'company' }) {
         <div className="rounded-2xl p-8 text-center" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #18394b 100%)' }}>
           <div className="text-xl font-extrabold text-white mb-2">
             {isProject
-              ? 'This took 30 seconds. Imagine managing it with live data.'
-              : 'This took 30 seconds. Imagine what we find with your real data.'}
+              ? "This took 30 seconds. Now imagine walking into the next steering committee knowing exactly where you stand."
+              : "This took 30 seconds. Now imagine walking into Monday's meeting knowing exactly where you stand."}
           </div>
-          <div className="text-sm text-white/60 leading-relaxed mb-8" style={{ whiteSpace: 'pre-line' }}>
+          <div className="text-sm text-white/60 leading-relaxed mb-8">
             {isProject
-              ? 'Refine these targets, add your actuals, track risk states live.\n14-day trial — no credit card required.'
-              : 'Refine these targets, add your numbers, see live risk states.\n14-day trial — no credit card required.'}
+              ? 'Real data. Live risk states. The project clarity your team needs — not just at the next milestone review. 14-day trial — no credit card required.'
+              : 'Real data. Live risk states. The strategic clarity your leadership team needs — not just once a quarter. 14-day trial — no credit card required.'}
           </div>
           <a
             href={registerUrl}
