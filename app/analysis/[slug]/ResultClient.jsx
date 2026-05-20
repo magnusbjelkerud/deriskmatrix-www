@@ -392,6 +392,17 @@ export default function ResultClient({ analysis, mode = 'company' }) {
           </div>
         </div>
 
+        {/* Locked goals teaser */}
+        <div className="bg-white rounded-2xl border-2 border-dashed border-slate-200 p-7 text-center">
+          <div className="text-3xl mb-3">🔒</div>
+          <div className="text-base font-bold text-navy mb-2">
+            {hiddenGoals.length} more goals identified — including
+          </div>
+          <div className="text-sm text-slate-500">
+            <span className="font-medium text-slate-600">{hiddenGoals.map(g => g.name).join(', ')}</span>
+          </div>
+        </div>
+
         {/* Canvas preview */}
         <CanvasPreview goals={visibleGoals} lockedCount={hiddenGoals.length} />
 
@@ -428,17 +439,6 @@ export default function ResultClient({ analysis, mode = 'company' }) {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* Locked goals teaser */}
-        <div className="bg-white rounded-2xl border-2 border-dashed border-slate-200 p-7 text-center">
-          <div className="text-3xl mb-3">🔒</div>
-          <div className="text-base font-bold text-navy mb-2">
-            {hiddenGoals.length} more goals identified — including
-          </div>
-          <div className="text-sm text-slate-500">
-            <span className="font-medium text-slate-600">{hiddenGoals.map(g => g.name).join(', ')}</span>
           </div>
         </div>
 
