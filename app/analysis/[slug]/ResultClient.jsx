@@ -249,7 +249,7 @@ const COPY = {
     assumptionNote: 'Based on public filings, industry benchmarks and your website.',
     fomoLabel: 'For leadership teams',
     fomoHeader: 'What a CFO actually needs\nbefore the board meeting.',
-    fomoIntro: 'Inside, the same three goals become a working risk picture you can lead from — not just a snapshot of last quarter.',
+    fomoIntro: "You weren't hired to maintain spreadsheets. You were hired to lead. Add your real numbers with a guided wizard — and the same three goals become a live risk picture your team can act on today.",
     fomoItems: [
       {
         title: 'Know which goals are slipping before the board does',
@@ -260,8 +260,8 @@ const COPY = {
         body: 'Each Dire goal comes with root causes, recommended actions, and what to escalate this week. Decisions, not dashboards.',
       },
       {
-        title: 'Build the risk culture your strategy needs',
-        body: "Patterns across your goals reveal where your leadership team decides too late, where evidence is thin, where ownership is unclear. The cultural work that actually moves results.",
+        title: 'Guided setup — from suggested to live in an afternoon',
+        body: 'Wizards walk you through your actual targets, thresholds, and first data points. No blank canvas, no spreadsheet gymnastics. Your AI-suggested risk picture becomes your real risk picture in one sitting.',
       },
       {
         title: 'Defend your numbers with evidence',
@@ -279,7 +279,7 @@ const COPY = {
     assumptionNote: 'Based on your project description and benchmarks from similar initiatives.',
     fomoLabel: 'For project leads',
     fomoHeader: 'What a project lead actually needs.',
-    fomoIntro: 'Inside, the same three goals become a working risk picture you can steer from — not just a status update.',
+    fomoIntro: "You weren't hired to write status reports. You were hired to deliver. Add your real project numbers with a guided wizard — and the same three goals become live risk states your team can steer from today.",
     fomoItems: [
       {
         title: 'Know which milestones are slipping — before the steering committee does',
@@ -290,8 +290,8 @@ const COPY = {
         body: 'Each Dire goal comes with root causes, recommended actions, and what to escalate this week.',
       },
       {
-        title: 'Build the project discipline your delivery needs',
-        body: 'Patterns across your goals reveal where decisions slip, where evidence is thin, where dependencies are unclear.',
+        title: 'Guided setup — from suggested to live before the next steering committee',
+        body: 'Wizards walk you through actual budget, timeline, and scope numbers. No blank canvas, no setup overhead. Your AI-suggested project risk picture becomes your real one in one sitting.',
       },
       {
         title: 'Defend your timeline — with evidence, not optimism',
@@ -310,8 +310,8 @@ function CtaBlock({ isProject, companyName, registerUrl, copy, headline }) {
       <div className="text-xl font-extrabold text-white mb-2">{headline}</div>
       <div className="text-sm text-white/60 leading-relaxed mb-8">
         {isProject
-          ? 'Real data. Live risk states. The project clarity your team needs — not just at the next milestone review. 14-day trial — no credit card required.'
-          : 'Real data. Live risk states. The strategic clarity your leadership team needs — not just once a quarter. 14-day trial — no credit card required.'}
+          ? 'Your AI-suggested goals are already set up. Add your real project numbers with a guided wizard — live risk states before your next steering committee. 14-day trial, no credit card required.'
+          : 'Your AI-suggested goals are already set up. Add your real numbers with a guided wizard — and your team has a live risk picture by end of day. 14-day trial, no credit card required.'}
       </div>
       <a
         href={registerUrl}
