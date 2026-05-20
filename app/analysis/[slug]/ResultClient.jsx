@@ -304,6 +304,25 @@ const COPY = {
   },
 }
 
+function CtaBlock({ isProject, companyName, registerUrl, copy, headline }) {
+  return (
+    <div className="rounded-2xl p-8 text-center" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #18394b 100%)' }}>
+      <div className="text-xl font-extrabold text-white mb-2">{headline}</div>
+      <div className="text-sm text-white/60 leading-relaxed mb-8">
+        {isProject
+          ? 'Real data. Live risk states. The project clarity your team needs — not just at the next milestone review. 14-day trial — no credit card required.'
+          : 'Real data. Live risk states. The strategic clarity your leadership team needs — not just once a quarter. 14-day trial — no credit card required.'}
+      </div>
+      <a
+        href={registerUrl}
+        className="inline-block bg-teal hover:bg-teal-dark text-white font-bold text-base px-10 py-4 rounded-xl transition-colors shadow-lg"
+      >
+        {copy.ctaLabel(companyName)}
+      </a>
+    </div>
+  )
+}
+
 export default function ResultClient({ analysis, mode = 'company' }) {
   const copy = COPY[mode] || COPY.company
   const isProject = mode === 'project'
@@ -352,24 +371,15 @@ export default function ResultClient({ analysis, mode = 'company' }) {
 
       <div className="max-w-3xl mx-auto px-6 py-10 space-y-8">
         {/* Primary CTA — shown before goals */}
-        <div className="rounded-2xl p-8 text-center" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #18394b 100%)' }}>
-          <div className="text-xl font-extrabold text-white mb-2">
-            {isProject
-              ? "This took 30 seconds. Now imagine walking into the next steering committee knowing exactly where you stand."
-              : "This took 30 seconds. Now imagine walking into Monday's meeting knowing exactly where you stand."}
-          </div>
-          <div className="text-sm text-white/60 leading-relaxed mb-8">
-            {isProject
-              ? 'Real data. Live risk states. The project clarity your team needs — not just at the next milestone review. 14-day trial — no credit card required.'
-              : 'Real data. Live risk states. The strategic clarity your leadership team needs — not just once a quarter. 14-day trial — no credit card required.'}
-          </div>
-          <a
-            href={registerUrl}
-            className="inline-block bg-teal hover:bg-teal-dark text-white font-bold text-base px-10 py-4 rounded-xl transition-colors shadow-lg"
-          >
-            {copy.ctaLabel(companyName)}
-          </a>
-        </div>
+        <CtaBlock
+          isProject={isProject}
+          companyName={companyName}
+          registerUrl={registerUrl}
+          copy={copy}
+          headline={isProject
+            ? "This took 30 seconds. Now imagine walking into the next steering committee knowing exactly where you stand."
+            : "This took 30 seconds. Now imagine walking into Monday's meeting knowing exactly where you stand."}
+        />
 
         {/* Visible goals */}
         <div>
@@ -463,6 +473,17 @@ export default function ResultClient({ analysis, mode = 'company' }) {
             </div>
           </div>
         </div>
+
+        {/* Closing CTA — shown after FOMO block */}
+        <CtaBlock
+          isProject={isProject}
+          companyName={companyName}
+          registerUrl={registerUrl}
+          copy={copy}
+          headline={isProject
+            ? "Stop finding out at the next milestone. Your risk picture is ready."
+            : "Stop finding out too late. Your risk picture is ready."}
+        />
 
         <div className="text-xs text-slate-400 text-center leading-relaxed pb-4">
           {isProject
