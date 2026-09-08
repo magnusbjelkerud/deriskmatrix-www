@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 /**
  * External review attribution.
@@ -25,14 +26,18 @@ import Link from 'next/link'
  *
  * To publish: fill in REVIEWER with what he has approved in writing, and only that.
  * If he asks for it to change or come down, change it here and it changes everywhere.
+ *
+ * Approved by email, 8 September 2026. He supplied the identification string himself and
+ * approved the sentence below verbatim; the photograph he consented to separately, on the
+ * condition that it stays secondary to the attribution and does not read as a testimonial.
+ * The consent record is in deriskmatrix-app/docs/reviewer-attribution.md.
  */
-export const REVIEWER = null
-// export const REVIEWER = {
-//   name: '',
-//   affiliation: '',      // optional; only what he states himself
-//   certifyingBody: '',   // set if his organisation issues ISO 31000 certification —
-//                         // renders an explicit denial that this review is one
-// }
+export const REVIEWER = {
+  name: 'Alex Dali, ARM, MBA, CTA31000',
+  affiliation: 'President of the G31000 Risk Institute',
+  certifyingBody: 'The G31000 Risk Institute',
+  photo: '/images/alex-dali.jpg',
+}
 
 export function hasReviewer() {
   return !!(REVIEWER && REVIEWER.name)
@@ -51,12 +56,23 @@ export default function ExternalReview() {
     <section>
       <h2 className="text-3xl font-black text-navy mb-3">External review</h2>
       <div className="bg-slate-50 rounded-2xl p-7">
-        <p className="text-slate-600 leading-relaxed mb-4">
-          The De-Risk Matrix methodology has been reviewed and challenged by{' '}
-          <strong className="text-navy">{reviewerLabel()}</strong>, in the role of{' '}
-          <strong className="text-navy">Critical External Reviewer</strong>, including its
-          alignment with ISO 31000 principles.
-        </p>
+        <div className="flex gap-4 items-start mb-4">
+          {REVIEWER.photo && (
+            <Image
+              src={REVIEWER.photo}
+              alt={REVIEWER.name}
+              width={56}
+              height={56}
+              className="w-14 h-14 rounded-full object-cover shrink-0"
+            />
+          )}
+          <p className="text-slate-600 leading-relaxed">
+            The De-Risk Matrix methodology has been reviewed and challenged by{' '}
+            <strong className="text-navy">{reviewerLabel()}</strong>, in the role of{' '}
+            <strong className="text-navy">Critical External Reviewer</strong>, including its
+            alignment with ISO 31000 principles.
+          </p>
+        </div>
         <p className="text-slate-600 leading-relaxed mb-4">
           That review is critical in the literal sense: it identified weaknesses, and
           several of them changed the methodology. Assumption management, early-warning

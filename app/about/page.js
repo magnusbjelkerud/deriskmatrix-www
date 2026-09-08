@@ -2,6 +2,7 @@ import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
 import Link from 'next/link'
 import Image from 'next/image'
+import { ExternalReviewNote } from '../../components/ExternalReview'
 
 export const metadata = {
   title: 'About Magnus Bjelkerud — De-Risk Matrix',
@@ -65,6 +66,12 @@ export default function AboutPage() {
               <a href="/validation" className="text-teal font-semibold hover:underline"> open to testing</a>.
             </p>
           </div>
+        </section>
+
+        {/* External review — short form. Renders nothing until the reviewer has
+            approved the exact wording; see components/ExternalReview.jsx */}
+        <section className="border-l-4 border-slate-200 pl-5">
+          <ExternalReviewNote />
         </section>
 
         {/* The quote */}
