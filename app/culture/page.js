@@ -101,8 +101,8 @@ const VALUES = [
   {
     icon: '◎',
     title: 'Psychological safety',
-    desc: 'Amy Edmondson\'s research shows that teams in psychologically safe environments surface bad news earlier, escalate problems faster, and recover more effectively from setbacks. In De-Risk Matrix terms: Dire goals can only be fixed in organizations where saying "we\'re in Dire" is safe.',
-    ref: 'Edmondson, A. (1999). Psychological Safety and Learning Behavior in Work Teams.',
+    desc: 'Edmondson defines team psychological safety as "a shared belief held by members of a team that the team is safe for interpersonal risk taking", and links it to teams surfacing problems rather than concealing them. In De-Risk Matrix terms: a Dire goal can only be fixed in an organisation where saying \"we are in Dire\" is safe. The research supports that condition. It does not establish our six-state response model \u2014 that part is ours.',
+    ref: 'Edmondson, A. (1999). Psychological Safety and Learning Behavior in Work Teams. Administrative Science Quarterly, 44(2), 350–383.',
   },
   {
     icon: '◈',
@@ -178,8 +178,15 @@ export default function CulturePage() {
               <p className="text-slate-600 leading-relaxed mb-4">
                 De-Risk Matrix is built on a simple but radical premise: <strong className="text-navy">every
                 risk state prescribes a specific cultural response</strong>. Not a generic "improve
-                performance" directive. A specific, named leadership behavior — grounded in
-                ISO 31000, ISO 45003, and Edmondson's psychological safety research.
+                performance" directive, but a specific, named leadership behaviour.
+              </p>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                Two things are worth separating. That leadership behaviour determines whether risk
+                gets surfaced and acted on is supported by ISO 31000, ISO 45003 and Edmondson&apos;s
+                work on psychological safety. <strong className="text-navy">Which</strong> behaviour
+                belongs to <strong className="text-navy">which</strong> of the six states is our own
+                proposal \u2014 offered because we think it is useful and because it can be tested,
+                not because anyone has validated it.
               </p>
               <p className="text-slate-600 leading-relaxed">
                 The framework makes culture measurable by making it specific. Leaders
@@ -402,7 +409,7 @@ export default function CulturePage() {
               {
                 icon: '◈',
                 title: 'Edmondson (1999)',
-                desc: 'Amy Edmondson\'s foundational research on psychological safety in work teams. Teams in psychologically safe environments surface bad news earlier, escalate problems faster, and recover more effectively — directly applicable to Dire and Pessimistic states.',
+                desc: 'Defines team psychological safety as "a shared belief held by members of a team that the team is safe for interpersonal risk taking" (Administrative Science Quarterly, 44(2), 350\u2013383). It supports why a team is able to raise a Dire goal at all. It says nothing about a six-state model, and we do not cite it as though it did.',
               },
             ].map(r => (
               <div key={r.title} className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">

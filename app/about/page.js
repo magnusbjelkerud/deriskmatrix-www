@@ -50,10 +50,19 @@ export default function AboutPage() {
               With a Master of Science and a Master of Management, Magnus developed the De-Risk Matrix methodology after identifying a persistent gap: existing frameworks failed to integrate strategic goal-setting with structured risk management and the organizational culture required to act on it.
             </p>
             <p>
-              Most risk frameworks treat risk as a separate discipline from strategy. Most goal frameworks — OKR, Balanced Scorecard, SMART — treat targets as single points without explicit risk floors. De-Risk Matrix connects the two: goals define the risk appetite; risk states drive the cultural response.
+              Most risk frameworks treat risk as a separate discipline from strategy. Most goal
+              frameworks &mdash; OKR, Balanced Scorecard, SMART &mdash; treat targets as single points
+              without explicit risk floors. De-Risk Matrix connects the two: a goal is set as a span
+              between target and threshold, which makes tolerance for that objective explicit, and
+              the resulting risk state drives the cultural response.
             </p>
             <p>
-              The methodology was refined through real-world pilots and specialist collaborations, and is deliberately aligned with ISO 31000 — the international standard for risk management — as well as ISO 45003 and Edmondson&apos;s psychological safety research.
+              The methodology was refined through real-world pilots and specialist collaborations,
+              and is deliberately aligned with ISO 31000, the international standard for risk
+              management, and with ISO 45003 on psychological health at work. Edmondson&apos;s
+              research on psychological safety informs why the cultural layer exists at all; it does
+              not validate the six-state model, which remains our own proposal and is
+              <a href="/validation" className="text-teal font-semibold hover:underline"> open to testing</a>.
             </p>
           </div>
         </section>
