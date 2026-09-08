@@ -429,7 +429,7 @@ export default function Home() {
               {
                 step: '02', color: '#1a9e8a', bg: '#d5f5e3',
                 title: 'Read the risk state',
-                desc: 'Goal position + evidence strength → one of 6 states, automatically. No subjectivity. No RAG committee debates.',
+                desc: 'Goal position + evidence strength → one of 6 states, by a stated rule rather than a RAG committee debate. Judgement still enters through the evidence call — so we measure how consistently people make it.',
                 eg: 'Harmonious · Dire · Potent · Pessimistic',
               },
               {
