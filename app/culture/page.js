@@ -217,7 +217,7 @@ export default function CulturePage() {
               &ldquo;Most organizations manage risk by describing it. De-Risk Matrix manages risk by prescribing the leadership response to it.&rdquo;
             </p>
             <p className="text-slate-500 text-sm">
-              The six risk states are not just labels. They are action directives — for leaders, grounded in evidence-based practice.
+              The six risk states are not just labels. They are action directives for leaders. The underlying concepts draw on published research; the mapping from each state to a specific leadership response is our own proposed practice, offered for testing rather than as a validated finding.
             </p>
           </div>
         </div>
@@ -330,12 +330,14 @@ export default function CulturePage() {
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <div>
               <h2 className="text-3xl font-black text-navy mb-5">
-                Culture is the primary barrier to goal achievement
+                Culture is the barrier we think matters most
               </h2>
               <p className="text-slate-600 leading-relaxed mb-4">
                 Strategy consultants often frame execution failure as a process problem. De-Risk
                 Matrix frames it as a culture problem — specifically, a misalignment between
-                what the risk state demands and how leaders actually behave.
+                what the risk state demands and how leaders actually behave. That is our
+                position, drawn from practice; we present it as an argument rather than as an
+                established finding.
               </p>
               <p className="text-slate-600 leading-relaxed mb-4">
                 A goal is in Dire state. The data is unambiguous. But the leadership team softens

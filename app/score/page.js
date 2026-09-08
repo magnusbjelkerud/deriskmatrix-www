@@ -46,7 +46,7 @@ const QUESTIONS = [
     id: 'culture',
     icon: '🏛️',
     label: 'How openly does your leadership talk about strategic risk?',
-    sublabel: 'Culture is the primary barrier to goal achievement.',
+    sublabel: 'How openly risk is discussed shapes whether it gets acted on.',
     options: [
       { value: 0, text: 'We avoid it — failure isn\'t openly discussed' },
       { value: 1, text: 'Risk is raised when problems become unavoidable' },
@@ -58,12 +58,24 @@ const QUESTIONS = [
     id: 'forecast',
     icon: '🔭',
     label: 'How far ahead can you see goal outcomes?',
-    sublabel: 'Risk is the effect of uncertainty — forecasting reduces it.',
+    sublabel: 'Risk is the effect of uncertainty. Forecasting does not remove it — it improves how well you can characterise it.',
     options: [
       { value: 0, text: 'We don\'t forecast — we report actuals after the fact' },
       { value: 1, text: 'End-of-year estimates when the board asks' },
       { value: 2, text: 'Regular updated forecasts for major goals' },
       { value: 3, text: 'Predictive models with confidence levels and scenario planning' },
+    ],
+  },
+  {
+    id: 'assumptions',
+    icon: '🧩',
+    label: 'How explicitly do you track the assumptions behind your goals?',
+    sublabel: 'Every forecast rests on beliefs about what must be true for a goal to succeed.',
+    options: [
+      { value: 0, text: 'We don\'t — goals are set without naming the assumptions behind them' },
+      { value: 1, text: 'Assumptions are implicit, occasionally surfaced in planning sessions' },
+      { value: 2, text: 'Key assumptions are documented alongside goals and revisited regularly' },
+      { value: 3, text: 'Assumptions are formally tracked, monitored, and linked to each goal\'s forecast' },
     ],
   },
 ]
@@ -82,6 +94,7 @@ const IMPROVEMENTS = {
   data_quality:   'Start collecting data regularly for your top 5 goals. Evidence strength is what separates a real forecast from a guess.',
   culture:        'Make risk a standing agenda item. Leaders who avoid discussing failure are flying blind.',
   forecast:       'Move from reporting actuals to forecasting outcomes. Risk state should reflect where you\'re heading, not where you\'ve been.',
+  assumptions:    'Document the key assumptions behind each goal. When a forecast changes, an assumption almost always changed first — make them visible before they break.',
 }
 
 function getBand(score) {

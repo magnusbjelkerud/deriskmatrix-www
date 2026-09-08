@@ -89,7 +89,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs">
             {[
-              { icon: '◎', val: 'ISO 31000',        label: 'aligned' },
+              { icon: '◎', val: 'ISO 31000 · PRINCE2 · PMBoK', label: 'framework-aligned' },
               { icon: '◈', val: '6 risk states',    label: 'always live, per goal' },
               { icon: '⚡', val: '5 AI tools',       label: 'goal-aware, not generic' },
               { icon: '🌐', val: 'Any language',     label: 'one risk picture, any team' },
@@ -261,6 +261,118 @@ export default function Home() {
                 <div className="text-slate-500 text-xs">Member, Belgian ISO Technical Committee on Risk Management</div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── [3c] FRAMEWORK ALIGNMENT ─────────────────────────────────── */}
+      <section className="py-20 bg-slate-50 border-t border-slate-100">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Standards &amp; frameworks</p>
+            <h2 className="text-3xl font-black text-navy mb-4">
+              Aligned with the frameworks your organization already uses
+            </h2>
+            <p className="text-slate-500 max-w-2xl mx-auto leading-relaxed">
+              De-Risk Matrix is not a competing standard — it is the operating layer that connects
+              ISO 31000, PRINCE2, OKR, COSO ERM, and other frameworks to a single live risk picture.
+              If your organization works within any of these, De-Risk Matrix speaks the same language.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4">
+            {[
+              {
+                badge: 'ISO 31000:2018',
+                title: 'Risk Management',
+                desc: 'The philosophical foundation of De-Risk Matrix. Risk defined as "the effect of uncertainty on objectives" — not just downside probability. Every risk state, every action, every threshold follows this principle.',
+                color: '#1a9e8a',
+                bg: '#f0fdf4',
+                border: '#bbf7d0',
+              },
+              {
+                badge: 'ISO 31010:2019',
+                title: 'Risk Assessment Techniques',
+                desc: 'De-Risk Matrix operationalises ISO 31010 evidence-based assessment through its 14-factor Evidence Wizard. Strong vs. weak evidence determines the risk state — replacing subjective RAG debates with structured judgment.',
+                color: '#1d4ed8',
+                bg: '#eff6ff',
+                border: '#bfdbfe',
+              },
+              {
+                badge: 'ISO 9001:2015',
+                title: 'Quality Management',
+                desc: 'ISO 9001 requires organizations to apply risk-based thinking throughout their quality management system. De-Risk Matrix provides the live risk picture and evidence trail that satisfies this requirement continuously — not just at audit time.',
+                color: '#7c3aed',
+                bg: '#f5f3ff',
+                border: '#ddd6fe',
+              },
+              {
+                badge: 'ISO 21500:2021',
+                title: 'Project Management',
+                desc: 'ISO 21500 defines risk management as a core project management process. De-Risk Matrix maps directly to project risk with dedicated project canvases — time, cost, scope, and quality as live risk states, not status reports.',
+                color: '#d97706',
+                bg: '#fffbeb',
+                border: '#fde68a',
+              },
+              {
+                badge: 'PRINCE2',
+                title: 'Projects in Controlled Environments',
+                desc: 'PRINCE2\'s risk theme centers on identifying, assessing, and controlling uncertainty. De-Risk Matrix adds a live risk state layer to any PRINCE2 project — replacing the static risk register with a continuously updated canvas.',
+                color: '#0369a1',
+                bg: '#f0f9ff',
+                border: '#bae6fd',
+              },
+              {
+                badge: 'PMBoK / PMI',
+                title: 'Project Management Body of Knowledge',
+                desc: 'The PMI risk management knowledge area requires risk identification, qualitative and quantitative analysis, and response planning. De-Risk Matrix provides the live framework that keeps all of this current between project gates.',
+                color: '#0e7490',
+                bg: '#ecfeff',
+                border: '#a5f3fc',
+              },
+              {
+                badge: 'COSO ERM',
+                title: 'Enterprise Risk Management',
+                desc: 'COSO ERM integrates risk with strategy and performance. De-Risk Matrix is built on this principle: goals are your risk picture. Every strategic objective has an explicit risk state — making COSO\'s strategy-risk link operational and visible.',
+                color: '#be185d',
+                bg: '#fdf2f8',
+                border: '#fbcfe8',
+              },
+              {
+                badge: 'OKR',
+                title: 'Objectives & Key Results',
+                desc: 'OKRs set direction — but they don\'t tell you whether you\'re at risk of missing them. De-Risk Matrix adds threshold values and evidence-based risk states to every OKR, turning aspirational goal-setting into a live risk management system.',
+                color: '#c2410c',
+                bg: '#fff7ed',
+                border: '#fed7aa',
+              },
+              {
+                badge: 'Balanced Scorecard',
+                title: 'Strategic Performance Management',
+                desc: 'The Balanced Scorecard organises strategic goals across four perspectives. De-Risk Matrix applies 6 risk states to every BSC measure — financial, customer, internal process, and learning — giving leadership a real-time risk view of the entire scorecard.',
+                color: '#374151',
+                bg: '#f9fafb',
+                border: '#e5e7eb',
+              },
+            ].map(f => (
+              <div key={f.badge} style={{ background: f.bg, border: `1.5px solid ${f.border}`, borderRadius: 14, padding: '20px 22px' }}>
+                <div style={{ display: 'inline-block', fontSize: 10, fontWeight: 800, color: f.color,
+                  background: f.color + '18', border: `1px solid ${f.color}30`,
+                  padding: '2px 9px', borderRadius: 20, letterSpacing: '.04em',
+                  marginBottom: 10, textTransform: 'uppercase' }}>
+                  {f.badge}
+                </div>
+                <h3 style={{ fontSize: 14, fontWeight: 800, color: '#0f172a', marginBottom: 8, lineHeight: 1.3 }}>{f.title}</h3>
+                <p style={{ fontSize: 12.5, color: '#475569', lineHeight: 1.65, margin: 0 }}>{f.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 text-center">
+            <p className="text-sm text-slate-500 max-w-xl mx-auto leading-relaxed">
+              Already running ISO 31000 assessments, PRINCE2 projects, or OKR cycles?
+              De-Risk Matrix does not replace them — it makes them live.
+            </p>
           </div>
         </div>
       </section>
@@ -484,7 +596,7 @@ export default function Home() {
             <p className="text-slate-400 text-sm max-w-2xl mx-auto mb-6">
               Culture is not a soft topic. It is the primary variable that determines whether a Dire goal gets fixed
               or stays Dire. Every risk state in De-Risk Matrix comes with a specific leadership response — grounded
-              in ISO 31000, ISO 45003, and psychological safety research.
+              in ISO 31000, ISO 45003 (psychological health at work), and psychological safety research.
             </p>
             <Link href="/culture" className="inline-flex items-center gap-2 text-teal font-bold text-sm hover:underline">
               Deep dive: risk culture and leadership →
