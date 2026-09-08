@@ -341,7 +341,7 @@ export default function Home() {
               {
                 badge: 'OKR',
                 title: 'Objectives & Key Results',
-                desc: 'OKRs set direction — but they don\'t tell you whether you\'re at risk of missing them. De-Risk Matrix adds threshold values and evidence-based risk states to every OKR, turning aspirational goal-setting into a live risk management system.',
+                desc: 'OKRs set direction — but they don\'t tell you whether you\'re at risk of missing them. De-Risk Matrix adds threshold values and risk states that account for evidence strength to every OKR, turning aspirational goal-setting into a live risk management system.',
                 color: '#c2410c',
                 bg: '#fff7ed',
                 border: '#fed7aa',
@@ -423,7 +423,7 @@ export default function Home() {
               {
                 step: '01', color: '#1d4ed8', bg: '#eff6ff',
                 title: 'Define goal spans',
-                desc: 'Every goal gets a target (ambition) and a threshold (floor). The gap between them is your explicit risk appetite.',
+                desc: 'Every goal gets a target (ambition) and a threshold (floor). The gap between them makes your tolerance for that goal explicit \u2014 one expression of appetite, not the whole of it.',
                 eg: 'Revenue: 50M target · 40M threshold',
               },
               {
@@ -441,7 +441,7 @@ export default function Home() {
               {
                 step: '04', color: '#d97706', bg: '#fef3c7',
                 title: 'Learn each cycle',
-                desc: 'Every data point improves calibration. Next period your forecasts are more precise. Your risk appetite is better defined.',
+                desc: 'Every data point improves calibration. Next period you can characterise the uncertainty better \u2014 forecasting does not remove it.',
                 eg: 'Better targets → sharper risk picture',
               },
             ].map(item => (

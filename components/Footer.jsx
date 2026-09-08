@@ -36,6 +36,7 @@ export default function Footer() {
             <h4 className="text-sm font-semibold text-slate-300 mb-4 uppercase tracking-wider">Company</h4>
             <ul className="space-y-2.5 text-sm text-slate-400">
               <li><Link href="/methodology" className="hover:text-white transition-colors">Methodology</Link></li>
+              <li><Link href="/validation" className="hover:text-white transition-colors">Validation protocol</Link></li>
               <li><Link href="/about" className="hover:text-white transition-colors">About Magnus</Link></li>
               <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy policy</Link></li>
               <li><Link href="/terms" className="hover:text-white transition-colors">Terms of service</Link></li>
