@@ -17,11 +17,22 @@ import Link from 'next/link'
  *      sentence. Publishing an inferred name or affiliation would be a small version
  *      of the overclaiming two rounds of review have been spent removing.
  *
+ * There is a third hazard specific to this reviewer. His organisation issues ISO 31000
+ * certification, and this site's methodology page carries an "Aligned with ISO 31000"
+ * badge. Naming him near that badge reads as certification however carefully the
+ * sentence is worded, so `certifyingBody` renders an explicit denial next to the name,
+ * and the section is mounted in the lower half of the page rather than beside the hero.
+ *
  * To publish: fill in REVIEWER with what he has approved in writing, and only that.
  * If he asks for it to change or come down, change it here and it changes everywhere.
  */
 export const REVIEWER = null
-// export const REVIEWER = { name: '', affiliation: '' }   // affiliation optional
+// export const REVIEWER = {
+//   name: '',
+//   affiliation: '',      // optional; only what he states himself
+//   certifyingBody: '',   // set if his organisation issues ISO 31000 certification —
+//                         // renders an explicit denial that this review is one
+// }
 
 export function hasReviewer() {
   return !!(REVIEWER && REVIEWER.name)
@@ -65,6 +76,12 @@ export default function ExternalReview() {
             </Link>{' '}
             is the instrument by which we intend to answer it.
           </p>
+          {REVIEWER && REVIEWER.certifyingBody && (
+            <p className="text-slate-500 text-sm leading-relaxed mt-3">
+              {REVIEWER.certifyingBody} provides ISO 31000 training and certification. This
+              review is neither, and De-Risk Matrix holds no ISO 31000 certification.
+            </p>
+          )}
         </div>
       </div>
     </section>
