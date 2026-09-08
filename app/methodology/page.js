@@ -1,6 +1,7 @@
 import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
 import Link from 'next/link'
+import ExternalReview from '../../components/ExternalReview'
 
 export const metadata = {
   title: 'Methodology — De-Risk Matrix',
@@ -361,6 +362,10 @@ export default function MethodologyPage() {
             </p>
           </div>
         </section>
+
+        {/* External review. Renders nothing until the reviewer has approved the
+            exact wording — see components/ExternalReview.jsx */}
+        <ExternalReview />
 
         {/* Provenance — three different kinds of authority, not one voice */}
         <section>

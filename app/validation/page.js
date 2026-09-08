@@ -1,6 +1,7 @@
 import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
 import Link from 'next/link'
+import { ExternalReviewNote } from '../../components/ExternalReview'
 
 export const metadata = {
   title: 'Validation protocol — De-Risk Matrix',
@@ -278,6 +279,7 @@ export default function ValidationPage() {
             states, the state-to-leadership-behaviour mapping, the assumption impact scale and the
             fragility indicator, all of which are validation targets rather than established findings.
           </p>
+          <ExternalReviewNote className="mb-4" />
           <Link href="/methodology" className="text-teal font-semibold text-sm hover:underline">
             See the full methodology →
           </Link>
