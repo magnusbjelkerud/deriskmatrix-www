@@ -185,7 +185,7 @@ export default function CulturePage() {
                 gets surfaced and acted on is supported by ISO 31000, ISO 45003 and Edmondson&apos;s
                 work on psychological safety. <strong className="text-navy">Which</strong> behaviour
                 belongs to <strong className="text-navy">which</strong> of the six states is our own
-                proposal \u2014 offered because we think it is useful and because it can be tested,
+                proposal — offered because we think it is useful and because it can be tested,
                 not because anyone has validated it.
               </p>
               <p className="text-slate-600 leading-relaxed">

@@ -412,7 +412,7 @@ export default function SaaSPage() {
               </h2>
               <p className="text-slate-300 leading-relaxed mb-4">
                 Every SaaS team has a dashboard. It shows MRR trending up.
-                Churn at 2.1%. NPS at 38. The numbers exist. The interpretation doesn\'t.
+                Churn at 2.1%. NPS at 38. The numbers exist. The interpretation doesn&apos;t.
               </p>
               <p className="text-slate-300 leading-relaxed mb-4">
                 De-Risk Matrix converts each metric into a risk state — a structured
