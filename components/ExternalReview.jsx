@@ -39,8 +39,18 @@ export const REVIEWER = {
   photo: '/images/alex-dali.jpg',
 }
 
+/**
+ * Final gate. He approved the wording, the disclaimer and the photograph, but asked to see
+ * the rendered pages (as PDFs) before confirming publication. Until he does, nothing
+ * renders publicly. Set to true when he confirms.
+ *
+ * NEXT_PUBLIC_REVIEWER_PREVIEW=1 renders it in a local build only, for the PDFs sent to him.
+ */
+export const PUBLISHED = false
+
 export function hasReviewer() {
-  return !!(REVIEWER && REVIEWER.name)
+  const visible = PUBLISHED || process.env.NEXT_PUBLIC_REVIEWER_PREVIEW === '1'
+  return !!(visible && REVIEWER && REVIEWER.name)
 }
 
 function reviewerLabel() {
